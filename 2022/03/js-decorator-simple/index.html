@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Js装饰器浅析 | 一点</title>
+  <meta name="keywords" content=" js , 装饰器 ">
+  <meta name="description" content="Js装饰器浅析 | 一点">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SQL">
+<meta property="og:url" content="http://chaoyu.site/SQL/index.html">
+<meta property="og:site_name" content="一点">
+<meta property="og:description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-08T01:41:53.000Z">
+<meta property="article:modified_time" content="2022-12-22T07:42:20.751Z">
+<meta property="article:author" content="chaoyu">
+<meta property="article:tag" content="技术博客,前端开发,笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>chaoyu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/imchaoyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:chaoyumail@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(19)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="代码规范">
+                        
+                        代码规范
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="git">
+                        
+                        git
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="javascript">
+                        
+                        javascript
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="nodejs">
+                        
+                        nodejs
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="python">
+                        
+                        python
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="19">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>仓库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分支</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>爬虫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法 时间复杂度 空间复杂度</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>行政区划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>装饰器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>commonjs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>eslint</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>esm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>js</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>module</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodejs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nrm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nvm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>prettier</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础 函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>url 网络基础</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/12/python-about-venv/"
+           data-tag="Python基础"
+           data-author="" >
+            <span class="post-title" title="Python虚拟环境简介和基础使用">Python虚拟环境简介和基础使用</span>
+            <span class="post-date" title="2022-12-30 19:51:20">2022/12/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 代码规范 "
+           href="/2022/05/eslit-prettier/"
+           data-tag="prettier,eslint"
+           data-author="" >
+            <span class="post-title" title="Prettier和Eslint在前端项目中的配置">Prettier和Eslint在前端项目中的配置</span>
+            <span class="post-date" title="2022-05-10 14:37:03">2022/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/04/web-system-theme-by-js-css/"
+           data-tag="主题"
+           data-author="" >
+            <span class="post-title" title="前端判断当前系统主题">前端判断当前系统主题</span>
+            <span class="post-date" title="2022-04-25 13:48:13">2022/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/a-world-about-js-base/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一句话理解JavaScript基础知识点">一句话理解JavaScript基础知识点</span>
+            <span class="post-date" title="2022-04-21 13:15:22">2022/04/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/about-simple-js-runtime/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="探究JavaScript的运行时">探究JavaScript的运行时</span>
+            <span class="post-date" title="2022-04-19 11:54:29">2022/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/js-macro-task-micro-task/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浅析Js的宏任务和微任务">浅析Js的宏任务和微任务</span>
+            <span class="post-date" title="2022-04-18 19:44:58">2022/04/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-high-function/"
+           data-tag="python基础 函数"
+           data-author="" >
+            <span class="post-title" title="Python进阶，从函数到高级魔法方法">Python进阶，从函数到高级魔法方法</span>
+            <span class="post-date" title="2022-03-21 10:55:26">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-struct/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，数据结构大汇总">Python基础，数据结构大汇总</span>
+            <span class="post-date" title="2022-03-21 10:53:38">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-var-throw/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，从变量到异常处理">Python基础，从变量到异常处理</span>
+            <span class="post-date" title="2022-03-21 10:51:48">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/what-happend-when-url-input/"
+           data-tag="url 网络基础"
+           data-author="" >
+            <span class="post-title" title="从Url输入到页面展现发生了什么">从Url输入到页面展现发生了什么</span>
+            <span class="post-date" title="2022-03-21 10:26:36">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/github-fork/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="GitHub如何提PR且fork后与原仓库同步">GitHub如何提PR且fork后与原仓库同步</span>
+            <span class="post-date" title="2022-03-11 08:40:59">2022/03/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/algorithm-complexity-O&S/"
+           data-tag="算法 时间复杂度 空间复杂度"
+           data-author="" >
+            <span class="post-title" title="时间复杂度和空间复杂度">时间复杂度和空间复杂度</span>
+            <span class="post-date" title="2022-03-08 15:42:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-connect-more-remotes/"
+           data-tag="git,仓库"
+           data-author="" >
+            <span class="post-title" title="Git关联多个远程仓库">Git关联多个远程仓库</span>
+            <span class="post-date" title="2022-03-08 11:50:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-pull&push/"
+           data-tag="git,分支"
+           data-author="" >
+            <span class="post-title" title="Git拉取远程分支并创建本地分支">Git拉取远程分支并创建本地分支</span>
+            <span class="post-date" title="2022-03-08 11:49:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-about-tags/"
+           data-tag="git,tag"
+           data-author="" >
+            <span class="post-title" title="Git创建tag并推送至远程">Git创建tag并推送至远程</span>
+            <span class="post-date" title="2022-03-08 11:48:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/about-npm-simple/"
+           data-tag="nodejs,npm,nvm,nrm,npx"
+           data-author="" >
+            <span class="post-title" title="Npm基础知识">Npm基础知识</span>
+            <span class="post-date" title="2022-03-08 10:32:01">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/commonjs&ESM-different/"
+           data-tag="commonjs,ES6,module,esm"
+           data-author="" >
+            <span class="post-title" title="commonjs和ES6 Module的区别">commonjs和ES6 Module的区别</span>
+            <span class="post-date" title="2022-03-08 10:29:11">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/03/js-decorator-simple/"
+           data-tag="js,装饰器"
+           data-author="" >
+            <span class="post-title" title="Js装饰器浅析">Js装饰器浅析</span>
+            <span class="post-date" title="2022-03-08 09:35:52">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/nodejs-worm-get-division/"
+           data-tag="nodejs,爬虫,行政区划"
+           data-author="" >
+            <span class="post-title" title="Nodejs爬虫获取行政区划">Nodejs爬虫获取行政区划</span>
+            <span class="post-date" title="2022-03-08 09:27:05">2022/03/08</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-js-decorator-simple" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Js装饰器浅析</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="javascript">javascript</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">js</a>
+            
+            <a class="color4">装饰器</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-03-08 09:35</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>装饰器（Decorator）是一种与类（class）相关的语法，用来注释或修改类和类方法。</p>
+</blockquote>
+<blockquote>
+<p>装饰器是一种函数，写成<code>@函数名</code>。它可以放在类和类方法的定义前面。如下：</p>
+</blockquote>
+<span id="more"></span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@frozen</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">  @<span class="title function_">configurable</span>(<span class="literal">false</span>)</span><br><span class="line">  @<span class="title function_">enumerable</span>(<span class="literal">true</span>)</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  @<span class="title function_">throttle</span>(<span class="number">500</span>)</span><br><span class="line">  <span class="title function_">expensiveMethod</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码一共使用了四个装饰器，一个用在<em>类本身</em>，另外三个用在<em>类方法</em>。它们不仅增加了代码的可读性，清晰地表达了意图，而且提供一种方便的手段，增加或修改类的功能。</p>
+</blockquote>
+<ol>
+<li>类的装饰</li>
+</ol>
+<blockquote>
+<p>装饰器对类的行为的改变，是代码编译时发生的，而不是在运行时</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@decorator</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line">A = <span class="title function_">decorator</span>(A) || A;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以在装饰器后面再添加提个参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title function_">log</span>(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">log</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    target.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">logger</span> = <span class="function">() =&gt;</span> <span class="string">`<span class="subst">$&#123;text&#125;</span>，<span class="subst">$&#123;target.name&#125;</span> 被调用`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> <span class="title class_">MyClass</span>()</span><br><span class="line">test.<span class="title function_">logger</span>() <span class="comment">// hello，MyClass 被调用</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li>方法的装饰</li>
+</ol>
+<blockquote>
+<p>与装饰类不同，对类方法的装饰本质是<em>操作其描述符</em>。可以把此时的装饰器理解成是 Object.defineProperty(obj, prop, descriptor) 的语法糖</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  @readonly</span><br><span class="line">  <span class="title function_">name</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.first&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.last&#125;</span>`</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>参数详解</li>
+</ol>
+<blockquote>
+<p>装饰器都具备三个参数，即 <code>target</code> , <code>name</code> , <code>descriptor</code> </p>
+</blockquote>
+<ul>
+<li>装饰器在装饰类时，</li>
+</ul>
+<blockquote>
+<p>target 目标是类本身，也就是例子中的 Hero 类，而此时name 和 descriptor 均为 undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title function_">speakName</span>(<span class="string">&quot;Julius&quot;</span>) </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Hero</span> &#123;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">speakName</span>(<span class="params">kingname</span>) &#123;  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">target, name, descriptor</span>) &#123;  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(target);    <span class="comment">// ƒ Hero()  </span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);      <span class="comment">// undefined  </span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(descriptor);    <span class="comment">// undefined  </span></span><br><span class="line">    target.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">name</span> = kingname;   </span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>装饰器在装饰类方法时</li>
+</ul>
+<blockquote>
+<p>target 目标是类实例，name 是类方法的名称，descriptor 则是类方法的描述对象，可看到 value 是类方法本身，其他3个值和 Object.defineProperty的属性一样，负责控制值的行为，该例中的 writable 就是其中之一。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hero</span> &#123;  </span><br><span class="line">  name = <span class="string">&quot;Julius&quot;</span>;  </span><br><span class="line">  @readonly  </span><br><span class="line">  <span class="title function_">speak</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`My name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);   </span><br><span class="line">  &#125; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">readonly</span>(<span class="params">target, name, descriptor</span>) &#123;  </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(target);  <span class="comment">// &#123;&#125; __proto__: Object: Object  </span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(name);    <span class="comment">// speak  </span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(descriptor);    </span><br><span class="line">  <span class="comment">/*    </span></span><br><span class="line"><span class="comment">   * configurable: true      </span></span><br><span class="line"><span class="comment">   * enumerable: false      </span></span><br><span class="line"><span class="comment">   * value: ƒ speak()      </span></span><br><span class="line"><span class="comment">   * writable: true      </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  descriptor.<span class="property">writable</span> = <span class="literal">false</span>; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hero = <span class="keyword">new</span> <span class="title class_">Hero</span>();</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>知识拓展</li>
+</ol>
+<ul>
+<li>Object.defineProperty</li>
+</ul>
+<blockquote>
+<p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。<br>该方法允许精确添加或修改对象的属性。通过赋值来添加的普通属性会创建在属性枚举期间显示的属性（for…in 或 Object.keys 方法）， 这些值可以被改变，也可以被删除。这种方法允许这些额外的细节从默认值改变。默认情况下，使用 Object.defineProperty() 添加的属性值是不可变的。</p>
+</blockquote>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, prop, descriptor)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>obj</code>：要在其上定义属性的对象。</p>
+</li>
+<li><p><code>prop</code>：要定义或修改的属性的名称。</p>
+</li>
+<li><p><code>descriptor</code>：将被定义或修改的属性描述符。</p>
+</li>
+<li><p>返回值：被传递给函数的对象。</p>
+</li>
+<li><p>属性描述符</p>
+</li>
+</ul>
+<blockquote>
+<p>对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。</p>
+</blockquote>
+<p><em>数据描述符</em>是一个具有值的属性，该值可能是可写的，也可能不是可写的。<br><em>存取描述符</em>是由 getter-setter 函数对描述的属性。<br>描述符必须是这两种形式之一；不能同时是两者。</p>
+<ol>
+<li><em>数据描述符和存取描述符均具有以下可选键值</em>：</li>
+</ol>
+<ul>
+<li>configurable</li>
+</ul>
+<blockquote>
+<p>当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，同时该属性也能从对应的对象上被删除。默认为 false</p>
+</blockquote>
+<ul>
+<li>enumerable</li>
+</ul>
+<blockquote>
+<p>enumerable定义了对象的属性是否可以在 for…in 循环和 Object.keys() 中被枚举。</p>
+</blockquote>
+<blockquote>
+<p>当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。</p>
+</blockquote>
+<ol start="2">
+<li><em>数据描述符同时具有以下可选键值</em>：</li>
+</ol>
+<ul>
+<li>value</li>
+</ul>
+<blockquote>
+<p>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined</p>
+</blockquote>
+<ul>
+<li>writable</li>
+</ul>
+<blockquote>
+<p>当且仅当该属性的 writable 为 true 时，value 才能被赋值运算符改变。默认为 false</p>
+</blockquote>
+<ol start="3">
+<li><em>存取描述符同时具有以下可选键值</em></li>
+</ol>
+<ul>
+<li>get</li>
+</ul>
+<blockquote>
+<p>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为 undefined</p>
+</blockquote>
+<ul>
+<li>set</li>
+</ul>
+<blockquote>
+<p>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为 undefined</p>
+</blockquote>
+<blockquote>
+<p>如果一个描述符不具有value,writable,get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常</p>
+</blockquote>
+<ul>
+<li>Babel编辑 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">  @<span class="title function_">readonly</span>(<span class="literal">false</span>)</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cat&#x27;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">readonly</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">target, key, descriptor</span>) &#123; <span class="comment">// 此处 target 为 C.prototype; key 为 method;</span></span><br><span class="line">    <span class="comment">// 原 descriptor 为：&#123; value: f, enumarable: false, writable: true, configurable: true &#125;</span></span><br><span class="line">    descriptor.<span class="property">writable</span> = value</span><br><span class="line">    <span class="keyword">return</span> descriptor</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title function_">C</span>()</span><br><span class="line">c.<span class="property">method</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dog&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c.<span class="title function_">method</span>() <span class="comment">// cat</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>可以看到装饰器函数接收的三个参数与 Object.defineProperty 是完全一样的，具体实现可以看 babel 转化后的代码，主要实现如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> C = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="title function_">method</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cat&#x27;</span>) &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> temp</span><br><span class="line">  temp = <span class="title function_">readonly</span>(<span class="literal">false</span>)(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>,</span><br><span class="line">    temp = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>)) || temp <span class="comment">// 通过 Object.getOwnPropertyDescriptor 获取到描述符传入到装饰器函数中</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (temp) <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>, temp)</span><br><span class="line">  <span class="keyword">return</span> C</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>有多个装饰器作用于同一个方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">  @<span class="title function_">readonly</span>(<span class="literal">false</span>)</span><br><span class="line">  @log</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经 babel 转化后的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">desc = [<span class="title function_">readonly</span>(<span class="literal">false</span>), log]</span><br><span class="line">    .<span class="title function_">slice</span>()</span><br><span class="line">    .<span class="title function_">reverse</span>()</span><br><span class="line">    .<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">desc, decorator</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">decorator</span>(target, property, desc) || desc;</span><br><span class="line">    &#125;, desc);</span><br></pre></td></tr></table></figure>
+<p>可以清晰地看出，经过 reverse 倒序后，<em>装饰器方法会至里向外执行</em></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/decorator">阮一峰-装饰器</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014495089">JS 装饰器，一篇就够</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2022 王一点
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixinpay.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

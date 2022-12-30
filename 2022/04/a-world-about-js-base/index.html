@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一句话理解JavaScript基础知识点 | 一点</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="一句话理解JavaScript基础知识点 | 一点">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SQL">
+<meta property="og:url" content="http://chaoyu.site/SQL/index.html">
+<meta property="og:site_name" content="一点">
+<meta property="og:description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-08T01:41:53.000Z">
+<meta property="article:modified_time" content="2022-12-22T07:42:20.751Z">
+<meta property="article:author" content="chaoyu">
+<meta property="article:tag" content="技术博客,前端开发,笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>chaoyu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/imchaoyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:chaoyumail@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(19)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="代码规范">
+                        
+                        代码规范
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="git">
+                        
+                        git
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="javascript">
+                        
+                        javascript
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="nodejs">
+                        
+                        nodejs
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="python">
+                        
+                        python
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="19">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>仓库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分支</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>爬虫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法 时间复杂度 空间复杂度</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>行政区划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>装饰器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>commonjs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>eslint</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>esm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>js</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>module</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodejs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nrm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nvm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>prettier</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础 函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>url 网络基础</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/12/python-about-venv/"
+           data-tag="Python基础"
+           data-author="" >
+            <span class="post-title" title="Python虚拟环境简介和基础使用">Python虚拟环境简介和基础使用</span>
+            <span class="post-date" title="2022-12-30 19:51:20">2022/12/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 代码规范 "
+           href="/2022/05/eslit-prettier/"
+           data-tag="prettier,eslint"
+           data-author="" >
+            <span class="post-title" title="Prettier和Eslint在前端项目中的配置">Prettier和Eslint在前端项目中的配置</span>
+            <span class="post-date" title="2022-05-10 14:37:03">2022/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/04/web-system-theme-by-js-css/"
+           data-tag="主题"
+           data-author="" >
+            <span class="post-title" title="前端判断当前系统主题">前端判断当前系统主题</span>
+            <span class="post-date" title="2022-04-25 13:48:13">2022/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/a-world-about-js-base/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一句话理解JavaScript基础知识点">一句话理解JavaScript基础知识点</span>
+            <span class="post-date" title="2022-04-21 13:15:22">2022/04/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/about-simple-js-runtime/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="探究JavaScript的运行时">探究JavaScript的运行时</span>
+            <span class="post-date" title="2022-04-19 11:54:29">2022/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/04/js-macro-task-micro-task/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浅析Js的宏任务和微任务">浅析Js的宏任务和微任务</span>
+            <span class="post-date" title="2022-04-18 19:44:58">2022/04/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-high-function/"
+           data-tag="python基础 函数"
+           data-author="" >
+            <span class="post-title" title="Python进阶，从函数到高级魔法方法">Python进阶，从函数到高级魔法方法</span>
+            <span class="post-date" title="2022-03-21 10:55:26">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-struct/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，数据结构大汇总">Python基础，数据结构大汇总</span>
+            <span class="post-date" title="2022-03-21 10:53:38">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-var-throw/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，从变量到异常处理">Python基础，从变量到异常处理</span>
+            <span class="post-date" title="2022-03-21 10:51:48">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/what-happend-when-url-input/"
+           data-tag="url 网络基础"
+           data-author="" >
+            <span class="post-title" title="从Url输入到页面展现发生了什么">从Url输入到页面展现发生了什么</span>
+            <span class="post-date" title="2022-03-21 10:26:36">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/github-fork/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="GitHub如何提PR且fork后与原仓库同步">GitHub如何提PR且fork后与原仓库同步</span>
+            <span class="post-date" title="2022-03-11 08:40:59">2022/03/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/algorithm-complexity-O&S/"
+           data-tag="算法 时间复杂度 空间复杂度"
+           data-author="" >
+            <span class="post-title" title="时间复杂度和空间复杂度">时间复杂度和空间复杂度</span>
+            <span class="post-date" title="2022-03-08 15:42:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-connect-more-remotes/"
+           data-tag="git,仓库"
+           data-author="" >
+            <span class="post-title" title="Git关联多个远程仓库">Git关联多个远程仓库</span>
+            <span class="post-date" title="2022-03-08 11:50:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-pull&push/"
+           data-tag="git,分支"
+           data-author="" >
+            <span class="post-title" title="Git拉取远程分支并创建本地分支">Git拉取远程分支并创建本地分支</span>
+            <span class="post-date" title="2022-03-08 11:49:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-about-tags/"
+           data-tag="git,tag"
+           data-author="" >
+            <span class="post-title" title="Git创建tag并推送至远程">Git创建tag并推送至远程</span>
+            <span class="post-date" title="2022-03-08 11:48:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/about-npm-simple/"
+           data-tag="nodejs,npm,nvm,nrm,npx"
+           data-author="" >
+            <span class="post-title" title="Npm基础知识">Npm基础知识</span>
+            <span class="post-date" title="2022-03-08 10:32:01">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/commonjs&ESM-different/"
+           data-tag="commonjs,ES6,module,esm"
+           data-author="" >
+            <span class="post-title" title="commonjs和ES6 Module的区别">commonjs和ES6 Module的区别</span>
+            <span class="post-date" title="2022-03-08 10:29:11">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 javascript "
+           href="/2022/03/js-decorator-simple/"
+           data-tag="js,装饰器"
+           data-author="" >
+            <span class="post-title" title="Js装饰器浅析">Js装饰器浅析</span>
+            <span class="post-date" title="2022-03-08 09:35:52">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/nodejs-worm-get-division/"
+           data-tag="nodejs,爬虫,行政区划"
+           data-author="" >
+            <span class="post-title" title="Nodejs爬虫获取行政区划">Nodejs爬虫获取行政区划</span>
+            <span class="post-date" title="2022-03-08 09:27:05">2022/03/08</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-a-world-about-js-base" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一句话理解JavaScript基础知识点</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="javascript">javascript</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-04-21 13:15</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8E%9F%E5%9E%8B"><span class="toc-text">1. 原型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">2. 原型链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-js%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-text">3. js运行时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">4. 执行上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%EF%BC%88VO%EF%BC%89"><span class="toc-text">5. 变量对象（VO）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">6. 作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-text">7. 作用域链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E9%97%AD%E5%8C%85"><span class="toc-text">8. 闭包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-call%E3%80%81apply%E3%80%81bind"><span class="toc-text">9. call、apply、bind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">10. 类数组对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-1-Arguments%E5%AF%B9%E8%B1%A1"><span class="toc-text">10.1. Arguments对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81"><span class="toc-text">11. 防抖和节流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">12. 传递参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-new%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">13. new关键字</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>JavaScript基础知识概念，尝试尽量用最精简的话表达。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="1-原型"><a href="#1-原型" class="headerlink" title="1. 原型"></a>1. 原型</h1><p>除null外的js对象，在创建的时候会与之关联另外一个对象，这个对象就是原型，每个对象都会从原型继承属性。</p>
+<blockquote>
+<ul>
+<li><strong>proto</strong>: 每个除null之外的对象都具有一个<code>__proto__</code>属性，这个属性指向该对象的原型。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>constructor: 每个原型都有一个<code>constructor</code>属性指向关联的构造函数</li>
+</ul>
+</blockquote>
+<p>加个例子理解：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line">person.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line"><span class="title class_">Person</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person) === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-原型链"><a href="#2-原型链" class="headerlink" title="2. 原型链"></a>2. 原型链</h1><p>当读取实例属性时，如果找不到就会查找对象关联的原型中的属性，如果还找不到，就会去找原型的原型，一直找到最顶层为止。这个由相互关联的原型组成的链状结构就是原型链。</p>
+<blockquote>
+<p>最顶层就是原型链的最后一个，即<code>Object.prototype</code>的原型，值为null</p>
+</blockquote>
+<blockquote>
+<p><code>Object.prototype.__proto__ = null</code>  即 <code>Object.prototype</code> 没有原型，所以查找属性的时候查到 <code>Object.prototype</code> 就可以停止查找了</p>
+</blockquote>
+<h1 id="3-js运行时"><a href="#3-js运行时" class="headerlink" title="3. js运行时"></a>3. js运行时</h1><p>js运行时有两个阶段：编译阶段和执行阶段。</p>
+<ul>
+<li>编译阶段：js通过编译生成<strong>执行上下文</strong>和<strong>可执行代码</strong></li>
+<li>执行阶段：执行可执行代码，生成结果</li>
+</ul>
+<blockquote>
+<ul>
+<li>可执行代码 就三种，全局代码、函数代码、eval代码<br>当执行到一个函数的时候，就会进行准备工作，这里的“准备工作”，让我们用个更专业一点的说法，就叫做”<strong>执行上下文(execution context)</strong>“</li>
+</ul>
+</blockquote>
+<h1 id="4-执行上下文"><a href="#4-执行上下文" class="headerlink" title="4. 执行上下文"></a>4. 执行上下文</h1><p>是<strong>js代码执行一段代码时的运行环境</strong>，比如调用一个函数，就会进入到这个函数的执行上下文，确定函数在执行期间用到的诸如this、变量、对象以及函数等。</p>
+<blockquote>
+<p>执行上下文有三个重要属性：变量对象、作用域链、this</p>
+</blockquote>
+<blockquote>
+<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入<strong>执行上下文栈</strong>，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。</p>
+</blockquote>
+<h1 id="5-变量对象（VO）"><a href="#5-变量对象（VO）" class="headerlink" title="5. 变量对象（VO）"></a>5. 变量对象（VO）</h1><p>变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。</p>
+<blockquote>
+<ul>
+<li>全局上下文:全局上下文中的变量对象就是全局对象</li>
+<li>函数上下文: 在函数上下文中，用活动对象(activation object, AO)来表示变量对象</li>
+</ul>
+</blockquote>
+<ul>
+<li>活动对象(AO): 活动对象是在进入函数上下文时刻被创建的，它通过函数的 arguments 属性初始化。arguments 属性值是 Arguments 对象。</li>
+</ul>
+<blockquote>
+<p>活动对象和变量对象其实是一个东西，只是变量对象是规范上的或者说是引擎实现上的，不可在 JavaScript 环境中访问，<strong>只有到当进入一个执行上下文中，这个执行上下文的变量对象才会被激活</strong>，所以才叫 activation object 呐，而只有被激活的变量对象，也就是活动对象上的各种属性才能被访问。</p>
+</blockquote>
+<ul>
+<li><p>函数上下文的变量对象初始化只包括 Arguments 对象</p>
+</li>
+<li><p>在进入执行上下文时会给变量对象添加形参、函数声明、变量声明等初始的属性值</p>
+</li>
+<li><p>在代码执行阶段，会再次修改变量对象的属性值</p>
+</li>
+</ul>
+<h1 id="6-作用域"><a href="#6-作用域" class="headerlink" title="6. 作用域"></a>6. 作用域</h1><p>程序源代码中定义变量的区域。</p>
+<blockquote>
+<p>作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。<br>JavaScript 采用词法作用域(lexical scoping)，也就是静态作用域。</p>
+</blockquote>
+<ul>
+<li><p>静态作用域<br> 即词法作用域，函数的作用域在函数定义的时候就决定了</p>
+</li>
+<li><p>动态作用域<br> 函数的作用域是在函数调用的时候才决定的</p>
+</li>
+</ul>
+<h1 id="7-作用域链"><a href="#7-作用域链" class="headerlink" title="7. 作用域链"></a>7. 作用域链</h1><p>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做作用域链。</p>
+<h1 id="8-闭包"><a href="#8-闭包" class="headerlink" title="8. 闭包"></a>8. 闭包</h1><p>MDN解释：闭包是指那些能够访问自由变量的函数</p>
+<ul>
+<li>自由变量：自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量</li>
+</ul>
+<p>ECMAScript中，闭包指的是：</p>
+<ul>
+<li><strong>从理论角度</strong>：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。</li>
+<li><strong>从实践角度</strong>：以下函数才算是闭包：</li>
+<li>即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）</li>
+<li>在代码中引用了自由变量</li>
+</ul>
+<h1 id="9-call、apply、bind"><a href="#9-call、apply、bind" class="headerlink" title="9. call、apply、bind"></a>9. call、apply、bind</h1><p> call和apply共同点</p>
+<ul>
+<li>都能够改变函数执行时的上下文，将一个对象的方法交给另一个对象来执行，并且是立即执行。</li>
+<li>调用 call 和 apply 的对象，必须是一个函数 Function。</li>
+<li>第一个参数是一个对象，Function的调用者，将会指向这个对象，如不传，则默认全局对象window</li>
+</ul>
+<p>call和apply区别：</p>
+<p> call，第二个参数开始，可接受任意个参数，apply第二个参数是一个数组或类数组，apply只有俩参数</p>
+<p>bind 方法 与 apply 和 call 比较类似，也能改变函数体内的 this 指向。不同的是，bind 方法的<strong>返回值是函数，并且需要稍后调用，才会执行</strong>。而 apply 和 call 则是立即调用。</p>
+<h1 id="10-类数组对象"><a href="#10-类数组对象" class="headerlink" title="10. 类数组对象"></a>10. 类数组对象</h1><p>顾名思义，就是具备与数组特征类似的对象。可以通过角标进行调用，具有length属性，同时也可以通过 for 循环进行遍历，无法使用 forEach、splice、push 等数组原型链上的方法</p>
+<blockquote>
+<p>拥有一个 length 属性和若干索引属性的对象</p>
+</blockquote>
+<blockquote>
+<p>Arguments 对象就是一个类数组对象。在客户端 JavaScript 中，一些 DOM 方法(document.getElementsByTagName()等)也返回类数组对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arrayLike = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">&#x27;age&#x27;</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">&#x27;sex&#x27;</span>,</span><br><span class="line">    <span class="attr">length</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用数组方法<br>用 Function.call 间接调用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayLike = &#123;<span class="number">0</span>: <span class="string">&#x27;name&#x27;</span>, <span class="number">1</span>: <span class="string">&#x27;age&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;sex&#x27;</span>, <span class="attr">length</span>: <span class="number">3</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">join</span>.<span class="title function_">call</span>(arrayLike, <span class="string">&#x27;&amp;&#x27;</span>); <span class="comment">// name&amp;age&amp;sex</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(arrayLike, <span class="number">0</span>); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"><span class="comment">// slice可以做到类数组转数组</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">map</span>.<span class="title function_">call</span>(arrayLike, <span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> item.<span class="title function_">toUpperCase</span>();</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// [&quot;NAME&quot;, &quot;AGE&quot;, &quot;SEX&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">splice</span>.<span class="title function_">call</span>(arrayLike, <span class="number">0</span>); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(arrayLike); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">concat</span>.<span class="title function_">apply</span>([], arrayLike)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="10-1-Arguments对象"><a href="#10-1-Arguments对象" class="headerlink" title="10.1. Arguments对象"></a>10.1. Arguments对象</h1><p>Arguments 对象只定义在函数体中，包括了函数的参数和其他属性。在函数体中，arguments 指代该函数的 Arguments 对象。</p>
+<blockquote>
+<p>类数组的索引属性和length属性之外，还有一个callee属性</p>
+</blockquote>
+<ul>
+<li><p>length属性<br>Arguments对象的length属性，表示实参的长度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">b, c, d</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;实参的长度为：&quot;</span> + <span class="variable language_">arguments</span>.<span class="property">length</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;形参的长度为：&quot;</span> + foo.<span class="property">length</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 形参的长度为：3</span></span><br><span class="line"><span class="comment">// 实参的长度为：1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>callee属性<br>Arguments 对象的 callee 属性，通过它可以调用函数自身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    (data[i] = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">callee</span>.<span class="property">i</span>) </span><br><span class="line">    &#125;).<span class="property">i</span> = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data[<span class="number">0</span>]();</span><br><span class="line">data[<span class="number">1</span>]();</span><br><span class="line">data[<span class="number">2</span>]();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p><strong>非严格模式下</strong>,传入的参数，实参和 arguments 的值会共享，当没有传入时，实参与 arguments 值不会共享。<strong>在严格模式下</strong>，实参和 arguments 是不会共享的</p>
+</blockquote>
+<ul>
+<li><p>传递参数<br>将参数从一个函数传递到另一个函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 apply 将 foo 的参数传递给 bar</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    bar.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params">a, b, c</span>) &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用ES6的 … 运算符，我们可以轻松转成数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params">...<span class="variable language_">arguments</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">func</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="11-防抖和节流"><a href="#11-防抖和节流" class="headerlink" title="11. 防抖和节流"></a>11. 防抖和节流</h1><p>防抖和节流的作用都是防止函数多次调用。</p>
+<p>区别在于，假设一个用户一直触发这个函数，且每次触发函数的间隔小于wait，</p>
+<ul>
+<li>防抖的情况下只会调用一次</li>
+<li>节流的情况会每隔一定时间（参数wait）调用函数</li>
+</ul>
+<h1 id="12-传递参数"><a href="#12-传递参数" class="headerlink" title="12. 传递参数"></a>12. 传递参数</h1><ul>
+<li>按值传递 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">v</span>) &#123;</span><br><span class="line">   v = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(v); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(value);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(value) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
+<li>引用传递<br> 传递对象的引用 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">   <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">o</span>) &#123;</span><br><span class="line">   o.<span class="property">value</span> = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">value</span>); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">value</span>) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></li>
+<li>共享传递<br> 传递对象的引用的副本 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">   <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">o</span>) &#123;</span><br><span class="line">   o = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(o); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">value</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+ 所以修改 o.value，可以通过引用找到原值，但是直接修改 o，并不会修改原值。所以第二个和第三个例子其实都是按共享传递</li>
+</ul>
+<blockquote>
+<p>参数如果是基本类型是按值传递，如果是引用类型按共享传递<br>但是因为拷贝副本也是一种值的拷贝，所以在《高程》中也直接认为是按值传递了</p>
+</blockquote>
+<h1 id="13-new关键字"><a href="#13-new关键字" class="headerlink" title="13. new关键字"></a>13. new关键字</h1><p> new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象类型之一</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2022 王一点
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixinpay.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
