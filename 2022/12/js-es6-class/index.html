@@ -609,7 +609,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-31 18:18:41'>2022-12-31 15:29</time>
+            发布时间 : <time class="date" title='最后更新: 2022-12-31 18:23:26'>2022-12-31 15:29</time>
         
     </div>
     <div class="article-meta">
@@ -678,7 +678,8 @@ Point.prototype.toString = function()&#123;
 <p>ES6中的<code>constructor</code>构造方法对应ES5中的构造函数。</p>
 <h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p><code>super</code>关键字既可以当函数使用，也可以当对象使用。这两种情况下，它的使用方法完全不同。<br>对象函数中的<code>this</code>指向的是当前函数所在的对象，而<code>super</code>指向的是当前函数所在对象的原型，比<code>this</code>更深了一层。在子类构造函数中调用<code>super()</code>，相当于调用父类的<code>constructor</code>。</p>
 <ol>
-<li>super当函数使用<pre><code class="javascript">class A&#123;&#125;
+<li><p>super当函数使用</p>
+<pre><code class="javascript">class A&#123;&#125;
 class B extends A&#123;
  constructor()&#123;
    super(); // ES6要求，子类的构造函数必须执行一次super函数，否则会报错
@@ -687,35 +688,52 @@ class B extends A&#123;
 <blockquote>
 <p>注：在 <code>constructor</code> 中必须调用 <code>super</code> 方法，因为子类没有自己的 <code>this</code> 对象，而是继承父类的 <code>this</code> 对象，然后对其进行加工,而 <code>super</code> 就代表了父类的构造函数。<code>super</code> 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 <code>super</code> 内部的 <code>this</code> 指的是 B，因此 <code>super()</code> 在这里相当于 <code>A.prototype.constructor.call(this, props)</code></p>
 </blockquote>
-<p>  &#96;&#96;&#96;javascript<br>  class A {<br> constructor() {<br>   console.log(new.target.name); &#x2F;&#x2F; new.target 指向当前正在执行的函数<br> }<br>  }</p>
 </li>
 </ol>
-<p>  class B extends A {<br>    constructor() {<br>      super();<br>    }<br>  }</p>
-<p>  new A(); &#x2F;&#x2F; A<br>  new B(); &#x2F;&#x2F; B</p>
-<pre><code>&gt; 可以看到，在 `super()` 执行时，它指向的是 子类 B 的构造函数，而不是父类 A 的构造函数。也就是说，`super()` 内部的 `this` 指向的是 B。
-
-2. super当对象使用
- &gt; - 在普通方法中，指向父类的原型对象；
- &gt; - 在静态方法中，指向父类。
- ```javascript
- class A&#123;
-  c()&#123;
-    return 2
+<pre><code class="javascript">class A &#123;
+  constructor() &#123;
+    console.log(new.target.name); // new.target 指向当前正在执行的函数
   &#125;
- &#125;
+&#125;
 
- class B extends A&#123;
-  constructor()&#123;
+class B extends A &#123;
+  constructor() &#123;
     super();
-    console.log(super.c()); // 2
   &#125;
+&#125;
+
+new A(); // A
+new B(); // B
+</code></pre>
+<blockquote>
+<p>可以看到，在 <code>super()</code> 执行时，它指向的是 子类 B 的构造函数，而不是父类 A 的构造函数。也就是说，<code>super()</code> 内部的 <code>this</code> 指向的是 B。</p>
+</blockquote>
+<ol start="2">
+<li><p>super当对象使用</p>
+<blockquote>
+<ul>
+<li>在普通方法中，指向父类的原型对象；</li>
+<li>在静态方法中，指向父类。</li>
+</ul>
+</blockquote>
+<pre><code class="javascript">class A&#123;
+ c()&#123;
+   return 2
  &#125;
- let b = new B();
+&#125;
+
+class B extends A&#123;
+ constructor()&#123;
+   super();
+   console.log(super.c()); // 2
+ &#125;
+&#125;
+let b = new B();
 </code></pre>
 <blockquote>
 <p>上面代码中，子类B当中的<code>super.c()</code>就是将<code>super</code>当作一个对象使用。这时，<code>super</code>在普通方法之中，指向<code>A.prototype</code>，所以<code>super.c()</code>就相当于<code>A.prototype.c()</code></p>
 </blockquote>
-<p>   <strong>通过<code>super</code>调用父类的方法时，<code>super</code>会绑定子类的<code>this</code></strong></p>
+<p><strong>通过<code>super</code>调用父类的方法时，<code>super</code>会绑定子类的<code>this</code></strong></p>
 <pre><code class="javascript">class A&#123;
  constructor()&#123;
    this.x = 1;
@@ -740,6 +758,8 @@ b.m(); // 2
 <blockquote>
 <p>上面代码中，<code>super.s()</code> 虽然调用的是 <code>A.prototytpe.s()</code>，但是 <code>A.prototytpe.s()</code>会绑定子类 B 的 <code>this</code>，导致输出的是 2，而不是 1。也就是说，实际上执行的是 <code>super.s.call(this)</code>。</p>
 </blockquote>
+</li>
+</ol>
 <p>  <strong>由于绑定子类的 <code>this</code>，所以如果通过 <code>super</code> 对某个属性赋值，这时 <code>super</code> 就是 <code>this</code>，赋值的属性会变成子类实例的属性。</strong></p>
 <pre><code class="javascript">class A &#123;
   constructor() &#123;
