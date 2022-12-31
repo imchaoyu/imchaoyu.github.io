@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Nodejs爬虫获取行政区划 | 一点</title>
-  <meta name="keywords" content=" nodejs , 爬虫 , 行政区划 ">
-  <meta name="description" content="Nodejs爬虫获取行政区划 | 一点">
+  <title>Js迭代器简介 | 一点</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Js迭代器简介 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -573,9 +573,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-nodejs-worm-get-division" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js-iterator-simple" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Nodejs爬虫获取行政区划</h1>
+        <h1 class="article-title">Js迭代器简介</h1>
     
     <div class="article-meta">
         
@@ -585,26 +585,15 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="nodejs">nodejs</a>
+            <a  data-rel="JavaScript">JavaScript</a>
             
         </span>
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color2">nodejs</a>
-            
-            <a class="color3">爬虫</a>
-            
-            <a class="color5">行政区划</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-03-08 09:27</time>
+            发布时间 : <time class="date" title='最后更新: 2022-12-31 12:05:09'>2022-12-31 11:36</time>
         
     </div>
     <div class="article-meta">
@@ -626,7 +615,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91"><span class="toc-text">开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%9B%AE%E6%A0%87%E7%BD%91%E7%AB%99"><span class="toc-text">分析目标网站</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">迭代器是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -642,95 +631,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>最近在开发一个房产管理系统，有个功能是需要对行政区划进行存入数据库管理，在网上找了很久，关于国家的行政区划数据都比较久远或者不完整，不能匹配自己的需求。<br>后来就想到用爬虫获取国家统计局网站的数据，因为Python还在学习中，所以就用自己熟悉的nodejs写了份简单的爬虫，能获取到国家统计局网站的全国行政区划信息（不包含港澳台）。</p>
-</blockquote>
-<span id="more"></span>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li>创建<code>src</code>文件价，作为生成的行政区划信息存放目录</li>
-<li>创建<code>index.js</code> 文件作为主要文件</li>
-</ul>
-<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><blockquote>
-<p>使用<code>npm</code>初始化项目，按照提示输入相应内容（项目名称、版本、描述等信息）</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><ul>
-<li><code>cheerio</code>： jquery核心功能的一个快速灵活而又简洁的实现，主要是为了用在服务器端需要对DOM进行操作的地方</li>
-<li><code>axios</code>：是一个基于 promise 的 HTTP 库（也可以使用nodejs的request或其他http库）</li>
-<li><code>iconv-lite</code>：解决nodejs中编码问题</li>
-<li><code>async</code>：区别与ES的<code>async/await</code>,这里作为一个库引入，主要使用async.mapLimit控制请求并发数</li>
-</ul>
+        <h1 id="迭代器是什么"><a href="#迭代器是什么" class="headerlink" title="迭代器是什么"></a>迭代器是什么</h1><p>迭代器（iterator）是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署iterator接口，就可以完成遍历操作。</p>
 <blockquote>
-<p>下文具体介绍各个库的使用</p>
+<p>ES6创造了一种新的遍历命令<code>for of</code>循环，iterator主要供<code>for of</code>使用。</p>
 </blockquote>
-<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><h2 id="分析目标网站"><a href="#分析目标网站" class="headerlink" title="分析目标网站"></a>分析目标网站</h2><blockquote>
-<p>进入国家统计局网站，找到行政区划网页，目前最新的数据是2020年的，网址：<a target="_blank" rel="noopener" href="http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/index.html">http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/index.html</a></p>
-</blockquote>
-<p>通过查看网页源码发现，其实这个网站比较简单，我们想获取的信息也直接在html内，所以可以直接使用<code>cheerio</code>来获取元素信息，并最终得到想要的数据。</p>
-<blockquote>
-<p>对被爬取网站的分析应该放在第一步，然后再根据不同网站的分析结果，确定使用的依赖库。</p>
-</blockquote>
-<p>首先定义几个变量</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">HOST</span> = <span class="string">&#x27;http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> headers = &#123; <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#x27;</span> &#125;;</span><br></pre></td></tr></table></figure>
-<p><code>HOST</code>: 就是要爬取的网站，这里给单独出来，方便后面的操作，（可以进一步优化，把年份拿出来，每次获取时手动输入，获取指定年份的数据）<br><code>headers</code>: 就是访问该网站时的header信息，这里就是为了模拟浏览器环境，防止出问题，其实不写也可以请求网站信息</p>
+<p>原生具备了iterator接口的数据结构：</p>
 <ul>
-<li>引入<code>axios</code>库，获取网站数据<br>文件头部引入<code>axios</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">&#x27;axios&#x27;</span>);</span><br></pre></td></tr></table></figure>
-然后定义一个函数用于请求地址获取相应数据。因为根据分析网站的结果可知，原网站数据是按层级一层一层划分并每个链接显示一级的数据。如：首页显示了所有省级信息，然后每个省级携带对应的不同链接，连接到下属城市，再根据城市信息链接到区县再到街道、居委会等。所以把请求接口的方法封装到一个函数里，通过参数访问，获取信息。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fetchData</span> = <span class="keyword">async</span> (<span class="params">url</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">axios</span>(url, &#123; headers &#125;);</span><br></pre></td></tr></table></figure>
-定义一个<code>main</code>函数，作为程序的主入口，再在<code>main</code>内执行<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">main</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> provinceData = <span class="keyword">await</span> <span class="title function_">fetchData</span>(<span class="variable constant_">HOST</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
-<blockquote>
-</blockquote>
-</li>
+<li>Array</li>
+<li>Arguments</li>
+<li>Set</li>
+<li>Map</li>
+<li>String</li>
+<li>TypedArray</li>
+<li>NodeList</li>
 </ul>
-<p>保存后执行<code>node index.js</code>即可获取网页信息。可用<code>console</code>打印出查看。</p>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><ol>
+<li>创建一个指针对象，指向当前数据结构的起始位置；</li>
+<li>第一次调用对象的<code>next</code>方法，指针自动指向数据结构的第一个成员；</li>
+<li>接下来不断不断调用<code>next</code>方法，指针一直往后移，直到指向最后一个成员；</li>
+<li>每次调用<code>next</code>方法放回一个包含<code>value</code>和<code>done</code>属性的对象；</li>
+</ol>
 <blockquote>
-<p>此时会发现，获取的数据，中文会乱码，这是因为，该网站编码采用的是<code>GB2312</code>。我们需要对获取的数据进行转译。</p>
+<p><strong>注意</strong> 需要自定义遍历数据的时候，记得享到使用迭代器</p>
 </blockquote>
-<ul>
-<li>引入<code>iconv-lite</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iconv = <span class="built_in">require</span>(<span class="string">&#x27;iconv-lite&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>修改请求函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">axios</span>(url, &#123; <span class="attr">responseType</span>: <span class="string">&#x27;arraybuffer&#x27;</span>, headers &#125;);</span><br><span class="line"><span class="comment">// iconv-lite 解析buffer数据为gb2312</span></span><br><span class="line">data = iconv.<span class="title function_">decode</span>(res.<span class="property">data</span>, <span class="string">&#x27;gb2312&#x27;</span>);</span><br><span class="line"><span class="string">``</span><span class="string">``</span></span><br><span class="line"></span><br><span class="line">**注意**</span><br><span class="line">&gt; axios会转换数据格式为utf-<span class="number">8</span>，所以这里需要把获取的数据转换为流，再使用<span class="string">`iconv-lite`</span>转为<span class="string">`GB2312`</span>格式</span><br><span class="line"></span><br><span class="line">&gt; 获取到正确的数据后就可以使用 <span class="string">`cheerio`</span> 进行精准的获取了。</span><br><span class="line"></span><br><span class="line">- 引入 <span class="string">`cheerio`</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`javascript</span></span><br><span class="line"><span class="string">const cheerio = require(&#x27;cheerio&#x27;);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;xiaoming&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们需要拿到<code>obj</code>对象里的<code>arr</code>数组的数据。</p>
+<p>由于<code>Object</code>并没有内置<code>iterator</code>，所以我们使用<code>for of</code>遍历时，控制台报错，现在我们给<code>obj</code>对象加入<code>iterator</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;xiaoming&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="title function_">iterator</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; _this.<span class="property">arr</span>.<span class="property">length</span>&gt;) &#123;</span><br><span class="line">          <span class="keyword">const</span> result  = &#123;</span><br><span class="line">            <span class="attr">value</span>: _this.<span class="property">arr</span>[index++],</span><br><span class="line">            <span class="attr">done</span>: <span class="literal">false</span></span><br><span class="line">          &#125;;</span><br><span class="line">          index++</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">value</span>: <span class="literal">undefined</span>,</span><br><span class="line">            <span class="attr">done</span>: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(value <span class="keyword">of</span> obj)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1,2,3,4</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>iterator</code>接口的目的，就是为所有数据结构提供一种统一的访问机制，即<code>for of</code>循环，那么就需要实现一个统一的，默认的<code>iterator</code>接口：<code>Symbol.iterator</code>。</p>
+</blockquote>
+<blockquote>
+<p>可以理解为： 一个对象只要具有<code>Symbol,iterator</code>属性，就可以认为是一个可迭代对象。</p>
+</blockquote>
+<p><code>Symbol.iterator</code>属性本身是一个函数，就是当前数据结构默认的遍历器生成函数，执行这个函数，就回返回一个迭代器对象。至于函数名<code>Symbol.iterator</code>，它是一个表达式，返回<code>Symbol</code>对象的<code>iterator</code>属性，这是一个预定义好的、类型为<code>Symbol</code>的特殊值，所以要放在方括号内。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> iter = arr[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]();</span><br><span class="line"></span><br><span class="line">iter.<span class="title function_">next</span>(); <span class="comment">// &#123;value: &quot;a&quot;, done: false&#125;</span></span><br><span class="line">iter.<span class="title function_">next</span>(); <span class="comment">// &#123;value: &quot;b&quot;, done: false&#125;</span></span><br><span class="line">iter.<span class="title function_">next</span>(); <span class="comment">// &#123;value: &quot;c&quot;, done: false&#125;</span></span><br><span class="line">iter.<span class="title function_">next</span>(); <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>分析网页结构，省级信息在<code>table</code>标签内，分四行显示，共四个<code>tr</code>标签，每个<code>tr</code>标签有个<code>class=&quot;provincetr&quot;</code>，然后名称在<code>td</code>下的<code>a</code>标签内，如下：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/letianxf/article/details/121501110">参考</a></p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">class</span>=<span class="string">&quot;provincetr&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;11.html&quot;</span>&gt;</span>北京市<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;12.html&quot;</span>&gt;</span>天津市<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;13.html&quot;</span>&gt;</span>河北省<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;14.html&quot;</span>&gt;</span>山西省<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;15.html&quot;</span>&gt;</span>内蒙古自治区<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;21.html&quot;</span>&gt;</span>辽宁省<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;22.html&quot;</span>&gt;</span>吉林省<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;23.html&quot;</span>&gt;</span>黑龙江省<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>发现规律遍可以编写代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">proviceStr</span> = (<span class="params">html</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> $ = cheerio.<span class="title function_">load</span>(html)</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  $(<span class="string">&quot;.provincetr a&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span> (<span class="params">index, element</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> name = $(element).<span class="title function_">text</span>().<span class="title function_">trim</span>();</span><br><span class="line">    <span class="keyword">let</span> url = $(element).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> id = url.<span class="title function_">replace</span>(<span class="string">&#x27;.html&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    result.<span class="title function_">push</span>(&#123;</span><br><span class="line">      <span class="attr">pid</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      id,</span><br><span class="line">      name,</span><br><span class="line">      <span class="attr">url</span>: <span class="variable constant_">HOST</span>+url,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这里遍历<code>class</code>下的元素，获取<code>a</code>标签内的内容和<code>href</code>信息，并需要获取对应的省级id(使用了通过链接截取，其实<code>href</code>内的信息也是对应的id)。并把url信息保存下来，用于下一级数据获取的一句</p>
-</blockquote>
-<p>打印<code>result</code>应该就能看到获取的数据了。</p>
-<blockquote>
-<p>接下来需要把数据存到文件中</p>
-</blockquote>
-<ul>
-<li>引入nodejs的<code>fs</code>模块<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br></pre></td></tr></table></figure>
-定义存放的变量，为了方便，直接把各个级别的信息分开存储：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> filePath = &#123;</span><br><span class="line">  <span class="attr">province</span>: <span class="string">&#x27;src/province.json&#x27;</span>,</span><br><span class="line">  <span class="attr">city</span>: <span class="string">&#x27;src/city.json&#x27;</span>,</span><br><span class="line">  <span class="attr">country</span>: <span class="string">&#x27;src/country.json&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-修改<code>main</code>方法：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">main</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Index</span> = <span class="title function_">joinUrl</span>(<span class="string">&#x27;index.html&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> provinceData = <span class="keyword">await</span> <span class="title function_">fetchData</span>(<span class="title class_">Index</span>, <span class="string">&#x27;province&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  fs.<span class="title function_">writeFileSync</span>(filePath.<span class="property">province</span>, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(provinceData));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>此时打开src文件夹便能看见多了个<code>province.json</code>，打开是个压缩的json文件。</p>
-</blockquote>
-<p>然后再分析市级数据。市级网页结构布局与省级类似，只是变成纵向排列，<code>tr</code>标签<code>class</code>为<code>citytr</code>。区县和街道、居委会布局都一样，只是<code>class</code>不同，所以可以抽取出共同代码，封装成一个函数。</p>
-<blockquote>
-<p>需要注意的是，越往下级爬取，数据量会越来越大，这时可能会报错，甚至会被原网站封ip的风险。</p>
-</blockquote>
-<blockquote>
-<p>这里因为只是爬取到区县级数据，所以没有做过多考虑，只是引入的<code>async</code>库的<code>mapLimit</code>，用于并发请求。</p>
-</blockquote>
-<ul>
-<li>最后，配置<code>package.json</code>，使用<code>npm</code>脚本启动项目，不再使用<code>node index.js</code></li>
-</ul>
-<blockquote>
-<p>时间仓储，只是为了满足项目中的一个小需求，临时写的一个爬虫，也是第一次使用nodejs爬取网页，问题还有很多，希望多多指正。后续抽出时间，对代码进行完善，解决爬取数据量大就报错的问题，并对省级id进行位数完善等。</p>
-</blockquote>
-<ul>
-<li>项目地址<br><a target="_blank" rel="noopener" href="https://github.com/imchaoyu/node-get-districts">https://github.com/imchaoyu/node-get-districts</a></li>
-</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
