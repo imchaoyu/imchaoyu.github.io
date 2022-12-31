@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -634,12 +634,59 @@
 <p>让网页适用系统主题色</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="使用js"><a href="#使用js" class="headerlink" title="使用js"></a>使用js</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*判断是否支持主题色*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&#x27;(prefers-color-scheme)&#x27;</span>).<span class="property">media</span> === <span class="string">&#x27;not all&#x27;</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Browser doesn\&#x27;t support dark mode&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*判断是否处于深色模式*/</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&#x27;(prefers-color-scheme: dark)&#x27;</span>).<span class="property">matches</span>)&#123;</span><br><span class="line">    <span class="comment">//Do some thing</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*判断是否处于浅色模式*/</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&#x27;(prefers-color-scheme: light)&#x27;</span>).<span class="property">matches</span>)&#123;</span><br><span class="line">    <span class="comment">//Do some thing</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*模式切换听器*/</span></span><br><span class="line"><span class="keyword">var</span> listeners=&#123;</span><br><span class="line">    <span class="attr">dark</span>: <span class="keyword">function</span>(<span class="params">mediaQueryList </span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(mediaQueryList.<span class="property">matches</span>)&#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;您切换到深色模式了！&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">light</span>: <span class="keyword">function</span>(<span class="params">mediaQueryList</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(mediaQueryList.<span class="property">matches</span>)&#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;您切换到浅色模式了！&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&#x27;(prefers-color-scheme: dark)&#x27;</span>).<span class="title function_">addListener</span>(listeners.<span class="property">dark</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&#x27;(prefers-color-scheme: light)&#x27;</span>).<span class="title function_">addListener</span>(listeners.<span class="property">light</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="使用js"><a href="#使用js" class="headerlink" title="使用js"></a>使用js</h1><pre><code class="javascript">/*判断是否支持主题色*/
 
+if (window.matchMedia(&#39;(prefers-color-scheme)&#39;).media === &#39;not all&#39;) &#123;
+    console.log(&#39;Browser doesn\&#39;t support dark mode&#39;);
+&#125;
+
+/*判断是否处于深色模式*/
+if(window.matchMedia(&#39;(prefers-color-scheme: dark)&#39;).matches)&#123;
+    //Do some thing
+&#125;
+
+/*判断是否处于浅色模式*/
+if(window.matchMedia(&#39;(prefers-color-scheme: light)&#39;).matches)&#123;
+    //Do some thing
+&#125;
+
+
+/*模式切换听器*/
+var listeners=&#123;
+    dark: function(mediaQueryList )&#123;
+        if(mediaQueryList.matches)&#123;
+            alert(&#39;您切换到深色模式了！&#39;)
+        &#125;
+    &#125;,
+    light: function(mediaQueryList)&#123;
+        if(mediaQueryList.matches)&#123;
+            alert(&#39;您切换到浅色模式了！&#39;)
+        &#125;
+    &#125;
+&#125;
+
+window.matchMedia(&#39;(prefers-color-scheme: dark)&#39;).addListener(listeners.dark)
+window.matchMedia(&#39;(prefers-color-scheme: light)&#39;).addListener(listeners.light)
+</code></pre>
 <h1 id="使用css"><a href="#使用css" class="headerlink" title="使用css"></a>使用css</h1><blockquote>
 <p>使用媒介查询prefers-color-scheme，支持dark，light，no-preference三种模式</p>
 </blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*深色*/</span></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">prefers-color-scheme</span>: dark) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">rgb</span>(<span class="number">53</span>, <span class="number">54</span>, <span class="number">58</span>);</span><br><span class="line">        <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">238</span>,<span class="number">238</span>,<span class="number">238</span>,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*浅色*/</span></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">prefers-color-scheme</span>: light) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>);</span><br><span class="line">        <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">51</span>,<span class="number">51</span>,<span class="number">51</span>,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="css">/*深色*/
+@media (prefers-color-scheme: dark) &#123;
+    body &#123;
+        background: rgb(53, 54, 58);
+        color: rgba(238,238,238,1);
+    &#125;
+&#125;
+
+/*浅色*/
+@media (prefers-color-scheme: light) &#123;
+    body &#123;
+        background: rgb(255,255,255);
+        color: rgba(51,51,51,1);
+    &#125;
+&#125;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
@@ -719,6 +766,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -743,6 +804,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -822,6 +915,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

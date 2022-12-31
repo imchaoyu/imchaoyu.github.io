@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -633,7 +633,23 @@
       
         <h1 id="运行时解析"><a href="#运行时解析" class="headerlink" title="运行时解析"></a>运行时解析</h1><span id="more"></span>
 <p>如下代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span></span><br><span class="line"><span class="keyword">const</span> c = &#123;<span class="attr">k</span>: <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">d</span> () &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a)</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">11</span></span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">22</span></span><br><span class="line">  <span class="title function_">dd</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">dd</span> () &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">d</span>() <span class="comment">// 输出啥？ undefined 2</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var a = 1
+let b = 2
+const c = &#123;k: 3&#125;
+
+function d () &#123;
+  console.log(a)
+  var a = 11
+  let b = 22
+  dd()
+&#125;
+
+function dd () &#123;
+   console.log(b)
+&#125;
+
+d() // 输出啥？ undefined 2
+</code></pre>
 <p>如果你是js老手, 一看d()执行结果就知道是a变量提升了打印undefined，dd方法执行打印2，那a为什么会提升呢, 怎么不是打印外面的变量a &#x3D; 1呢？b怎么不打印22呢？想要弄清楚这些问题，就要了解js的执行机制了。</p>
 <p>js运行时有两个阶段：编译阶段、执行阶段。<br><strong>编译阶段</strong>：js通过编译生成执行上下文和可执行代码两部分。<br><strong>执行阶段</strong>：执行可执行代码，输出结果。<br>可以理解如下图</p>
 <p><img src="/2022/04/about-simple-js-runtime/1.webp" alt="js运行时"></p>
@@ -652,7 +668,10 @@
 <p><strong>this</strong>: this是一套和作用域无关的独立机制，这个你可以另外找到相关文章深入理解。</p>
 <p>变量提升其实就是函数运行的编译阶段，把所有var声明的变量统一提升到该作用域“顶部”， 并赋默认值undefined。</p>
 <p>所以执行d()函数的时候，相当于以下流程,先编译再执行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a)</span><br><span class="line">a = <span class="number">11</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var a = undefined
+console.log(a)
+a = 11
+</code></pre>
 <p>而dd()执行的时候其实就是按照上面说的，由于dd上下文没有声明b变量，根据作用域链查找外部引用，直到首次找到b，而作用域在编译阶段就确定了外部引用。具体可以参考下图：</p>
 <p><img src="/2022/04/about-simple-js-runtime/4.webp" alt="d方法运行时"></p>
 <p>所以，就例子而言无论d方法还是dd方法，它们的外部引用都是指向全局上下文，在执行阶段，如果发现函数作用域没有变量声明就会沿着作用域往外部引用查找。</p>
@@ -755,6 +774,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -779,6 +812,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -858,6 +923,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

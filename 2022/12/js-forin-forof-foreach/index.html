@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Js的for In、for offroEach的区别 | 一点</title>
+  <title>Js的for In、for of及froEach的区别 | 一点</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Js的for In、for offroEach的区别 | 一点">
+  <meta name="description" content="Js的for In、for of及froEach的区别 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -575,7 +575,7 @@
     <div class="pjax">
         <article id="post-js-forin-forof-foreach" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Js的for In、for offroEach的区别</h1>
+        <h1 class="article-title">Js的for In、for of及froEach的区别</h1>
     
     <div class="article-meta">
         
@@ -593,7 +593,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-31 12:31:06'>2022-12-31 12:06</time>
+            发布时间 : <time class="date" title='最后更新: 2022-12-31 12:37:56'>2022-12-31 12:06</time>
         
     </div>
     <div class="article-meta">
@@ -640,29 +640,85 @@
 </blockquote>
 <h1 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h1><p>  <code>for in</code>是为遍历对象属性而构建的，它以任意顺序遍历一个对象的除<code>Symbol</code>以外的可枚举属性，可用<code>break</code>或者<code>throw</code>跳出。</p>
 <ul>
-<li>语法<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (variablename <span class="keyword">in</span> object) &#123;</span><br><span class="line">  <span class="comment">// 可枚举属性</span></span><br><span class="line">  <span class="comment">// 注意: 不是可枚举属性</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(variablename);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>语法<pre><code class="javascript">for (variablename in object) &#123;
+  // 可枚举属性
+  // 注意: 不是可枚举属性
+  console.log(variablename);
+&#125;
+</code></pre>
+</li>
 <li>例子：<ol>
-<li>遍历对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;xiaoming&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出：name age</span></span><br></pre></td></tr></table></figure></li>
-<li>遍历数组：返回数组的索引值 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> arr)&#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(item)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 输出： 0 1 2</span></span><br></pre></td></tr></table></figure></li>
-<li>需要注意的是，<code>for in</code>会遍历原型链的属性 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">ufo</span> = <span class="string">&#x27;xiaoqiang&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> arr)&#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(item)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出：0 1 2 ufo</span></span><br></pre></td></tr></table></figure></li>
+<li>遍历对象<pre><code class="javascript">let obj = &#123;
+  name: &#39;xiaoming&#39;,
+  age: 18
+&#125;
+for(let item in obj)&#123;
+  console.log(item)
+&#125;
+// 输出：name age
+</code></pre>
+</li>
+<li>遍历数组：返回数组的索引值<pre><code class="javascript">let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
+ for(let item in arr)&#123;
+console.log(item)
+ &#125;
+ // 输出： 0 1 2
+</code></pre>
+</li>
+<li>需要注意的是，<code>for in</code>会遍历原型链的属性<pre><code class="javascript">Array.prototype.ufo = &#39;xiaoqiang&#39;;
+let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
+for(let item in arr)&#123;
+ console.log(item)
+&#125;
+// 输出：0 1 2 ufo
+</code></pre>
+</li>
 </ol>
 </li>
 </ul>
 <h1 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h1><p> <code>for of</code>语句在可迭代对象上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句（包括<code>Array</code>、<code>Map</code>、<code>Set</code>、<code>String</code>、<code>TypedArray</code>、<code>Argument</code>等，不包括Object）可用<code>break</code>或者<code>throw</code>跳出。</p>
 <ul>
-<li><p>语法</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(variable <span class="keyword">of</span> 可迭代对象)&#123;</span><br><span class="line">  <span class="comment">// 操作语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">sex</span>: <span class="string">&#x27;男&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> arr) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 a b c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> obj) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 报错 obj is not iterable (obj不是可迭代的)</span></span><br></pre></td></tr></table></figure>
-<h2 id="for-of与for-in的不同"><a href="#for-of与for-in的不同" class="headerlink" title="for of与for in的不同"></a>for of与for in的不同</h2></li>
+<li>语法<pre><code class="javascript">for(variable of 可迭代对象)&#123;
+ // 操作语句
+&#125;
+</code></pre>
+</li>
+<li>例子<pre><code class="javascript">let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+
+let obj = &#123;
+  name: &#39;张三&#39;,
+  age: 18,
+  sex: &#39;男&#39;
+&#125;
+
+for (let i of arr) &#123;
+  console.log(i)
+&#125;
+// 输出 a b c
+
+for (let i of obj) &#123;
+  console.log(i)
+&#125;
+// 报错 obj is not iterable (obj不是可迭代的)
+</code></pre>
+</li>
+</ul>
+<h2 id="for-of与for-in的不同"><a href="#for-of与for-in的不同" class="headerlink" title="for of与for in的不同"></a>for of与for in的不同</h2><ul>
 <li><p><code>for...of</code>不像<code>for...in</code>, 它不支持遍历普通对象，因为普通对象没有迭代器接口。但是可以通过<code>Object.key()</code>去遍历迭代。</p>
 </li>
 <li><p><code>for...of</code>支持 迭代 <code>Unicode</code> 字符串、<code>set</code> 及 <code>map</code>。</p>
 </li>
 <li><p><code>for...of</code>可以通过<code>await</code>关键字每次迭代中等待异步任务</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">await</span> ( value <span class="keyword">in</span> statcks ) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">for await ( value in statcks ) &#123;
+  //...
+&#125;
+</code></pre>
 <ul>
-<li>语法：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (variable <span class="keyword">in</span> object) &#123;</span><br><span class="line">  <span class="comment">// 在此执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>语法：<pre><code class="javascript">for (variable in object) &#123;
+// 在此执行代码
+&#125;
+</code></pre>
+</li>
 </ul>
 </li>
 </ul>
@@ -745,6 +801,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -769,6 +839,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -848,6 +950,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

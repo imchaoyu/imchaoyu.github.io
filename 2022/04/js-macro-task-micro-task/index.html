@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -642,22 +642,53 @@
 </blockquote>
 <p>有了宏观任务和微观任务机制，我们就可以实现 JavaScript 引擎级和宿主级的任务了，例如：Promise 永远在队列尾部添加微任务。setTimeout 等宿主 API，则会添加宏任务。</p>
 <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>Promise 是 JavaScript 语言提供的一种标准化的异步管理方式，它的总体思想是，需要进行 io、等待或者其它异步操作的函数，不返回真实结果，而返回一个“承诺”，函数的调用方可以在合适的时机，选择等待这个承诺兑现（通过 Promise 的 then 方法的回调）。Promise 的基本用法示例如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">wait</span>(<span class="params">duration</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(resolve,duration);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">wait</span>(<span class="number">3000</span>).<span class="title function_">then</span>( <span class="function">()=&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ok!&quot;</span>));</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">function wait(duration) &#123;
+    return new Promise(function(resolve, reject) &#123;
+        setTimeout(resolve,duration);
+    &#125;)
+&#125;
+wait(3000).then( ()=&gt; console.log(&quot;ok!&quot;));
+</code></pre>
 <blockquote>
 <p>这段代码定义了一个函数 <code>wait</code>，它的作用是等候传入参数指定的时长。</p>
 </blockquote>
 <p>Promise 的 then 回调是一个异步的执行过程，下面我们就来研究一下 Promise 函数中的执行顺序，我们来看一段代码示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve, reject</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;);</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c&quot;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;b&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var p = new Promise(function(resolve, reject)&#123;
+    console.log(&quot;a&quot;);
+    resolve()
+&#125;);
+p.then(() =&gt; console.log(&quot;c&quot;));
+console.log(&quot;b&quot;)
+</code></pre>
 <blockquote>
 <p>执行以上代码，输出顺序是a-&gt;b-&gt;c<br>在进入 <code>console.log(&#39;b&#39;)</code> 之前， <code>p</code> 已经得到了 <code>resolve</code>，但是 <code>Promise</code> 的 <code>resolve</code> 始终是异步操作，所以 c 无法出现在 b 之前。</p>
 </blockquote>
 <p>接下来我们试试跟 <code>setTimeout</code> 混用的 <code>Promise</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve, reject</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;d&quot;</span>), <span class="number">0</span>)</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c&quot;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;b&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var p = new Promise(function(resolve, reject)&#123;
+    console.log(&quot;a&quot;);
+    resolve()
+&#125;);
+setTimeout(()=&gt;console.log(&quot;d&quot;), 0)
+p.then(() =&gt; console.log(&quot;c&quot;));
+console.log(&quot;b&quot;)
+</code></pre>
 <blockquote>
 <p>运行以上代码，不论顺序如何，d必定发生在c之后，因为 <code>Promise</code> 产生的是 JavaScript 引擎内部的微任务，而 <code>setTimeout</code> 是浏览器 API，它产生宏任务。</p>
 </blockquote>
 <p>再设计一段代码：执行一个耗时1s的Promise</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;d&quot;</span>), <span class="number">0</span>)</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve, reject</span>)&#123;</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;);</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line">    <span class="keyword">var</span> begin = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">while</span>(<span class="title class_">Date</span>.<span class="title function_">now</span>() - begin &lt; <span class="number">1000</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c1&quot;</span>) </span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve, reject</span>)&#123;</span><br><span class="line">        <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;c2&quot;</span>))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">setTimeout(()=&gt;console.log(&quot;d&quot;), 0)
+var p = new Promise(function(resolve, reject)&#123;
+    resolve()
+&#125;);
+p.then(() =&gt; &#123; 
+    var begin = Date.now();
+    while(Date.now() - begin &lt; 1000);
+    console.log(&quot;c1&quot;) 
+    new Promise(function(resolve, reject)&#123;
+        resolve()
+    &#125;).then(() =&gt; console.log(&quot;c2&quot;))
+&#125;);
+</code></pre>
 <blockquote>
 <p>运行代码可以发现，即使耗时一秒的 c1 执行完毕，再排队的 c2，仍然先于 d 执行了，这很好地解释了微任务优先的原理。</p>
 </blockquote>
@@ -751,6 +782,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -775,6 +820,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -854,6 +931,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

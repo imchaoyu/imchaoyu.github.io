@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -670,13 +670,19 @@
 </blockquote>
 <p>上面介绍中可以看出，实际项目开发中就可以使用Eslint+Prettier来规范项目中的代码质量和风格，只是配置会有些麻烦。</p>
 <h1 id="ESLint-与-Prettier配合使用"><a href="#ESLint-与-Prettier配合使用" class="headerlink" title="ESLint 与 Prettier配合使用"></a>ESLint 与 Prettier配合使用</h1><p>首先是在项目文件夹下安装这两个工具：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prettier eslint -D</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">npm install prettier eslint -D
+</code></pre>
 <p>项目根目录下创建配置文件 eslintrc.js 和 .prettierrc.js。</p>
 <h2 id="eslinrc"><a href="#eslinrc" class="headerlink" title=".eslinrc.*"></a>.eslinrc.*</h2><blockquote>
 <p>其中eslintrc.js可以通过命令行创建</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br><span class="line"><span class="comment"># 同 ./node_modules/.bin/eslint --init</span></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">npm init @eslint/config</span><br><span class="line"><span class="comment">#或使用yarn</span></span><br><span class="line">yarn create @eslint/config</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">npx eslint --init
+# 同 ./node_modules/.bin/eslint --init
+# 或
+npm init @eslint/config
+#或使用yarn
+yarn create @eslint/config
+</code></pre>
 <p>此命令会根据选择自动安装部分依赖，并且可以选择Eslint文件支持的几种格式：</p>
 <ol>
 <li>JavaScript - 使用 .eslintrc.js 或者 .eslintrc.cjs然后输出一个配置对象。</li>
@@ -689,42 +695,125 @@
 <p>以上优先级顺序从1~5依次降低</p>
 </blockquote>
 <p><strong>例：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* </span><br><span class="line">$ npx eslint --init</span><br><span class="line">✔ How would you like to use ESLint? · style</span><br><span class="line">✔ What <span class="built_in">type</span> of modules does your project use? · esm</span><br><span class="line">✔ Which framework does your project use? · react</span><br><span class="line">✔ Does your project use TypeScript? · No / Yes</span><br><span class="line">✔ Where does your code run? · browser</span><br><span class="line">✔ How would you like to define a style <span class="keyword">for</span> your project? · guide</span><br><span class="line">✔ Which style guide <span class="keyword">do</span> you want to follow? · standard</span><br><span class="line">✔ What format <span class="keyword">do</span> you want your config file to be <span class="keyword">in</span>? · javascript</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上面的回答对应下面的 .eslint.js 文件</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;env&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;browser&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;es2021&quot;</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;extends&quot;</span>: [<span class="string">&quot;plugin:react/recommended&quot;</span>, <span class="string">&quot;standard&quot;</span>],</span><br><span class="line">  <span class="string">&quot;parser&quot;</span>: <span class="string">&quot;@typescript-eslint/parser&quot;</span>,</span><br><span class="line">  <span class="string">&quot;parserOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;ecmaFeatures&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;jsx&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;ecmaVersion&quot;</span>: <span class="number">12</span>,</span><br><span class="line">    <span class="string">&quot;sourceType&quot;</span>: <span class="string">&quot;module&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;plugins&quot;</span>: [<span class="string">&quot;react&quot;</span>, <span class="string">&quot;@typescript-eslint&quot;</span>],</span><br><span class="line">  <span class="string">&quot;rules&quot;</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">/* 
+$ npx eslint --init
+✔ How would you like to use ESLint? · style
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · No / Yes
+✔ Where does your code run? · browser
+✔ How would you like to define a style for your project? · guide
+✔ Which style guide do you want to follow? · standard
+✔ What format do you want your config file to be in? · javascript
+*/
+</code></pre>
+<pre><code class="javascript">// 上面的回答对应下面的 .eslint.js 文件
+&#123;
+  &quot;env&quot;: &#123;
+    &quot;browser&quot;: true,
+    &quot;es2021&quot;: true
+  &#125;,
+  &quot;extends&quot;: [&quot;plugin:react/recommended&quot;, &quot;standard&quot;],
+  &quot;parser&quot;: &quot;@typescript-eslint/parser&quot;,
+  &quot;parserOptions&quot;: &#123;
+    &quot;ecmaFeatures&quot;: &#123;
+      &quot;jsx&quot;: true
+    &#125;,
+    &quot;ecmaVersion&quot;: 12,
+    &quot;sourceType&quot;: &quot;module&quot;
+  &#125;,
+  &quot;plugins&quot;: [&quot;react&quot;, &quot;@typescript-eslint&quot;],
+  &quot;rules&quot;: &#123;&#125;
+&#125;
+</code></pre>
 <h2 id="prettierrc-js"><a href="#prettierrc-js" class="headerlink" title=".prettierrc.js"></a>.prettierrc.js</h2><p>配置可如下设置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="string">&quot;printWidth&quot;</span>: <span class="number">80</span>, <span class="comment">//一行的字符数，如果超过会进行换行，默认为80</span></span><br><span class="line">  <span class="string">&quot;tabWidth&quot;</span>: <span class="number">2</span>, <span class="comment">//一个tab代表几个空格数，默认为80</span></span><br><span class="line">  <span class="string">&quot;useTabs&quot;</span>: <span class="literal">false</span>, <span class="comment">//是否使用tab进行缩进，默认为false，表示用空格进行缩减</span></span><br><span class="line">  <span class="string">&quot;singleQuote&quot;</span>: <span class="literal">false</span>, <span class="comment">//字符串是否使用单引号，默认为false，使用双引号</span></span><br><span class="line">  <span class="string">&quot;semi&quot;</span>: <span class="literal">true</span>, <span class="comment">//行位是否使用分号，默认为true</span></span><br><span class="line">  <span class="string">&quot;trailingComma&quot;</span>: <span class="string">&quot;none&quot;</span>, <span class="comment">//是否使用尾逗号，有三个可选值&quot;&lt;none|es5|all&gt;&quot;</span></span><br><span class="line">  <span class="string">&quot;bracketSpacing&quot;</span>: <span class="literal">true</span>, <span class="comment">//对象大括号直接是否有空格，默认为true，效果：&#123; foo: bar &#125;</span></span><br><span class="line">  <span class="string">&quot;parser&quot;</span>: <span class="string">&quot;babylon&quot;</span> <span class="comment">//代码的解析引擎，默认为babylon，与babel相同。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">module.exports = &#123;
+  &quot;printWidth&quot;: 80, //一行的字符数，如果超过会进行换行，默认为80
+  &quot;tabWidth&quot;: 2, //一个tab代表几个空格数，默认为80
+  &quot;useTabs&quot;: false, //是否使用tab进行缩进，默认为false，表示用空格进行缩减
+  &quot;singleQuote&quot;: false, //字符串是否使用单引号，默认为false，使用双引号
+  &quot;semi&quot;: true, //行位是否使用分号，默认为true
+  &quot;trailingComma&quot;: &quot;none&quot;, //是否使用尾逗号，有三个可选值&quot;&lt;none|es5|all&gt;&quot;
+  &quot;bracketSpacing&quot;: true, //对象大括号直接是否有空格，默认为true，效果：&#123; foo: bar &#125;
+  &quot;parser&quot;: &quot;babylon&quot; //代码的解析引擎，默认为babylon，与babel相同。
+&#125;
+</code></pre>
 <h2 id="Prettier-ESLint检测"><a href="#Prettier-ESLint检测" class="headerlink" title="Prettier+ESLint检测"></a>Prettier+ESLint检测</h2><blockquote>
 <p><code>eslint-plugin-prettier</code>插件会调用prettier对代码风格进行检查</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">npm install eslint-plugin-prettier -D
+</code></pre>
 <p>然后修改 <code>.eslintrc.*</code> 配置文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="string">&quot;plugins&quot;</span>: [<span class="string">&quot;prettier&quot;</span>],</span><br><span class="line">  <span class="string">&quot;rules&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;prettier/prettier&quot;</span>: <span class="string">&quot;error&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">&#123;
+  //...
+  &quot;plugins&quot;: [&quot;prettier&quot;],
+  &quot;rules&quot;: &#123;
+    &quot;prettier/prettier&quot;: &quot;error&quot;
+  &#125;
+  //...
+&#125;
+</code></pre>
 <blockquote>
 <p>原理是 以 ESLint 规则的方式运行 Prettier，通过 Prettier 找出格式化前后的差异，prettier进行差异标记，借助ESLint的autofix功能，在保存代码的时候，自动将抛出error的地方进行fix。</p>
 </blockquote>
 <h2 id="插件冲突"><a href="#插件冲突" class="headerlink" title="插件冲突"></a>插件冲突</h2><blockquote>
 <p>通过使用<code>eslint-config-prettier</code>配置，能够关闭与prettier冲突的lint选项。这样我们就不会看到一些error同时出现两次。使用的时候需要确保，这个配置在extends的最后一项</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//.eslintrc.*</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">extends</span>: [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="string">&quot;prettier&quot;</span>,</span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">//.eslintrc.*
+&#123;
+  //...
+  extends: [
+    // ...
+    &quot;prettier&quot;,
+  ],
+  // ...
+&#125;
+</code></pre>
 <h1 id="Vscode配置"><a href="#Vscode配置" class="headerlink" title="Vscode配置"></a>Vscode配置</h1><p>在vscode中安装Eslint和Prettier插件，然后进入settings.json，进行配置：</p>
 <blockquote>
 <p>建议在工作区进行编辑设置，项目中会出现类似如下文件：<br>.vscode&#x2F;<br>|- extensions.json<br>|- README.md<br>|- settings.json</p>
 </blockquote>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;editor.codeActionsOnSave&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;source.fixAll&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;source.fixAll.eslint&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;eslint.validate&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;javascript&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;javascriptreact&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;eslint.options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;extensions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;.jsx&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;.tsx&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="json">&#123;
+  &quot;editor.codeActionsOnSave&quot;: &#123;
+    &quot;source.fixAll&quot;: true,
+    &quot;source.fixAll.eslint&quot;: true,
+  &#125;,
+  &quot;eslint.validate&quot;: [
+    &quot;javascript&quot;,
+    &quot;javascriptreact&quot;
+  ],
+  &quot;eslint.options&quot;: &#123;
+    &quot;extensions&quot;: [
+      &quot;.js&quot;,
+      &quot;.jsx&quot;,
+      &quot;.tsx&quot;
+    ]
+  &#125;,
+&#125;
+</code></pre>
 <p><code>editor.codeActionsOnSave</code>: 在保存代码时自动格式化，<br><code>eslint.validate</code>: 如果需要支持其他类型，可在此处添加，如vue等</p>
 <h2 id="多层级项目不提示"><a href="#多层级项目不提示" class="headerlink" title="多层级项目不提示"></a>多层级项目不提示</h2><p>当项目文件不是在一级文件夹下，而是有多层级，这种情况下，Eslint就不会对检测到的语法进行标红提示，此时需要修改Eslint的工作目录区<code>eslint.workingDirectories</code>，把对应的项目地址添加进去就可以了。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;eslint.workingDirectories&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="string">&quot;./admin&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;./service&quot;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="json">&quot;eslint.workingDirectories&quot;: [
+  &quot;./admin&quot;,
+  &quot;./service&quot;
+],
+</code></pre>
 <h1 id="使用-umijs-x2F-fabric"><a href="#使用-umijs-x2F-fabric" class="headerlink" title="使用@umijs&#x2F;fabric"></a>使用@umijs&#x2F;fabric</h1><p>项目代码的规范配置是一件耗时费力的事，而且不一定符合所有的人的习惯，也关乎团队合作中的代码质量问题。<br><code>@umijs/fabric</code> 是包含了 prettier，eslint，stylelint 的配置文件合集，可以开箱即用，能节约很大一部分时间。<a target="_blank" rel="noopener" href="https://github.com/umijs/fabric">使用方式</a>参见官方文档。</p>
 <p><code>@umijs/fabric</code> 的理念是最大原则尊重每个人的开发习惯和代码风格习惯，所以采用了不进行标红提示的处理，只是在提交代码时，使用gitHooks进行代码格式化，即 每个成员的本地代码可以保持个人的风格，提交到线上时，则根据规则进行格式化保持统一。</p>
 <p>这个理念还是很好的，既然风格无法统一就不用统一，解决了使用tab还是space的问题。</p>
 <p>可是有些人已经习惯于标红提示，编写代码阶段就进行格式化，即使不是自己喜欢的风格也忍受。这时需要怎么修改<code>@umijs/fabric</code>呢？</p>
 <p>其实也很简单，只需要安装<code>eslint-plugin-prettier</code>:</p>
 <ol>
-<li>安装<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure></li>
-<li>修改.eslintrc.js  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="attr">plugins</span>: [<span class="string">&#x27;prettier&#x27;</span>],</span><br><span class="line"><span class="attr">rules</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;prettier/prettier&#x27;</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+<li>安装<pre><code class="bash">npm install eslint-plugin-prettier -D
+</code></pre>
+</li>
+<li>修改.eslintrc.js<pre><code class="javascript">// ...
+plugins: [&#39;prettier&#39;],
+rules: &#123;
+ &#39;prettier/prettier&#39;: &#39;error&#39;,
+&#125;,
+//...
+</code></pre>
 完成。</li>
 </ol>
 
@@ -806,6 +895,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -830,6 +933,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -909,6 +1044,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

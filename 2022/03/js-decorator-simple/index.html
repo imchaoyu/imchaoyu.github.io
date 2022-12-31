@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -647,7 +647,16 @@
 <p>装饰器是一种函数，写成<code>@函数名</code>。它可以放在类和类方法的定义前面。如下：</p>
 </blockquote>
 <span id="more"></span>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@frozen</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">  @<span class="title function_">configurable</span>(<span class="literal">false</span>)</span><br><span class="line">  @<span class="title function_">enumerable</span>(<span class="literal">true</span>)</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  @<span class="title function_">throttle</span>(<span class="number">500</span>)</span><br><span class="line">  <span class="title function_">expensiveMethod</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">@frozen
+class Foo &#123;
+  @configurable(false)
+  @enumerable(true)
+  method() &#123;&#125;
+
+  @throttle(500)
+  expensiveMethod() &#123;&#125;
+&#125;
+</code></pre>
 <blockquote>
 <p>上面代码一共使用了四个装饰器，一个用在<em>类本身</em>，另外三个用在<em>类方法</em>。它们不仅增加了代码的可读性，清晰地表达了意图，而且提供一种方便的手段，增加或修改类的功能。</p>
 </blockquote>
@@ -657,18 +666,28 @@
 <blockquote>
 <p>装饰器对类的行为的改变，是代码编译时发生的，而不是在运行时</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@decorator</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line">A = <span class="title function_">decorator</span>(A) || A;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>可以在装饰器后面再添加提个参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title function_">log</span>(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">log</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    target.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">logger</span> = <span class="function">() =&gt;</span> <span class="string">`<span class="subst">$&#123;text&#125;</span>，<span class="subst">$&#123;target.name&#125;</span> 被调用`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> <span class="title class_">MyClass</span>()</span><br><span class="line">test.<span class="title function_">logger</span>() <span class="comment">// hello，MyClass 被调用</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol start="2">
-<li>方法的装饰</li>
-</ol>
-<blockquote>
-<p>与装饰类不同，对类方法的装饰本质是<em>操作其描述符</em>。可以把此时的装饰器理解成是 Object.defineProperty(obj, prop, descriptor) 的语法糖</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  @readonly</span><br><span class="line">  <span class="title function_">name</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.first&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.last&#125;</span>`</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">@decorator
+class A &#123;&#125;
 
+// 等同于
+class A &#123;&#125;
+A = decorator(A) || A;
+</code></pre>
+<ul>
+<li>可以在装饰器后面再添加提个参数<br>&#96;&#96;&#96;javascript<br>@log(‘hi’)<br>class MyClass { }</li>
+</ul>
+<p>function log(text) {<br>  return function(target) {<br>    target.prototype.logger &#x3D; () &#x3D;&gt; <code>$&#123;text&#125;，$&#123;target.name&#125; 被调用</code><br>  }<br>}</p>
+<p>const test &#x3D; new MyClass()<br>test.logger() &#x2F;&#x2F; hello，MyClass 被调用</p>
+<pre><code>
+2. 方法的装饰
+
+&gt; 与装饰类不同，对类方法的装饰本质是*操作其描述符*。可以把此时的装饰器理解成是 Object.defineProperty(obj, prop, descriptor) 的语法糖
+```javascript
+class Person &#123;
+  @readonly
+  name() &#123; return `$&#123;this.first&#125; $&#123;this.last&#125;` &#125;
+&#125;
+</code></pre>
 <ol start="3">
 <li>参数详解</li>
 </ol>
@@ -681,16 +700,47 @@
 <blockquote>
 <p>target 目标是类本身，也就是例子中的 Hero 类，而此时name 和 descriptor 均为 undefined</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title function_">speakName</span>(<span class="string">&quot;Julius&quot;</span>) </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Hero</span> &#123;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">speakName</span>(<span class="params">kingname</span>) &#123;  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">target, name, descriptor</span>) &#123;  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(target);    <span class="comment">// ƒ Hero()  </span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);      <span class="comment">// undefined  </span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(descriptor);    <span class="comment">// undefined  </span></span><br><span class="line">    target.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">name</span> = kingname;   </span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">@speakName(&quot;Julius&quot;) 
+class Hero &#123;&#125;  
 
+function speakName(kingname) &#123;  
+  return function(target, name, descriptor) &#123;  
+    console.log(target);    // ƒ Hero()  
+    console.log(name);      // undefined  
+    console.log(descriptor);    // undefined  
+    target.prototype.name = kingname;   
+  &#125;; 
+&#125;
+</code></pre>
 <ul>
 <li>装饰器在装饰类方法时</li>
 </ul>
 <blockquote>
 <p>target 目标是类实例，name 是类方法的名称，descriptor 则是类方法的描述对象，可看到 value 是类方法本身，其他3个值和 Object.defineProperty的属性一样，负责控制值的行为，该例中的 writable 就是其中之一。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hero</span> &#123;  </span><br><span class="line">  name = <span class="string">&quot;Julius&quot;</span>;  </span><br><span class="line">  @readonly  </span><br><span class="line">  <span class="title function_">speak</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`My name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);   </span><br><span class="line">  &#125; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">readonly</span>(<span class="params">target, name, descriptor</span>) &#123;  </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(target);  <span class="comment">// &#123;&#125; __proto__: Object: Object  </span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(name);    <span class="comment">// speak  </span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(descriptor);    </span><br><span class="line">  <span class="comment">/*    </span></span><br><span class="line"><span class="comment">   * configurable: true      </span></span><br><span class="line"><span class="comment">   * enumerable: false      </span></span><br><span class="line"><span class="comment">   * value: ƒ speak()      </span></span><br><span class="line"><span class="comment">   * writable: true      </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  descriptor.<span class="property">writable</span> = <span class="literal">false</span>; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hero = <span class="keyword">new</span> <span class="title class_">Hero</span>();</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">class Hero &#123;  
+  name = &quot;Julius&quot;;  
+  @readonly  
+  speak() &#123;  
+    console.log(`My name is $&#123;this.name&#125;`);   
+  &#125; 
+&#125;  
 
+function readonly(target, name, descriptor) &#123;  
+  console.log(target);  // &#123;&#125; __proto__: Object: Object  
+  console.log(name);    // speak  
+  console.log(descriptor);    
+  /*    
+   * configurable: true      
+   * enumerable: false      
+   * value: ƒ speak()      
+   * writable: true      
+   */  
+  descriptor.writable = false; 
+&#125;  
+
+const hero = new Hero();
+</code></pre>
 <ol start="4">
 <li>知识拓展</li>
 </ol>
@@ -700,7 +750,8 @@
 <blockquote>
 <p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。<br>该方法允许精确添加或修改对象的属性。通过赋值来添加的普通属性会创建在属性枚举期间显示的属性（for…in 或 Object.keys 方法）， 这些值可以被改变，也可以被删除。这种方法允许这些额外的细节从默认值改变。默认情况下，使用 Object.defineProperty() 添加的属性值是不可变的。</p>
 </blockquote>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, prop, descriptor)</span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code class="javascript">Object.defineProperty(obj, prop, descriptor)
+</code></pre>
 <ul>
 <li><p><code>obj</code>：要在其上定义属性的对象。</p>
 </li>
@@ -769,15 +820,43 @@
 <p>如果一个描述符不具有value,writable,get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常</p>
 </blockquote>
 <ul>
-<li>Babel编辑 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">  @<span class="title function_">readonly</span>(<span class="literal">false</span>)</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cat&#x27;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">readonly</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">target, key, descriptor</span>) &#123; <span class="comment">// 此处 target 为 C.prototype; key 为 method;</span></span><br><span class="line">    <span class="comment">// 原 descriptor 为：&#123; value: f, enumarable: false, writable: true, configurable: true &#125;</span></span><br><span class="line">    descriptor.<span class="property">writable</span> = value</span><br><span class="line">    <span class="keyword">return</span> descriptor</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title function_">C</span>()</span><br><span class="line">c.<span class="property">method</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dog&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c.<span class="title function_">method</span>() <span class="comment">// cat</span></span><br></pre></td></tr></table></figure></li>
+<li>Babel编辑<br> &#96;&#96;&#96;javascript<br> class C {<br>  @readonly(false)<br>  method() { console.log(‘cat’) }<br>}</li>
 </ul>
-<p>可以看到装饰器函数接收的三个参数与 Object.defineProperty 是完全一样的，具体实现可以看 babel 转化后的代码，主要实现如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> C = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="title function_">method</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;cat&#x27;</span>) &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> temp</span><br><span class="line">  temp = <span class="title function_">readonly</span>(<span class="literal">false</span>)(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>,</span><br><span class="line">    temp = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>)) || temp <span class="comment">// 通过 Object.getOwnPropertyDescriptor 获取到描述符传入到装饰器函数中</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (temp) <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(C.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;method&#x27;</span>, temp)</span><br><span class="line">  <span class="keyword">return</span> C</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>function readonly(value) {<br>  return function (target, key, descriptor) { &#x2F;&#x2F; 此处 target 为 C.prototype; key 为 method;<br>    &#x2F;&#x2F; 原 descriptor 为：{ value: f, enumarable: false, writable: true, configurable: true }<br>    descriptor.writable &#x3D; value<br>    return descriptor<br>  }<br>}</p>
+<p>const c &#x3D; new C()<br>c.method &#x3D; () &#x3D;&gt; console.log(‘dog’)</p>
+<p>c.method() &#x2F;&#x2F; cat</p>
+<pre><code>
+可以看到装饰器函数接收的三个参数与 Object.defineProperty 是完全一样的，具体实现可以看 babel 转化后的代码，主要实现如下所示：
 
+```javascript
+var C = (function() &#123;
+ class C &#123;
+   method() &#123; console.log(&#39;cat&#39;) &#125;
+ &#125;
+
+ var temp
+ temp = readonly(false)(C.prototype, &#39;method&#39;,
+   temp = Object.getOwnPropertyDescriptor(C.prototype, &#39;method&#39;)) || temp // 通过 Object.getOwnPropertyDescriptor 获取到描述符传入到装饰器函数中
+
+ if (temp) Object.defineProperty(C.prototype, &#39;method&#39;, temp)
+ return C
+&#125;)()
+</code></pre>
 <p>有多个装饰器作用于同一个方法:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">  @<span class="title function_">readonly</span>(<span class="literal">false</span>)</span><br><span class="line">  @log</span><br><span class="line">  <span class="title function_">method</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">class C &#123;
+  @readonly(false)
+  @log
+  method() &#123; &#125;
+&#125;
+</code></pre>
 <p>经 babel 转化后的代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">desc = [<span class="title function_">readonly</span>(<span class="literal">false</span>), log]</span><br><span class="line">    .<span class="title function_">slice</span>()</span><br><span class="line">    .<span class="title function_">reverse</span>()</span><br><span class="line">    .<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">desc, decorator</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">decorator</span>(target, property, desc) || desc;</span><br><span class="line">    &#125;, desc);</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">desc = [readonly(false), log]
+    .slice()
+    .reverse()
+    .reduce(function(desc, decorator) &#123;
+      return decorator(target, property, desc) || desc;
+    &#125;, desc);
+</code></pre>
 <p>可以清晰地看出，经过 reverse 倒序后，<em>装饰器方法会至里向外执行</em></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/decorator">阮一峰-装饰器</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014495089">JS 装饰器，一篇就够</a></p>
 
@@ -859,6 +938,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -883,6 +976,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -962,6 +1087,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

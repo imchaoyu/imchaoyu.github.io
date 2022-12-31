@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -654,7 +654,63 @@
 <span id="more"></span>
 
 <p>打印 module、require 查看细节：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">module</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">require</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// out:</span></span><br><span class="line"><span class="title class_">Module</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS&#x27;</span>,</span><br><span class="line">  <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#x27;</span>,</span><br><span class="line">  <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">children</span>: [],</span><br><span class="line">  <span class="attr">paths</span>: [</span><br><span class="line">    <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/Users/xxx/Desktop/node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/Users/xxx/node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/Users/node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/node_modules&#x27;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="title class_">Function</span>: <span class="built_in">require</span>] &#123;</span><br><span class="line">  <span class="attr">resolve</span>: [<span class="title class_">Function</span>: resolve] &#123; <span class="attr">paths</span>: [<span class="title class_">Function</span>: paths] &#125;,</span><br><span class="line">  <span class="attr">main</span>: <span class="title class_">Module</span> &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS&#x27;</span>,</span><br><span class="line">    <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#x27;</span>,</span><br><span class="line">    <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">children</span>: [],</span><br><span class="line">    <span class="attr">paths</span>: [</span><br><span class="line">      <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/node_modules&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/node_modules&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;/Users/xxx/Desktop/node_modules&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;/Users/xxx/node_modules&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;/Users/node_modules&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;/node_modules&#x27;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">extensions</span>: [<span class="title class_">Object</span>: <span class="literal">null</span> prototype] &#123;</span><br><span class="line">    <span class="string">&#x27;.js&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">    <span class="string">&#x27;.json&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">    <span class="string">&#x27;.node&#x27;</span>: [<span class="title class_">Function</span> (anonymous)]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">cache</span>: [<span class="title class_">Object</span>: <span class="literal">null</span> prototype] &#123;</span><br><span class="line">    <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#x27;</span>: <span class="title class_">Module</span> &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS&#x27;</span>,</span><br><span class="line">      <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#x27;</span>,</span><br><span class="line">      <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">children</span>: [],</span><br><span class="line">      <span class="attr">paths</span>: [<span class="title class_">Array</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">console.log(module);
+console.log(require);
+
+// out:
+Module &#123;
+  id: &#39;.&#39;,
+  path: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS&#39;,
+  exports: &#123;&#125;,
+  filename: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#39;,
+  loaded: false,
+  children: [],
+  paths: [
+    &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/node_modules&#39;,
+    &#39;/Users/xxx/Desktop/esm_commonjs/node_modules&#39;,
+    &#39;/Users/xxx/Desktop/node_modules&#39;,
+    &#39;/Users/xxx/node_modules&#39;,
+    &#39;/Users/node_modules&#39;,
+    &#39;/node_modules&#39;
+  ]
+&#125;
+
+[Function: require] &#123;
+  resolve: [Function: resolve] &#123; paths: [Function: paths] &#125;,
+  main: Module &#123;
+    id: &#39;.&#39;,
+    path: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS&#39;,
+    exports: &#123;&#125;,
+    filename: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#39;,
+    loaded: false,
+    children: [],
+    paths: [
+      &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/node_modules&#39;,
+      &#39;/Users/xxx/Desktop/esm_commonjs/node_modules&#39;,
+      &#39;/Users/xxx/Desktop/node_modules&#39;,
+      &#39;/Users/xxx/node_modules&#39;,
+      &#39;/Users/node_modules&#39;,
+      &#39;/node_modules&#39;
+    ]
+  &#125;,
+  extensions: [Object: null prototype] &#123;
+    &#39;.js&#39;: [Function (anonymous)],
+    &#39;.json&#39;: [Function (anonymous)],
+    &#39;.node&#39;: [Function (anonymous)]
+  &#125;,
+  cache: [Object: null prototype] &#123;
+    &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#39;: Module &#123;
+      id: &#39;.&#39;,
+      path: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS&#39;,
+      exports: &#123;&#125;,
+      filename: &#39;/Users/xxx/Desktop/esm_commonjs/commonJS/c.js&#39;,
+      loaded: false,
+      children: [],
+      paths: [Array]
+    &#125;
+  &#125;
+&#125;
+</code></pre>
 <blockquote>
 <ul>
 <li>module 中的一些属性<br>exports：这就是 module.exports 对应的值，由于还没有赋任何值给它，它目前是一个空对象。<br>loaded：表示当前的模块是否加载完成。<br>paths：node 模块的加载路径，这块不展开讲，感兴趣可以看node 文档</li>
@@ -799,6 +855,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -823,6 +893,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -902,6 +1004,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

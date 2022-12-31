@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -665,55 +665,72 @@
 </ul>
 <h1 id="NRM-（npm-registry-manager）"><a href="#NRM-（npm-registry-manager）" class="headerlink" title="NRM: （npm registry manager）"></a>NRM: （npm registry manager）</h1><ul>
 <li><p>安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g nrm</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">npm install -g nrm
+</code></pre>
 </li>
 <li><p>查看可选源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">nrm ls
+</code></pre>
 </li>
 <li><p>切换源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm use xxx</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">nrm use xxx
+</code></pre>
 </li>
 <li><p>测试各个可用源速度</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm <span class="built_in">test</span></span><br></pre></td></tr></table></figure></li>
+<pre><code class="bash">nrm test
+</code></pre>
+</li>
 </ul>
 <h1 id="NPX-（npm-package-extention）"><a href="#NPX-（npm-package-extention）" class="headerlink" title="NPX: （npm package extention）"></a>NPX: （npm package extention）</h1><blockquote>
 <p>可直接使用，如果不能用npx可安装：</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npx</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">npm install -g npx
+</code></pre>
 <h2 id="调用项目安装的模块"><a href="#调用项目安装的模块" class="headerlink" title="调用项目安装的模块"></a>调用项目安装的模块</h2><blockquote>
 <p>npx 想要解决的主要问题，就是调用项目内部安装的模块<br>一般来说，调用某个模块 ，只能在项目脚本和 package.json 的scripts字段里面，如果想在命令行下调用，必须像下面这样：</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目的根目录下执行</span></span><br><span class="line">node-modules/.bin/xxx --version</span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 项目的根目录下执行
+node-modules/.bin/xxx --version
+</code></pre>
 <blockquote>
 <p>npx 就是想解决这个问题，让项目内部安装的模块用起来更方便，只要像下面这样调用就行了</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx xxx --version</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">npx xxx --version
+</code></pre>
 <blockquote>
 <p>npx 的<strong>原理</strong>很简单，就是运行的时候，会到node_modules&#x2F;.bin路径和环境变量$PATH里面，检查命令是否存在。</p>
 </blockquote>
 <ul>
 <li>由于 npx 会检查环境变量$PATH，所以系统命令也可以调用。</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等同于 ls</span></span><br><span class="line">$ npx <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># 等同于 ls
+$ npx ls
+</code></pre>
 <blockquote>
 <p>注意，Bash 内置的命令不在$PATH里面，所以不能用。比如，cd是 Bash 命令，因此就不能用npx cd。</p>
 </blockquote>
-<h2 id="避免全局安装模块"><a href="#避免全局安装模块" class="headerlink" title="避免全局安装模块"></a>避免全局安装模块</h2><h2 id="使用不同的-Node-js-版本运行代码"><a href="#使用不同的-Node-js-版本运行代码" class="headerlink" title="使用不同的 Node.js 版本运行代码"></a>使用不同的 Node.js 版本运行代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx node@10 -v <span class="comment">#v10.18.1</span></span><br><span class="line">npx node@12 -v <span class="comment">#v12.14.1</span></span><br></pre></td></tr></table></figure>
+<h2 id="避免全局安装模块"><a href="#避免全局安装模块" class="headerlink" title="避免全局安装模块"></a>避免全局安装模块</h2><h2 id="使用不同的-Node-js-版本运行代码"><a href="#使用不同的-Node-js-版本运行代码" class="headerlink" title="使用不同的 Node.js 版本运行代码"></a>使用不同的 Node.js 版本运行代码</h2><pre><code class="bash">npx node@10 -v #v10.18.1
+npx node@12 -v #v12.14.1
+</code></pre>
 <p>这有助于避免使用 nvm 之类的工具或其他 Node.js 版本管理工具。</p>
 <h2 id="–no-install-参数和-–ignore-existing-参数"><a href="#–no-install-参数和-–ignore-existing-参数" class="headerlink" title="–no-install 参数和 –ignore-existing 参数"></a>–no-install 参数和 –ignore-existing 参数</h2><blockquote>
 <p>如果想让 npx 强制使用本地模块，不下载远程模块，可以使用–no-install参数。如果本地不存在该模块，就会报错。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx --no-install http-server</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">$ npx --no-install http-server
+</code></pre>
 <blockquote>
 <p>反过来，如果忽略本地的同名模块，强制安装使用远程模块，可以使用–ignore-existing参数。比如，本地已经安装了http-server，但还是想使用远程模块，就用这个参数。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx --ignore-existing http-server</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">$ npx --ignore-existing http-server
+</code></pre>
 <h1 id="NVM-（Node-Version-Manager）"><a href="#NVM-（Node-Version-Manager）" class="headerlink" title="NVM: （Node Version Manager）"></a>NVM: （Node Version Manager）</h1><ul>
 <li><p>Mac 安装 nvm<br><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm/blob/master/README.md">https://github.com/nvm-sh/nvm/blob/master/README.md</a></p>
 </li>
 <li><p>Windows 安装 nvm</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm-windows</span><br><span class="line">nodist</span><br></pre></td></tr></table></figure></li>
+<pre><code>nvm-windows
+nodist
+</code></pre>
+</li>
 </ul>
 
       
@@ -794,6 +811,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -818,6 +849,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -897,6 +960,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

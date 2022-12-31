@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -615,7 +615,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8E%9F%E5%9E%8B"><span class="toc-text">1. 原型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">2. 原型链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-js%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-text">3. js运行时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">4. 执行上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%EF%BC%88VO%EF%BC%89"><span class="toc-text">5. 变量对象（VO）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">6. 作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-text">7. 作用域链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E9%97%AD%E5%8C%85"><span class="toc-text">8. 闭包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-call%E3%80%81apply%E3%80%81bind"><span class="toc-text">9. call、apply、bind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">10. 类数组对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-1-Arguments%E5%AF%B9%E8%B1%A1"><span class="toc-text">10.1. Arguments对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81"><span class="toc-text">11. 防抖和节流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">12. 传递参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-new%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">13. new关键字</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8E%9F%E5%9E%8B"><span class="toc-text">1. 原型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">2. 原型链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-js%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-text">3. js运行时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">4. 执行上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%EF%BC%88VO%EF%BC%89"><span class="toc-text">5. 变量对象（VO）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">6. 作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-text">7. 作用域链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E9%97%AD%E5%8C%85"><span class="toc-text">8. 闭包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-call%E3%80%81apply%E3%80%81bind"><span class="toc-text">9. call、apply、bind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">10. 类数组对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-new%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">13. new关键字</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -648,8 +648,14 @@
 </ul>
 </blockquote>
 <p>加个例子理解：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line">person.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line"><span class="title class_">Person</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person) === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">function Person() &#123;
+&#125;
+var person = new Person();
 
+person.__proto__ === Person.prototype
+Person === Person.prototype.constructor
+Object.getPrototypeOf(person) === Person.prototype
+</code></pre>
 <h1 id="2-原型链"><a href="#2-原型链" class="headerlink" title="2. 原型链"></a>2. 原型链</h1><p>当读取实例属性时，如果找不到就会查找对象关联的原型中的属性，如果还找不到，就会去找原型的原型，一直找到最顶层为止。这个由相互关联的原型组成的链状结构就是原型链。</p>
 <blockquote>
 <p>最顶层就是原型链的最后一个，即<code>Object.prototype</code>的原型，值为null</p>
@@ -733,41 +739,110 @@
 <blockquote>
 <p>Arguments 对象就是一个类数组对象。在客户端 JavaScript 中，一些 DOM 方法(document.getElementsByTagName()等)也返回类数组对象</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arrayLike = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">&#x27;age&#x27;</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">&#x27;sex&#x27;</span>,</span><br><span class="line">    <span class="attr">length</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var array = [&#39;name&#39;, &#39;age&#39;, &#39;sex&#39;];
+
+var arrayLike = &#123;
+    0: &#39;name&#39;,
+    1: &#39;age&#39;,
+    2: &#39;sex&#39;,
+    length: 3
+&#125;
+</code></pre>
 <ul>
-<li>调用数组方法<br>用 Function.call 间接调用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayLike = &#123;<span class="number">0</span>: <span class="string">&#x27;name&#x27;</span>, <span class="number">1</span>: <span class="string">&#x27;age&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;sex&#x27;</span>, <span class="attr">length</span>: <span class="number">3</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">join</span>.<span class="title function_">call</span>(arrayLike, <span class="string">&#x27;&amp;&#x27;</span>); <span class="comment">// name&amp;age&amp;sex</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(arrayLike, <span class="number">0</span>); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"><span class="comment">// slice可以做到类数组转数组</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">map</span>.<span class="title function_">call</span>(arrayLike, <span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> item.<span class="title function_">toUpperCase</span>();</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// [&quot;NAME&quot;, &quot;AGE&quot;, &quot;SEX&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">splice</span>.<span class="title function_">call</span>(arrayLike, <span class="number">0</span>); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(arrayLike); <span class="comment">// [&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;] </span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">concat</span>.<span class="title function_">apply</span>([], arrayLike)</span><br></pre></td></tr></table></figure></li>
+<li>调用数组方法<br>用 Function.call 间接调用<br>&#96;&#96;&#96;javascript<br>var arrayLike &#x3D; {0: ‘name’, 1: ‘age’, 2: ‘sex’, length: 3 }</li>
 </ul>
-<h1 id="10-1-Arguments对象"><a href="#10-1-Arguments对象" class="headerlink" title="10.1. Arguments对象"></a>10.1. Arguments对象</h1><p>Arguments 对象只定义在函数体中，包括了函数的参数和其他属性。在函数体中，arguments 指代该函数的 Arguments 对象。</p>
-<blockquote>
-<p>类数组的索引属性和length属性之外，还有一个callee属性</p>
-</blockquote>
+<p>Array.prototype.join.call(arrayLike, ‘&amp;’); &#x2F;&#x2F; name&amp;age&amp;sex</p>
+<p>Array.prototype.slice.call(arrayLike, 0); &#x2F;&#x2F; [“name”, “age”, “sex”]<br>&#x2F;&#x2F; slice可以做到类数组转数组</p>
+<p>Array.prototype.map.call(arrayLike, function(item){<br>    return item.toUpperCase();<br>});<br>&#x2F;&#x2F; [“NAME”, “AGE”, “SEX”]</p>
+<p>Array.prototype.splice.call(arrayLike, 0); &#x2F;&#x2F; [“name”, “age”, “sex”] </p>
+<p>Array.from(arrayLike); &#x2F;&#x2F; [“name”, “age”, “sex”] </p>
+<p>Array.prototype.concat.apply([], arrayLike)</p>
+<pre><code>
+# 10.1. Arguments对象
+Arguments 对象只定义在函数体中，包括了函数的参数和其他属性。在函数体中，arguments 指代该函数的 Arguments 对象。
+&gt; 类数组的索引属性和length属性之外，还有一个callee属性
+
+- length属性
+Arguments对象的length属性，表示实参的长度
+```javascript
+function foo(b, c, d)&#123;
+    console.log(&quot;实参的长度为：&quot; + arguments.length)
+&#125;
+
+console.log(&quot;形参的长度为：&quot; + foo.length)
+
+foo(1)
+
+// 形参的长度为：3
+// 实参的长度为：1
+</code></pre>
 <ul>
-<li><p>length属性<br>Arguments对象的length属性，表示实参的长度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">b, c, d</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;实参的长度为：&quot;</span> + <span class="variable language_">arguments</span>.<span class="property">length</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;形参的长度为：&quot;</span> + foo.<span class="property">length</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 形参的长度为：3</span></span><br><span class="line"><span class="comment">// 实参的长度为：1</span></span><br></pre></td></tr></table></figure>
+<li>callee属性<br>Arguments 对象的 callee 属性，通过它可以调用函数自身。<br>&#96;&#96;&#96;javascript<br>var data &#x3D; [];</li>
+</ul>
+<p>for (var i &#x3D; 0; i &lt; 3; i++) {<br>    (data[i] &#x3D; function () {<br>       console.log(arguments.callee.i)<br>    }).i &#x3D; i;<br>}</p>
+<p>data<a href>0</a>;<br>data<a href>1</a>;<br>data<a href>2</a>;</p>
+<p>&#x2F;&#x2F; 0<br>&#x2F;&#x2F; 1<br>&#x2F;&#x2F; 2</p>
+<pre><code>
+&gt; **非严格模式下**,传入的参数，实参和 arguments 的值会共享，当没有传入时，实参与 arguments 值不会共享。**在严格模式下**，实参和 arguments 是不会共享的
+
+- 传递参数
+将参数从一个函数传递到另一个函数
+```javascript
+// 使用 apply 将 foo 的参数传递给 bar
+function foo() &#123;
+    bar.apply(this, arguments);
+&#125;
+function bar(a, b, c) &#123;
+   console.log(a, b, c);
+&#125;
+
+foo(1, 2, 3)
+</code></pre>
+<ul>
+<li>使用ES6的 … 运算符，我们可以轻松转成数组<br>&#96;&#96;&#96;javascript<br>function func(…arguments) {<br>  console.log(arguments); &#x2F;&#x2F; [1, 2, 3]<br>}</li>
+</ul>
+<p>func(1, 2, 3);</p>
+<pre><code>
+# 11. 防抖和节流
+防抖和节流的作用都是防止函数多次调用。
+
+区别在于，假设一个用户一直触发这个函数，且每次触发函数的间隔小于wait，
+- 防抖的情况下只会调用一次
+- 节流的情况会每隔一定时间（参数wait）调用函数
+
+# 12. 传递参数
+ - 按值传递
+ ```javascript
+ var value = 1;
+ function foo(v) &#123;
+    v = 2;
+    console.log(v); //2
+ &#125;
+ foo(value);
+ console.log(value) // 1
+</code></pre>
+<ul>
+<li>引用传递<br> 传递对象的引用<pre><code class="javascript">var obj = &#123;
+value: 1
+&#125;;
+function foo(o) &#123;
+o.value = 2;
+console.log(o.value); //2
+&#125;
+foo(obj);
+console.log(obj.value) // 2
+</code></pre>
 </li>
-<li><p>callee属性<br>Arguments 对象的 callee 属性，通过它可以调用函数自身。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    (data[i] = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">callee</span>.<span class="property">i</span>) </span><br><span class="line">    &#125;).<span class="property">i</span> = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data[<span class="number">0</span>]();</span><br><span class="line">data[<span class="number">1</span>]();</span><br><span class="line">data[<span class="number">2</span>]();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p><strong>非严格模式下</strong>,传入的参数，实参和 arguments 的值会共享，当没有传入时，实参与 arguments 值不会共享。<strong>在严格模式下</strong>，实参和 arguments 是不会共享的</p>
-</blockquote>
-<ul>
-<li><p>传递参数<br>将参数从一个函数传递到另一个函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 apply 将 foo 的参数传递给 bar</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    bar.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params">a, b, c</span>) &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用ES6的 … 运算符，我们可以轻松转成数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params">...<span class="variable language_">arguments</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">func</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="11-防抖和节流"><a href="#11-防抖和节流" class="headerlink" title="11. 防抖和节流"></a>11. 防抖和节流</h1><p>防抖和节流的作用都是防止函数多次调用。</p>
-<p>区别在于，假设一个用户一直触发这个函数，且每次触发函数的间隔小于wait，</p>
-<ul>
-<li>防抖的情况下只会调用一次</li>
-<li>节流的情况会每隔一定时间（参数wait）调用函数</li>
-</ul>
-<h1 id="12-传递参数"><a href="#12-传递参数" class="headerlink" title="12. 传递参数"></a>12. 传递参数</h1><ul>
-<li>按值传递 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">v</span>) &#123;</span><br><span class="line">   v = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(v); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(value);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(value) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
-<li>引用传递<br> 传递对象的引用 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">   <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">o</span>) &#123;</span><br><span class="line">   o.<span class="property">value</span> = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">value</span>); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">value</span>) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></li>
-<li>共享传递<br> 传递对象的引用的副本 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">   <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">o</span>) &#123;</span><br><span class="line">   o = <span class="number">2</span>;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(o); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>(obj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">value</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<li>共享传递<br> 传递对象的引用的副本<pre><code class="javascript">var obj = &#123;
+value: 1
+&#125;;
+function foo(o) &#123;
+o = 2;
+console.log(o); //2
+&#125;
+foo(obj);
+console.log(obj.value) // 1
+</code></pre>
  所以修改 o.value，可以通过引用找到原值，但是直接修改 o，并不会修改原值。所以第二个和第三个例子其实都是按共享传递</li>
 </ul>
 <blockquote>
@@ -853,6 +928,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -877,6 +966,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -956,6 +1077,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 

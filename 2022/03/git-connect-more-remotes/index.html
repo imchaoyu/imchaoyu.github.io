@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -362,7 +362,7 @@
            href="/2022/12/js-forin-forof-foreach/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Js的for In、for offroEach的区别">Js的for In、for offroEach的区别</span>
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
             <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
         </a>
         
@@ -648,35 +648,50 @@
 <li><p>本地创建好文件夹及文件</p>
 </li>
 <li><p>初始化git</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">git init
+</code></pre>
 </li>
 <li><p>分别在GitHub和Gitee上创建好远程仓库</p>
 </li>
 <li><p>回到本地关联远程仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add github git@github.com:imchaoyu/note.git</span><br><span class="line">git remote add gitee git@gitee.com:chaoyu91/note.git</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">git remote add github git@github.com:imchaoyu/note.git
+git remote add gitee git@gitee.com:chaoyu91/note.git
+</code></pre>
 <p>执行以下命令，查看关联的远程仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">git remote -v
+</code></pre>
 <p>会显示</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gitee   https://gitee.com/chaoyu91/notes.git (fetch)</span><br><span class="line">gitee   https://gitee.com/chaoyu91/notes.git (push)</span><br><span class="line">github  git@github.com:imchaoyu/notes.git (fetch)</span><br><span class="line">github  git@github.com:imchaoyu/notes.git (push)</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">gitee   https://gitee.com/chaoyu91/notes.git (fetch)
+gitee   https://gitee.com/chaoyu91/notes.git (push)
+github  git@github.com:imchaoyu/notes.git (fetch)
+github  git@github.com:imchaoyu/notes.git (push)
+</code></pre>
 <p>说明关联成功。</p>
 </li>
 </ul>
 <blockquote>
 <p>当有修改推送到远程的时候,分别推送即可</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push github master</span><br><span class="line">git push gitee master</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">git push github master
+git push gitee master
+</code></pre>
 <ul>
-<li>可关联master分支,使用<code>git push github</code>等直接提交,不用再写默认master分支名<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push --set-upstream github master</span><br><span class="line">git push --set-upstream gitee master</span><br></pre></td></tr></table></figure></li>
+<li>可关联master分支,使用<code>git push github</code>等直接提交,不用再写默认master分支名<pre><code class="bash"> git push --set-upstream github master
+ git push --set-upstream gitee master
+</code></pre>
+</li>
 </ul>
 <blockquote>
 <p>如果已关联一个远程,可使用以下命令,先删除远程关联,再重新关联即可</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> origin</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">git remote rm origin
+</code></pre>
 <blockquote>
 <p>也可直接修改远程仓库名称</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename gitee mayun</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">git remote rename gitee mayun
+</code></pre>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
     </div>
@@ -755,6 +770,20 @@
 
         /*高亮代码块行号*/
         
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
 
         /*访问数量*/
         
@@ -779,6 +808,38 @@
 </script>
 
 <!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
 
 <!--自定义样式设置-->
 <style>
@@ -858,6 +919,16 @@
     /*文章列表背景图*/
     
 
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 
