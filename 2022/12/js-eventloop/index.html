@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Git创建tag并推送至远程 | 一点</title>
-  <meta name="keywords" content=" git , tag ">
-  <meta name="description" content="Git创建tag并推送至远程 | 一点">
+  <title>浅析js中的EvntLoop事件循环 | 一点</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="浅析js中的EvntLoop事件循环 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -582,9 +582,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-git-about-tags" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js-eventloop" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Git创建tag并推送至远程</h1>
+        <h1 class="article-title">浅析js中的EvntLoop事件循环</h1>
     
     <div class="article-meta">
         
@@ -594,24 +594,15 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="git">git</a>
+            <a  data-rel="JavaScript">JavaScript</a>
             
         </span>
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color4">git</a>
-            
-            <a class="color4">tag</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-03-08 11:48</time>
+            发布时间 : <time class="date" title='最后更新: 2022-12-31 15:24:33'>2022-12-31 14:45</time>
         
     </div>
     <div class="article-meta">
@@ -633,7 +624,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A0%86%EF%BC%88Heap%EF%BC%89"><span class="toc-text">堆（Heap）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%88%EF%BC%88Stack%EF%BC%89"><span class="toc-text">栈（Stack）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89"><span class="toc-text">队列（Queue）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1"><span class="toc-text">同步任务和异步任务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">异步运行机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="toc-text">宏任务和微任务</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -649,32 +640,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>本地创建tag</p>
-<pre><code class="bash">git tag -a v1.0.0 -m &#39;this is test version 1.0&#39;
+        <blockquote>
+<p>Evnt Loop即事件循环，是解决JavaScript单线程运行阻塞的一种机制。</p>
+</blockquote>
+<h1 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h1><p>堆表示一大块非结构化的内存区域。对象、数据被存在堆中</p>
+<h1 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h1><p>栈在JavaScript中又被称为执行栈、调用栈，是一种<strong>后进先出</strong>的数组结构。<br>JavaScript有一个主线程（main thread）和调用栈（call-stack或执行栈），主线各所有的任务都会被放到调用栈等待主线程执行。<br>JS调用栈采用的是后进先出的规则，当函数执行的时候，会被添加到栈的顶部，当执行栈执行完成后，就会从栈顶移除，直到栈内被清空。</p>
+<blockquote>
+<p>这里说的堆栈，是数据结构的堆栈，不是内存中的堆栈（内存中的堆栈，堆存放引用类型的数据，栈存放基本数据类型的数据）</p>
+</blockquote>
+<pre><code class="javascript">function foo(b)&#123;
+  const a = 10;
+  return a + b + 11
+&#125;
+function bar(x)&#123;
+  const y = 3;
+  return foo(x * y)
+&#125;
+console.log(bar(7))
+// 42
 </code></pre>
-<span id="more"></span></li>
-<li><p>将本地tag推送到远程分支</p>
-<pre><code class="bash">git push origin master --tags
-</code></pre>
-</li>
-<li><p>查看tag</p>
-<pre><code class="bash">git tag
-</code></pre>
-</li>
-<li><p>查看某一个标签详细信息</p>
-<pre><code class="bash">git show v1.0.0
-</code></pre>
-</li>
-<li><p>删除本地标签</p>
-<pre><code class="bash">git tag -d v0.8
-</code></pre>
-</li>
-<li><p>删除远程分支标签</p>
-<pre><code class="bash">git push origin master :refs/tags/v0.8
-</code></pre>
-</li>
+<blockquote>
+<p>如上代码，当调用<code>bar</code>时，创建第一个帧，帧中包含了<code>bar</code>的参数和局部变量。当<code>bar</code>调用<code>foo</code>时，第二个帧就被创建出来了，并被压到第一个帧之上，帧中包含了<code>foo</code>的参数和局部变量。当<code>foo</code>返回时，最上层的帧就被弹出栈（剩下<code>bar</code>函数的调用栈）。当<code>bar</code>返回时，栈就空了。</p>
+</blockquote>
+<h1 id="队列（Queue）"><a href="#队列（Queue）" class="headerlink" title="队列（Queue）"></a>队列（Queue）</h1><p>队列即任务队列（Task Queue），是一种<strong>先进先出</strong>的数据结构。在队尾添加新元素，从对头移除元素。</p>
+<h1 id="同步任务和异步任务"><a href="#同步任务和异步任务" class="headerlink" title="同步任务和异步任务"></a>同步任务和异步任务</h1><ul>
+<li><strong>同步任务</strong>是调用立即得到结果的任务，同步任务在主线程上排队执行的任务，只有前一个任务执行完毕后，才能执行后一个任务。</li>
+<li><strong>异步任务</strong>是调用无法立即得到结果，需要额外的操作才能预期结果的任务，异步任务不进入主线程，而进入“任务队列”的任务，只有任务队列通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</li>
 </ul>
+<blockquote>
+<p>js引擎遇到异步任务（DOM事件监听、网络请求、setTimeout计时器等），会交给相应的线程单独去维护异步任务，等待某个时机（计时器结束、网络请求成功、用户点击DOM），然后由事件触发线程将异步对应的回调函数加入到消息队列中，消息队列中的回调函数等待被执行。</p>
+</blockquote>
+<h2 id="异步运行机制"><a href="#异步运行机制" class="headerlink" title="异步运行机制"></a>异步运行机制</h2><ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈</li>
+<li>主线程之外，还存在一个任务队列。只要异步任务有了运行结果，就在任务队列之中放置一个事件。</li>
+<li>一旦执行栈中的所有同步任务执行完毕，系统就会读取任务队列，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面第三步。</li>
+</ol>
+<blockquote>
+<p> 主线程从任务队列中读取事件，这个过程是不断循环的，所以整个的这种运行机制又被称为<strong>Evnt Loop（事件循环）</strong></p>
+</blockquote>
+<p><img src="/2022/12/js-eventloop/evntloop.png" alt="事件循环流程图"></p>
+<h1 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h1><p>所有任务分为<strong>宏任务（macrotask）</strong>和<strong>微任务（microtask）</strong>两种。</p>
+<ul>
+<li><strong>宏任务</strong>包括<code>script</code>全部代码、<code>setTimeout</code>、<code>setInterval</code>、<code>setImmediate</code>、<code>I/O</code>、<code>UI Rendering</code>。</li>
+<li><strong>微任务</strong>包括<code>Process.nextTick</code>、<code>Promise</code>、<code>Object.observe</code>(废弃)、<code>MutationObserver</code></li>
+</ul>
+<p>在挂起任务时，JS引擎会将所有任务按照类别分到两个队列中，首先在宏任务的队列中取出第一个任务，执行完毕后取出微任务队列中的所有任务顺序执行，之后再取宏任务，周而复始，直至两个队列的任务都取完。</p>
+<p><img src="/2022/12/js-eventloop/macromicrotask.png" alt="宏任务和微任务执行"></p>
+<blockquote>
+<p>异步编程的几种方法：</p>
+<ul>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>发布&#x2F;订阅</li>
+<li>Promise对象</li>
+<li>Generator函数</li>
+<li>async&#x2F;awai</li>
+</ul>
+</blockquote>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
