@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Reduce简介和基础应用 | 一点</title>
+  <title>ES6的class探索 | 一点</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Reduce简介和基础应用 | 一点">
+  <meta name="description" content="ES6的class探索 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -589,9 +589,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-js-reduce-simple" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js-es6-class" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Reduce简介和基础应用</h1>
+        <h1 class="article-title">ES6的class探索</h1>
     
     <div class="article-meta">
         
@@ -609,7 +609,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-31 11:34:08'>2022-12-31 10:55</time>
+            发布时间 : <time class="date" title='最后更新: 2022-12-31 18:18:41'>2022-12-31 15:29</time>
         
     </div>
     <div class="article-meta">
@@ -631,7 +631,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Reduce%E7%AE%80%E4%BB%8B"><span class="toc-text">Reduce简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#constructor-NaN"><span class="toc-text">constructor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#super"><span class="toc-text">super</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">静态方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95%E5%92%8C%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="toc-text">私有方法和私有属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%9D%97"><span class="toc-text">静态块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#new-target%E5%B1%9E%E6%80%A7"><span class="toc-text">new.target属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6%E4%B8%8EES5%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">ES6与ES5的对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#class%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%B8%80%E4%BA%9B%E9%99%90%E5%88%B6"><span class="toc-text">class关键字的一些限制</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -647,156 +647,310 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Reduce简介"><a href="#Reduce简介" class="headerlink" title="Reduce简介"></a>Reduce简介</h1><blockquote>
-<p>reduce() 方法对数组中的每个元素执行一个由您提供的reduce函数(升序执行)，将其结果汇总为单个返回值。<br>reduce方法可做的事情特别多，循环遍历能做的，reduce都可以做，比如数组求和、数组求积、数组中元素出现的次数、数组去重等等。</p>
+        <p>ES6 中的关键字<code>class</code>本质上还是通过原型链和函数实现的，提供了一种更加方便、逻辑更加清晰的方法去实现类。</p>
+<p>所以ES6的<code>class</code>属于一种语法糖，使写法更优雅，更加面向对象的编程，其思想和ES5没有本质区别。</p>
+<blockquote>
+<p>ES6的 <code>class</code> 内部是基于寄生组合式继承，它是目前最理想的继承方式。</p>
 </blockquote>
-<ul>
-<li><p>语法</p>
-<pre><code class="javascript">arr.reduce(function(prev,cur,index,arr)&#123;
-// ...
-&#125;, init);
+<pre><code class="javascript">//ES6
+class Point&#123;
+  constructor(x,y)&#123;
+    this.x = x;
+    this.y = y;
+  &#125;
+  toString()&#123;
+    return `$&#123;this.x&#125;,$&#123;this.y&#125;`
+  &#125;
+&#125;
 </code></pre>
-</li>
-<li><p>参数解释</p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>prev</code> <em>必需</em></td>
-<td align="left">累计器累计回调的返回值; 表示上一次调用回调时的返回值，或者初始值 init</td>
-</tr>
-<tr>
-<td align="left"><code>cur</code> <em>必需</em></td>
-<td align="left">表示当前正在处理的数组元素</td>
-</tr>
-<tr>
-<td align="left"><code>index</code> <em>可选</em></td>
-<td align="left">表示当前正在处理的数组元素的索引，若提供 init 值，则起始索引为- 0，否则起始索引为1</td>
-</tr>
-<tr>
-<td align="left"><code>arr</code> <em>可选</em></td>
-<td align="left">表示原数组</td>
-</tr>
-<tr>
-<td align="left"><code>init</code> <em>可选</em></td>
-<td align="left">表示初始值</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>例子</p>
+<p>等同于</p>
+<pre><code class="javascript">// ES5
+function Point(x,y)&#123;
+  this.x = x;
+  this.y = y;
+&#125;
+Point.prototype.toString = function()&#123;
+  return &#39;(&#39; + this.x + &#39;,&#39; + this.y + &#39;)&#39;;
+&#125;;
+</code></pre>
+<h1 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h1><p><code>constructor</code>方法是类的构造函数，是一个默认方法，通过<code>new</code>命令创建对象实例时，自动调用该方法。</p>
+<p>一个类必须有<code>constructor</code>方法，如果没有显示定义，一个默认的<code>constructor</code>方法会被默认添加。一般<code>constructor</code>方法返回实例对象<code>this</code>，但是也可以指定<code>constructor</code>方法返回一个全新的对象，让返回的实例对象不是该类的实例。</p>
+<p>ES6中的<code>constructor</code>构造方法对应ES5中的构造函数。</p>
+<h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p><code>super</code>关键字既可以当函数使用，也可以当对象使用。这两种情况下，它的使用方法完全不同。<br>对象函数中的<code>this</code>指向的是当前函数所在的对象，而<code>super</code>指向的是当前函数所在对象的原型，比<code>this</code>更深了一层。在子类构造函数中调用<code>super()</code>，相当于调用父类的<code>constructor</code>。</p>
 <ol>
-<li><p>没有设置函数的初始迭代值</p>
-<pre><code class="javascript">const arr = [1,2,3,4,5];
-const sum = arr.reduce(function(prev,cur,index,arr)&#123;
- console.log(prev,cur,index);
- return prev + cur;
-&#125;);
-console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
+<li>super当函数使用<pre><code class="javascript">class A&#123;&#125;
+class B extends A&#123;
+ constructor()&#123;
+   super(); // ES6要求，子类的构造函数必须执行一次super函数，否则会报错
+&#125;
 </code></pre>
-<p> <img src="/2022/12/js-reduce-simple/1.png" alt="例1"></p>
 <blockquote>
-<p>分析：在这里reduce的作用就是对这个数组进行求和，迭代了4次，函数迭代的初始值是1，也就是默认值（数组的第一项），prev的值是每次计算后的值。</p>
+<p>注：在 <code>constructor</code> 中必须调用 <code>super</code> 方法，因为子类没有自己的 <code>this</code> 对象，而是继承父类的 <code>this</code> 对象，然后对其进行加工,而 <code>super</code> 就代表了父类的构造函数。<code>super</code> 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 <code>super</code> 内部的 <code>this</code> 指的是 B，因此 <code>super()</code> 在这里相当于 <code>A.prototype.constructor.call(this, props)</code></p>
 </blockquote>
-</li>
-<li><p>设置函数的初始迭代值</p>
-<pre><code class="javascript">const arr = [1,2,3,4,5];
-const sum = arr.reduce((prev,cur,index,arr) =&gt; &#123;
-  console.log(prev,cur,index);
-  return prev + cur;
-&#125;,5); 
-console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
-</code></pre>
-<p><img src="/2022/12/js-reduce-simple/1.png" alt="例2"></p>
-<blockquote>
-<p>分析：这里我们添加了一个初始的迭代值，也就是让prev从5开始计算(以5为初始值求和)，可以看到，这里迭代了5次，结果也加上了初始值。同时，这里使用箭头函数来代替完整的函数。 运行结果相同。</p>
-</blockquote>
+<p>  &#96;&#96;&#96;javascript<br>  class A {<br> constructor() {<br>   console.log(new.target.name); &#x2F;&#x2F; new.target 指向当前正在执行的函数<br> }<br>  }</p>
 </li>
 </ol>
-</li>
-</ul>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul>
-<li>数组求和<pre><code class="javascript">let arr = [1,2,3,4,5]
-console.log(arr.reduce((a,b) =&gt; a + b)) // - 15
-console.log(arr.reduce((a,b) =&gt; a * b))  // - 120
-</code></pre>
-</li>
-<li>计算数组中每个元素出现的次数<pre><code class="javascript">const names = [&#39;Alice&#39;, &#39;Bob&#39;, &#39;Tiff&#39;, &#39;Bruce&#39;, &#39;Alice&#39;, &#39;Bob&#39;, &#39;Bob&#39;];
-const countedNames = names.reduce(function (allNames, name) &#123;
-  console.log(allNames,name);
-  if (name in allNames) &#123;
-    allNames[name]++;
-  &#125;
-  else &#123;
-    allNames[name] = 1;
-  &#125;
-  return allNames;
-&#125;, &#123;&#125;);
-console.log(countedNames);
-</code></pre>
-<img src="/2022/12/js-reduce-simple/3.png" alt="例3"></li>
-<li>去除数组中重复的元素<pre><code class="javascript">    let myArray = [&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;e&#39;, &#39;e&#39;, &#39;c&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;];
-    let myOrderedArray = myArray.reduce(function (accumulator, currentValue) &#123;
-    if (accumulator.indexOf(currentValue) === -1) &#123;
-      accumulator.push(currentValue)
-    &#125;
-    return accumulator;
-  &#125;, []);
-    console.log(myOrderedArray);  // - [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;]
+<p>  class B extends A {<br>    constructor() {<br>      super();<br>    }<br>  }</p>
+<p>  new A(); &#x2F;&#x2F; A<br>  new B(); &#x2F;&#x2F; B</p>
+<pre><code>&gt; 可以看到，在 `super()` 执行时，它指向的是 子类 B 的构造函数，而不是父类 A 的构造函数。也就是说，`super()` 内部的 `this` 指向的是 B。
 
-    let arr = [1,2,1,2,3,5,4,5,3,4,4,4,4];
-  let result = arr.sort().reduce((init, current) =&gt; &#123;
-      if(init.length === 0 || init[init.length-1] !== current) &#123;
-          init.push(current);
-      &#125;
-      return init;
-  &#125;, []);
-  console.log(result); // - [1,2,3,4,5]
-</code></pre>
-</li>
-<li>按属性对Object分类<pre><code class="javascript">const person = [
-  &#123;
-      name: &#39;xiaoming&#39;,
-      age: 18
-  &#125;,&#123;
-      name: &#39;xiaohong&#39;,
-      age: 17
-  &#125;,&#123;
-      name: &#39;xiaogang&#39;,
-      age: 17
+2. super当对象使用
+ &gt; - 在普通方法中，指向父类的原型对象；
+ &gt; - 在静态方法中，指向父类。
+ ```javascript
+ class A&#123;
+  c()&#123;
+    return 2
   &#125;
-];
-function groupBy(objectArray, property) &#123;
-  return objectArray.reduce(function (acc, obj) &#123;
-    let key = obj[property];
-    if (!acc[key]) &#123;
-      acc[key] = [];
-    &#125;
-    acc[key].push(obj);
-    return acc;
-  &#125;, &#123;&#125;);
+ &#125;
+
+ class B extends A&#123;
+  constructor()&#123;
+    super();
+    console.log(super.c()); // 2
+  &#125;
+ &#125;
+ let b = new B();
+</code></pre>
+<blockquote>
+<p>上面代码中，子类B当中的<code>super.c()</code>就是将<code>super</code>当作一个对象使用。这时，<code>super</code>在普通方法之中，指向<code>A.prototype</code>，所以<code>super.c()</code>就相当于<code>A.prototype.c()</code></p>
+</blockquote>
+<p>   <strong>通过<code>super</code>调用父类的方法时，<code>super</code>会绑定子类的<code>this</code></strong></p>
+<pre><code class="javascript">class A&#123;
+ constructor()&#123;
+   this.x = 1;
+ &#125;
+ s()&#123;
+   console.log(this.x)
+ &#125;
 &#125;
-const groupedPerson = groupBy(person, &#39;age&#39;);
-console.log(groupedPerson);
-</code></pre>
-<img src="/2022/12/js-reduce-simple/4.png" alt="例4"></li>
-<li>对对象的属性求和<pre><code class="javascript">let people = [
-  &#123; name: &#39;Alice&#39;, age: 21 &#125;,
-  &#123; name: &#39;Max&#39;, age: 20 &#125;,
-  &#123; name: &#39;Jane&#39;, age: 20 &#125;
-];
-let result = people.reduce((a,b) =&gt;&#123;
-    a = a + b.age;
-    return a;
-&#125;,0)
 
-console.log(result) // - 结果：61
+class B extends A&#123;
+ constructor()&#123;
+   super();
+   this.x = 2;
+ &#125;
+ m()&#123;
+   super.s()
+ &#125;
+&#125;
+let b = new B();
+b.m(); // 2
+</code></pre>
+<blockquote>
+<p>上面代码中，<code>super.s()</code> 虽然调用的是 <code>A.prototytpe.s()</code>，但是 <code>A.prototytpe.s()</code>会绑定子类 B 的 <code>this</code>，导致输出的是 2，而不是 1。也就是说，实际上执行的是 <code>super.s.call(this)</code>。</p>
+</blockquote>
+<p>  <strong>由于绑定子类的 <code>this</code>，所以如果通过 <code>super</code> 对某个属性赋值，这时 <code>super</code> 就是 <code>this</code>，赋值的属性会变成子类实例的属性。</strong></p>
+<pre><code class="javascript">class A &#123;
+  constructor() &#123;
+    this.x = 1;
+  &#125;
+&#125;
+
+class B extends A &#123;
+  constructor() &#123;
+    super();
+    this.x = 2;
+    super.x = 3;
+    console.log(super.x); // undefined
+    console.log(this.x); // 3
+  &#125;
+&#125;
+
+let b = new B();
+</code></pre>
+<blockquote>
+<p>上面代码中，<code>super.x</code> 赋值为 3，这时等同于对 <code>this.x</code> 赋值为 3。而当读取 <code>super.x </code>的时候，调用的是 <code>A.prototype.x</code>，但并没有 x 方法，所以返回 <code>undefined</code>。</p>
+</blockquote>
+<p>  <strong>注意，使用 <code>super</code> 的时候，必须显式指定是作为函数，还是作为对象使用，否则会报错。</strong></p>
+<pre><code class="javascript">class A &#123;&#125;
+class B extends A &#123;
+  constructor() &#123;
+    super();
+    console.log(super); // 报错
+  &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>上面代码中，<code>console.log(super);</code> 中的 <code>super</code>，无法看出是作为函数使用，还是作为对象使用，所以 JavaScript 引擎解析代码的时候就会报错。如果能清晰的表明 <code>super</code> 的数据类型，就不会报错。<br><strong>由于对象总是继承其他对象的，所以可以在任意一个对象中，使用 super 关键字。</strong></p>
+</blockquote>
+<h1 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h1><blockquote>
+<p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
+</blockquote>
+<pre><code class="javascript">class Foo &#123;
+  static classMethod() &#123;
+    return &#39;hello&#39;;
+  &#125;
+&#125;
+ 
+Foo.classMethod() // &#39;hello&#39;
+ 
+var foo = new Foo();
+foo.classMethod()
+// TypeError: foo.classMethod is not a function
+</code></pre>
+<p><strong>注意，如果静态方法包含this关键字，这个this指的是类，而不是实例</strong></p>
+<pre><code class="javascript">class Foo &#123;
+  static bar() &#123;
+    this.baz();
+  &#125;
+  static baz() &#123;
+    console.log(&#39;hello&#39;);
+  &#125;
+  baz() &#123;
+    console.log(&#39;world&#39;);
+  &#125;
+&#125;
+ 
+Foo.bar() // hello
+</code></pre>
+<blockquote>
+<p>上面代码中，静态方法<code>bar</code>调用了<code>this.baz</code>，这里的<code>this</code>指的是<code>Foo</code>类，而不是<code>Foo</code>的实例，等同于调用<code>Foo.baz</code>。另外，从这个例子还可以看出，静态方法可以与非静态方法重名。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>父类的静态方法，可以被子类继承。</li>
+<li>静态方法也是可以从<code>super</code>对象上调用的。</li>
+</ul>
+</blockquote>
+<h1 id="私有方法和私有属性"><a href="#私有方法和私有属性" class="headerlink" title="私有方法和私有属性"></a>私有方法和私有属性</h1><blockquote>
+<p>私有方法和私有属性，是只能在类的内部访问的方法和属性，外部不能访问。这是常见需求，有利于代码的封装，但 ES6 不提供，只能通过变通方法模拟实现。</p>
+</blockquote>
+<ul>
+<li><p>一种做法是在命名上加以区别</p>
+<pre><code class="javascript">class Widget &#123;
+  // 公有方法
+  foo (baz) &#123;
+    this._bar(baz);
+  &#125;
+  // 私有方法
+  _bar(baz) &#123;
+    return this.snaf = baz;
+  &#125;
+  // ...
+&#125;
+</code></pre>
+</li>
+<li><p>另一种方法就是索性将私有方法移出类，因为类内部的所有方法都是对外可见的。</p>
+<pre><code class="javascript">class Widget &#123;
+  foo (baz) &#123;
+    bar.call(this, baz); // 内部调用了bar.call(this, baz)。这使得bar()实际上成为了当前类的私有方法
+  &#125;
+  // ...
+&#125;
+ 
+function bar(baz) &#123;
+  return this.snaf = baz;
+&#125;
+</code></pre>
+</li>
+<li><p>还有一种方法是利用<code>Symbol</code>值的唯一性，将私有方法的名字命名为一个<code>Symbol</code>值。</p>
+</li>
+</ul>
+<h1 id="静态块"><a href="#静态块" class="headerlink" title="静态块"></a>静态块</h1><blockquote>
+<p>ES2022引入的新概念。允许在类的内部设置一个代码块，在类生成时运行一次，主要作用是对静态属性进行初始化。</p>
+</blockquote>
+<pre><code class="javascript">class C &#123;
+  static x = ...;
+  static y;
+  static z;
+ 
+  static &#123;
+    try &#123;
+      const obj = doSomethingWith(this.x);
+      this.y = obj.y;
+      this.z = obj.z;
+    &#125;
+    catch &#123;
+      this.y = ...;
+      this.z = ...;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>上面代码中，类的内部有一个 <code>static</code> 代码块，这就是静态块。它的好处是将静态属性y和z的初始化逻辑，写入了类的内部，而且只运行一次。<br>每个类只能有一个静态块，在静态属性声明后运行。静态块的内部不能有return语句。<br>静态块内部可以使用类名或this，指代当前类。</p>
+</blockquote>
+<h1 id="new-target属性"><a href="#new-target属性" class="headerlink" title="new.target属性"></a>new.target属性</h1><blockquote>
+<p><code>new</code>是从构造函数生成实例对象的命令。ES6为<code>new</code>命令引入了一个<code>new.target</code>属性，该属性一般用在构造函数之中，返回<code>new</code>命令作用于的那个构造函数。如果构造函数不是通过<code>new</code>命令或<code>Reflect.construct()</code>调用的，<code>new.target</code>会返回<code>undefined</code>，因此这个属性可以用来确定构造函数是怎么调用的。</p>
+</blockquote>
+<pre><code class="javascript">function Person(name) &#123;
+  if (new.target !== undefined) &#123;
+    this.name = name;
+  &#125; else &#123;
+    throw new Error(&#39;必须使用 new 命令生成实例&#39;);
+  &#125;
+&#125;
+ 
+// 另一种写法
+function Person(name) &#123;
+  if (new.target === Person) &#123;
+    this.name = name;
+  &#125; else &#123;
+    throw new Error(&#39;必须使用 new 命令生成实例&#39;);
+  &#125;
+&#125;
+ 
+var person = new Person(&#39;张三&#39;); // 正确
+var notAPerson = Person.call(person, &#39;张三&#39;);  // 报错
+</code></pre>
+<p><strong><code>class</code> 内部调用<code>new.target</code>，返回当前 <code>class</code>。</strong><br>需要注意的是，子类继承父类时，<code>new.target</code>会返回子类。<br>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
+<h1 id="ES6与ES5的对象"><a href="#ES6与ES5的对象" class="headerlink" title="ES6与ES5的对象"></a>ES6与ES5的对象</h1><ul>
+<li><p>静态方法对比</p>
+<ul>
+<li>ES6实现方式<pre><code class="javascript">class Employee&#123;
+constructor(name, dept)&#123;
+  this.name = name;
+  this.dept = dept;
+&#125;
+static func()&#123;
+  console.log(&#39;static&#39;)
+&#125;
+getName()&#123;
+  console.log(this.name)
+&#125;
+&#125;
+</code></pre>
+</li>
+<li>ES5实现方式<pre><code class="javascript">function Employee(name, dept)&#123;
+this.name = name;
+this.dept = dept;
+&#125;
+Employee.fun = function()&#123;
+console.log(&quot;static&quot;)
+&#125;
+Employee.prototype.getName=function()&#123;
+console.log(this.name)
+&#125;
 </code></pre>
 </li>
 </ul>
+</li>
+<li><p>继承</p>
+<ul>
+<li>ES6实现方式<pre><code class="javascript">class Manager extends Employee&#123;
+constructor(name, dept, reports)&#123;
+  super(name, dept);
+  this.reports = reports;
+&#125;
+&#125;
+</code></pre>
+</li>
+<li>ES5实现方式<pre><code class="javascript">function Manager(reports, name ,dept)&#123;
+Employee.call(this, name, dept);
+this.reports = reports;
+&#125;
+Manager.fun = Employee.fun;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="class关键字的一些限制"><a href="#class关键字的一些限制" class="headerlink" title="class关键字的一些限制"></a>class关键字的一些限制</h1><ol>
+<li>灵活性</li>
+<li>类声明不可提升</li>
+<li>无法重写类</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
