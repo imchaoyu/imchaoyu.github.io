@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Git拉取远程分支并创建本地分支 | 一点</title>
-  <meta name="keywords" content=" git , 分支 ">
-  <meta name="description" content="Git拉取远程分支并创建本地分支 | 一点">
+  <title>CSS的块级格式化上下文 | 一点</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="CSS的块级格式化上下文 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -623,9 +623,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-git-pull&amp;push" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-css-block-formatter-context" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Git拉取远程分支并创建本地分支</h1>
+        <h1 class="article-title">CSS的块级格式化上下文</h1>
     
     <div class="article-meta">
         
@@ -635,24 +635,15 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="git">git</a>
+            <a  data-rel="HTML+CSS">HTML+CSS</a>
             
         </span>
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color4">git</a>
-            
-            <a class="color3">分支</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-03-08 11:49</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-01 22:11:25'>2023-01-01 22:03</time>
         
     </div>
     <div class="article-meta">
@@ -674,7 +665,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-text">查看分支</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E5%B9%B6%E6%8E%A8%E9%80%81%E8%BF%9C%E7%A8%8B"><span class="toc-text">创建本地分支并推送远程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF"><span class="toc-text">拉取远程分支并创建本地分支</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BFC%E7%90%86%E8%A7%A3"><span class="toc-text">BFC理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BFC%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6"><span class="toc-text">BFC触发条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BFC%E8%83%BD%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">BFC能解决什么问题</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -690,49 +681,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h1><ul>
-<li><p>查看远程分支</p>
-<pre><code class="bash">git branch -r
-</code></pre>
-<span id="more"></span></li>
-<li><p>查看本地分支</p>
-<pre><code class="bash">git branch
-</code></pre>
-</li>
-<li><p>查看本地和远程分支</p>
-<pre><code class="bash">git branch -a
-</code></pre>
-</li>
+        <h1 id="BFC理解"><a href="#BFC理解" class="headerlink" title="BFC理解"></a>BFC理解</h1><p><strong>BFC</strong>: (block formatting context)块级格式化上下文<br><strong>简单理解</strong>：BFC元素可以理解成被隔离的区间（BFC的子元素不会对外面的元素产生影响）</p>
+<h1 id="BFC触发条件"><a href="#BFC触发条件" class="headerlink" title="BFC触发条件"></a>BFC触发条件</h1><p>如何让一个元素变成BFC，触发规则如下：</p>
+<ul>
+<li><code>float: left | right</code></li>
+<li><code>overflow: hidden | scroll | auto;</code>(即不是visible)</li>
+<li><code>dispaly: inline-block | table-cell | table-caption | flex | grid</code>(即非none、inline和block)</li>
+<li><code>position: absolute | fixed</code>（即非relative）</li>
 </ul>
-<h1 id="创建本地分支并推送远程"><a href="#创建本地分支并推送远程" class="headerlink" title="创建本地分支并推送远程"></a>创建本地分支并推送远程</h1><ul>
-<li><p>本地创建分支</p>
-<pre><code class="bash">git checkout -b 本地分支名
-</code></pre>
-</li>
-<li><p>本地分支推送到远程</p>
-<pre><code class="bash">git push origin HEAD -u
-</code></pre>
-</li>
+<h1 id="BFC能解决什么问题"><a href="#BFC能解决什么问题" class="headerlink" title="BFC能解决什么问题"></a>BFC能解决什么问题</h1><ul>
+<li>margin 重合问题</li>
+<li>margin 塌陷问题</li>
+<li>高度塌陷问题</li>
 </ul>
-<h1 id="拉取远程分支并创建本地分支"><a href="#拉取远程分支并创建本地分支" class="headerlink" title="拉取远程分支并创建本地分支"></a>拉取远程分支并创建本地分支</h1><ul>
-<li><p>创建本地分支并切换到新分支 并 本地分支与远程分支建立映射关系</p>
-<pre><code class="bash">git checkout -b 本地分支名 origin/远程分支名
-</code></pre>
-</li>
-<li><p>创建本地分支 不会切换到新分支 不会和远程分支建立映射关系</p>
-<pre><code class="bash">git fetch origin 远程分支名:本地分支名
-</code></pre>
-</li>
-</ul>
-<p><strong>手动建立映射关系</strong></p>
-<pre><code class="bash">git branch --set-upstream-to origin/远程分支名
-</code></pre>
-<p>撤销本地分支与远程分支的映射关系</p>
-<pre><code class="bash">git branch --unset-upstream
-</code></pre>
-<p><strong>查看本地分支与远程分支的映射关系</strong></p>
-<pre><code class="bash">git branch -vv 
-</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
