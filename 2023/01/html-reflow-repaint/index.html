@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Categories | 一点</title>
+  <title>重排与重绘的极简描述 | 一点</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Categories | 一点">
+  <meta name="description" content="重排与重绘的极简描述 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -641,19 +641,27 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="categories-" class="article article-type-categories" itemscope itemprop="blogPost">
+        <article id="post-html-reflow-repaint" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Categories</h1>
+        <h1 class="article-title">重排与重绘的极简描述</h1>
     
     <div class="article-meta">
         
         
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="HTML+CSS">HTML+CSS</a>
+            
+        </span>
         
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-22 15:42:20'>2022-03-08 10:43</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-01 22:19:25'>2023-01-01 22:12</time>
         
     </div>
     <div class="article-meta">
@@ -675,7 +683,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E6%8E%92-reflow"><span class="toc-text">重排(reflow)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E7%BB%98%EF%BC%88repaint-%E6%88%96-redraw%EF%BC%89"><span class="toc-text">重绘（repaint 或 redraw）</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -691,7 +699,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="重排-reflow"><a href="#重排-reflow" class="headerlink" title="重排(reflow)"></a>重排(reflow)</h1><blockquote>
+<p>当DOM的变化引发了元素几何属性的变化，比如改变元素的宽高，元素的位置，导致浏览器不得不重新计算元素的几何属性，并重新构建渲染树，这个过程称为“重排”或叫“回流”。<br><strong>触发重排的条件：任何页面布局和几何属性的改变都会触发重排</strong>，如下：</p>
+</blockquote>
+<ol>
+<li>页面渲染初始化；(无法避免)</li>
+<li>添加或删除可见的DOM元素；</li>
+<li>元素位置的改变，或者使用动画；</li>
+<li>元素尺寸的改变——大小，外边距，边框；</li>
+<li>浏览器窗口尺寸的变化（resize事件发生时）；</li>
+<li>填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变；</li>
+<li>读取某些元素属性</li>
+</ol>
+<ul>
+<li>为什么获取一些属性或调用方法也会导致回流？<blockquote>
+<p>因为以上属性和方法都需要返回最新的布局信息，因此浏览器不得不触发回流重绘来返回正确的值。<br>操作DOM其实是非常耗性能的，所以我们不仅要避免去操作DOM，还要减少访问DOM的次数。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="重绘（repaint-或-redraw）"><a href="#重绘（repaint-或-redraw）" class="headerlink" title="重绘（repaint 或 redraw）"></a>重绘（repaint 或 redraw）</h1><blockquote>
+<p>完成重排后，要将重新构建的渲染树渲染到屏幕上，这个过程就是“重绘”。<br><strong>触发条件：比如元素的外观属性color,background-color等</strong></p>
+</blockquote>
+<p>简单的说:<br>重排负责元素的几何属性更新，重绘负责元素的样式更新。而且，<strong>重排必然带来重绘，但是重绘未必带来重排</strong>。比如，改变某个元素的背景，这个就不涉及元素的几何属性，所以只发生重绘。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
     </div>
