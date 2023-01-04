@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -745,23 +777,31 @@ const headers = &#123; &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; 
 </code></pre>
 <p><code>HOST</code>: 就是要爬取的网站，这里给单独出来，方便后面的操作，（可以进一步优化，把年份拿出来，每次获取时手动输入，获取指定年份的数据）<br><code>headers</code>: 就是访问该网站时的header信息，这里就是为了模拟浏览器环境，防止出问题，其实不写也可以请求网站信息</p>
 <ul>
-<li>引入<code>axios</code>库，获取网站数据<br>文件头部引入<code>axios</code><pre><code class="javascript">const axios = require(&#39;axios&#39;);
-</code></pre>
-然后定义一个函数用于请求地址获取相应数据。因为根据分析网站的结果可知，原网站数据是按层级一层一层划分并每个链接显示一级的数据。如：首页显示了所有省级信息，然后每个省级携带对应的不同链接，连接到下属城市，再根据城市信息链接到区县再到街道、居委会等。所以把请求接口的方法封装到一个函数里，通过参数访问，获取信息。<pre><code class="javascript">const fetchData = async (url) =&gt; &#123;
-const res = await axios(url, &#123; headers &#125;);
-</code></pre>
-定义一个<code>main</code>函数，作为程序的主入口，再在<code>main</code>内执行<br>&#96;&#96;&#96;javascript<br>const main &#x3D; async () &#x3D;&gt; {<br>const provinceData &#x3D; await fetchData(HOST);<br>}</li>
+<li>引入<code>axios</code>库，获取网站数据<br>文件头部引入<code>axios</code></li>
 </ul>
-<p>main();</p>
-<pre><code>&gt; 
+<pre><code class="javascript">const axios = require(&#39;axios&#39;);
+</code></pre>
+<p>然后定义一个函数用于请求地址获取相应数据。因为根据分析网站的结果可知，原网站数据是按层级一层一层划分并每个链接显示一级的数据。如：首页显示了所有省级信息，然后每个省级携带对应的不同链接，连接到下属城市，再根据城市信息链接到区县再到街道、居委会等。所以把请求接口的方法封装到一个函数里，通过参数访问，获取信息。</p>
+<pre><code class="javascript">const fetchData = async (url) =&gt; &#123;
+  const res = await axios(url, &#123; headers &#125;);
+</code></pre>
+<p>定义一个<code>main</code>函数，作为程序的主入口，再在<code>main</code>内执行</p>
+<pre><code class="javascript">const main = async () =&gt; &#123;
+  const provinceData = await fetchData(HOST);
+&#125;
 
-保存后执行`node index.js`即可获取网页信息。可用`console`打印出查看。
-&gt; 此时会发现，获取的数据，中文会乱码，这是因为，该网站编码采用的是`GB2312`。我们需要对获取的数据进行转译。
-
-- 引入`iconv-lite`
-
-```javascript
-const iconv = require(&#39;iconv-lite&#39;);
+main();
+</code></pre>
+<blockquote>
+</blockquote>
+<p>保存后执行<code>node index.js</code>即可获取网页信息。可用<code>console</code>打印出查看。</p>
+<blockquote>
+<p>此时会发现，获取的数据，中文会乱码，这是因为，该网站编码采用的是<code>GB2312</code>。我们需要对获取的数据进行转译。</p>
+</blockquote>
+<ul>
+<li>引入<code>iconv-lite</code></li>
+</ul>
+<pre><code class="javascript">const iconv = require(&#39;iconv-lite&#39;);
 </code></pre>
 <p>修改请求函数：</p>
 <pre><code class="javascript">let data = null;
@@ -821,22 +861,24 @@ data = iconv.decode(res.data, &#39;gb2312&#39;);
 <p>接下来需要把数据存到文件中</p>
 </blockquote>
 <ul>
-<li>引入nodejs的<code>fs</code>模块<pre><code class="javascript">const fs = require(&#39;fs&#39;);
-</code></pre>
-定义存放的变量，为了方便，直接把各个级别的信息分开存储：<pre><code class="javascript">const filePath = &#123;
-province: &#39;src/province.json&#39;,
-city: &#39;src/city.json&#39;,
-country: &#39;src/country.json&#39;
-&#125;
-</code></pre>
-修改<code>main</code>方法：<pre><code class="javascript">const main = async () =&gt; &#123;
-const Index = joinUrl(&#39;index.html&#39;);
-const provinceData = await fetchData(Index, &#39;province&#39;, &#39;&#39;);
-fs.writeFileSync(filePath.province, JSON.stringify(provinceData));
-&#125;
-</code></pre>
-</li>
+<li>引入nodejs的<code>fs</code>模块</li>
 </ul>
+<pre><code class="javascript">const fs = require(&#39;fs&#39;);
+</code></pre>
+<p>定义存放的变量，为了方便，直接把各个级别的信息分开存储：</p>
+<pre><code class="javascript">const filePath = &#123;
+  province: &#39;src/province.json&#39;,
+  city: &#39;src/city.json&#39;,
+  country: &#39;src/country.json&#39;
+&#125;
+</code></pre>
+<p>修改<code>main</code>方法：</p>
+<pre><code class="javascript">const main = async () =&gt; &#123;
+  const Index = joinUrl(&#39;index.html&#39;);
+  const provinceData = await fetchData(Index, &#39;province&#39;, &#39;&#39;);
+  fs.writeFileSync(filePath.province, JSON.stringify(provinceData));
+&#125;
+</code></pre>
 <blockquote>
 <p>此时打开src文件夹便能看见多了个<code>province.json</code>，打开是个压缩的json文件。</p>
 </blockquote>

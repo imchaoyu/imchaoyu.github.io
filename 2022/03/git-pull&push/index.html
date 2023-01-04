@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -709,39 +741,41 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h1><ul>
-<li><p>查看远程分支</p>
+<li>查看远程分支</li>
+</ul>
 <pre><code class="bash">git branch -r
 </code></pre>
-<span id="more"></span></li>
-<li><p>查看本地分支</p>
+<span id="more"></span>
+<ul>
+<li>查看本地分支</li>
+</ul>
 <pre><code class="bash">git branch
 </code></pre>
-</li>
-<li><p>查看本地和远程分支</p>
+<ul>
+<li>查看本地和远程分支</li>
+</ul>
 <pre><code class="bash">git branch -a
 </code></pre>
-</li>
-</ul>
 <h1 id="创建本地分支并推送远程"><a href="#创建本地分支并推送远程" class="headerlink" title="创建本地分支并推送远程"></a>创建本地分支并推送远程</h1><ul>
-<li><p>本地创建分支</p>
+<li>本地创建分支</li>
+</ul>
 <pre><code class="bash">git checkout -b 本地分支名
 </code></pre>
-</li>
-<li><p>本地分支推送到远程</p>
+<ul>
+<li>本地分支推送到远程</li>
+</ul>
 <pre><code class="bash">git push origin HEAD -u
 </code></pre>
-</li>
-</ul>
 <h1 id="拉取远程分支并创建本地分支"><a href="#拉取远程分支并创建本地分支" class="headerlink" title="拉取远程分支并创建本地分支"></a>拉取远程分支并创建本地分支</h1><ul>
-<li><p>创建本地分支并切换到新分支 并 本地分支与远程分支建立映射关系</p>
+<li>创建本地分支并切换到新分支 并 本地分支与远程分支建立映射关系</li>
+</ul>
 <pre><code class="bash">git checkout -b 本地分支名 origin/远程分支名
 </code></pre>
-</li>
-<li><p>创建本地分支 不会切换到新分支 不会和远程分支建立映射关系</p>
+<ul>
+<li>创建本地分支 不会切换到新分支 不会和远程分支建立映射关系</li>
+</ul>
 <pre><code class="bash">git fetch origin 远程分支名:本地分支名
 </code></pre>
-</li>
-</ul>
 <p><strong>手动建立映射关系</strong></p>
 <pre><code class="bash">git branch --set-upstream-to origin/远程分支名
 </code></pre>

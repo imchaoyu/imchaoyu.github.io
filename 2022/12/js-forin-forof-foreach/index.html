@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -716,7 +748,9 @@
 </code></pre>
 </li>
 <li>例子：<ol>
-<li>遍历对象<pre><code class="javascript">let obj = &#123;
+<li>遍历对象</li>
+</ol>
+<pre><code class="javascript">let obj = &#123;
   name: &#39;xiaoming&#39;,
   age: 18
 &#125;
@@ -725,15 +759,19 @@ for(let item in obj)&#123;
 &#125;
 // 输出：name age
 </code></pre>
-</li>
-<li>遍历数组：返回数组的索引值<pre><code class="javascript">let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
+<ol start="2">
+<li>遍历数组：返回数组的索引值</li>
+</ol>
+<pre><code class="javascript">let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
  for(let item in arr)&#123;
-console.log(item)
+   console.log(item)
  &#125;
  // 输出： 0 1 2
 </code></pre>
-</li>
-<li>需要注意的是，<code>for in</code>会遍历原型链的属性<pre><code class="javascript">Array.prototype.ufo = &#39;xiaoqiang&#39;;
+<ol start="3">
+<li>需要注意的是，<code>for in</code>会遍历原型链的属性</li>
+</ol>
+<pre><code class="javascript">Array.prototype.ufo = &#39;xiaoqiang&#39;;
 let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
 for(let item in arr)&#123;
  console.log(item)
@@ -741,16 +779,16 @@ for(let item in arr)&#123;
 // 输出：0 1 2 ufo
 </code></pre>
 </li>
-</ol>
-</li>
 </ul>
 <h1 id="for-of"><a href="#for-of" class="headerlink" title="for of"></a>for of</h1><p> <code>for of</code>语句在可迭代对象上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句（包括<code>Array</code>、<code>Map</code>、<code>Set</code>、<code>String</code>、<code>TypedArray</code>、<code>Argument</code>等，不包括Object）可用<code>break</code>或者<code>throw</code>跳出。</p>
 <ul>
-<li>语法<pre><code class="javascript">for(variable of 可迭代对象)&#123;
- // 操作语句
+<li>语法</li>
+</ul>
+<pre><code class="javascript">for(variable of 可迭代对象)&#123;
+  // 操作语句
 &#125;
 </code></pre>
-</li>
+<ul>
 <li>例子<pre><code class="javascript">let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
 
 let obj = &#123;
@@ -777,19 +815,19 @@ for (let i of obj) &#123;
 <li><p><code>for...of</code>支持 迭代 <code>Unicode</code> 字符串、<code>set</code> 及 <code>map</code>。</p>
 </li>
 <li><p><code>for...of</code>可以通过<code>await</code>关键字每次迭代中等待异步任务</p>
+</li>
+</ul>
 <pre><code class="javascript">for await ( value in statcks ) &#123;
-  //...
+    //...
 &#125;
 </code></pre>
 <ul>
-<li>语法：<pre><code class="javascript">for (variable in object) &#123;
-// 在此执行代码
+<li>语法：</li>
+</ul>
+<pre><code class="javascript">for (variable in object) &#123;
+  // 在此执行代码
 &#125;
 </code></pre>
-</li>
-</ul>
-</li>
-</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>浏览器跨域的理解 | 一点</title>
+  <title>Linux系统目录结构介绍 | 一点</title>
   <meta name="keywords" content="">
-  <meta name="description" content="浏览器跨域的理解 | 一点">
+  <meta name="description" content="Linux系统目录结构介绍 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -673,9 +673,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-fe-cors" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-linux-list-menu" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">浏览器跨域的理解</h1>
+        <h1 class="article-title">Linux系统目录结构介绍</h1>
     
     <div class="article-meta">
         
@@ -685,7 +685,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="HTML+CSS">HTML+CSS</a>
+            <a  data-rel="Linux">Linux</a>
             
         </span>
         
@@ -693,7 +693,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-01 22:25:53'>2023-01-01 22:13</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-04 12:28:59'>2023-01-04 12:15</time>
         
     </div>
     <div class="article-meta">
@@ -715,7 +715,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E6%A6%82%E5%BF%B5"><span class="toc-text">跨域概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5"><span class="toc-text">跨域的几种情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E6%96%B9%E6%B3%95"><span class="toc-text">解决跨域方法</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%84%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">各目录介绍</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -731,57 +731,117 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="跨域概念"><a href="#跨域概念" class="headerlink" title="跨域概念"></a>跨域概念</h1><p>跨域是受到浏览器同源策略的影响，如果没有同源策略，浏览器很容易遭受一些攻击像<code>xss</code>, <code>csrf</code>等等。</p>
-<p><strong>同源策略</strong>是指<strong>协议+域名+端口</strong>都一致的情况叫同源，其他任意一种情况不同都是非同源或不同域。**不同域之间访问资源就叫”跨域”**。</p>
+        <p><code> ls</code></p>
+<blockquote>
+<p>查看当前目录<br><code>ls /</code><br>查看Linux所有目录</p>
+</blockquote>
+<h1 id="各目录介绍"><a href="#各目录介绍" class="headerlink" title="各目录介绍"></a>各目录介绍</h1><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;bin</td>
+<td>Binary，该目录存放着经常使用的命令</td>
+</tr>
+<tr>
+<td>&#x2F;boot</td>
+<td>存放的是启动Linux时使用的一些核心文件，包括连接文件和镜像文件</td>
+</tr>
+<tr>
+<td>&#x2F;dev</td>
+<td>Device，存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的</td>
+</tr>
+<tr>
+<td>&#x2F;etc</td>
+<td>存放所有的系统管理所需要的配置文件和子目录</td>
+</tr>
+<tr>
+<td>&#x2F;home</td>
+<td>用户主目录，每个用户都有一个自己的目录，目录名一般以用户的账号命名</td>
+</tr>
+<tr>
+<td>&#x2F;lib</td>
+<td>存放系统最基本的动态连接共享库，类似Windows的DLL文件</td>
+</tr>
+<tr>
+<td>&#x2F;lost+found</td>
+<td>该目录一般是空的，当系统非法关机后，这里存放一些文件</td>
+</tr>
+<tr>
+<td>&#x2F;media</td>
+<td>Linux会自动识别一些设备，如U盘、光驱，当识别后，会把识别的设备挂载到这个目录下</td>
+</tr>
+<tr>
+<td>&#x2F;mnt</td>
+<td>让用户临时挂载别的文件系统，可将光驱挂载在&#x2F;mnt上</td>
+</tr>
+<tr>
+<td>&#x2F;opt</td>
+<td>给主机额外安装软件所摆放的目录，如安装一个oracle数据库可以放到这个目录。默认是空的</td>
+</tr>
+<tr>
+<td>&#x2F;proc</td>
+<td>虚拟目录，是系统内存的映射，这个目录不在硬盘上而是在内存里</td>
+</tr>
+<tr>
+<td>&#x2F;root</td>
+<td>系统管理员目录，也称作超级权限者的用户主目录</td>
+</tr>
+<tr>
+<td>&#x2F;sbin</td>
+<td>存放系统管理员使用的系统管理程序<em>s即Super User</em></td>
+</tr>
+<tr>
+<td>&#x2F;selinux</td>
+<td>Redhat&#x2F;CentOS所特有的目录，selinux是一个安全机制，类似Windows的防火墙，，这个目录就是存放selinux相关的文件</td>
+</tr>
+<tr>
+<td>&#x2F;srv</td>
+<td>存放一些服务启动后需要提取的数据</td>
+</tr>
+<tr>
+<td>&#x2F;sys</td>
+<td>linux2.6内核的一个大变化，该目录安装了2.6内核中新出现的一个系统文件系统sysfs</td>
+</tr>
+<tr>
+<td>&#x2F;tmp</td>
+<td>存放一些临时文件</td>
+</tr>
+<tr>
+<td>&#x2F;usr</td>
+<td>用户的很多应用程序和文件都放在这个目录下，类型windows的program files目录</td>
+</tr>
+<tr>
+<td>&#x2F;usr&#x2F;bin</td>
+<td>系统用户使用的应用程序</td>
+</tr>
+<tr>
+<td>&#x2F;usr&#x2F;sbin</td>
+<td>超级用户使用的比较高级的管理程序和系统守护程序</td>
+</tr>
+<tr>
+<td>&#x2F;usr&#x2F;src</td>
+<td>内核源码默认存放的目录</td>
+</tr>
+<tr>
+<td>&#x2F;var</td>
+<td>存放着不断扩充着的东西，我们习惯将那些经常被修改的目录放在这里，包括日志文件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>在linux系统中，有几个目录是比较重要的，平时需要注意不要误删除或者随意更改内部文件。</p>
+</blockquote>
 <ul>
-<li>同源策略限制了哪些内容？<ul>
-<li>cookie，localStorage, indexDB</li>
-<li>dom</li>
-<li>ajax<blockquote>
-<p>有些标签元素不受同源影响可以访问资源：img,script,link<br>很多初级开发看到了报跨域错误时，会认为请求没有发出去，这是错误的理解。<br>其实请求是发出去，后端服务器中可以看到日志正常返回了数据，只不过是被浏览器认为这是不安全的访问给拦截了而已!</p>
+<li><strong>&#x2F;etc</strong>： 系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。</li>
+<li><strong>&#x2F;bin, &#x2F;sbin, &#x2F;usr&#x2F;bin, &#x2F;usr&#x2F;sbin</strong>: 这是系统预设的执行文件的放置目录，比如 ls 就是在&#x2F;bin&#x2F;ls 目录下的。<blockquote>
+<p>&#x2F;bin, &#x2F;usr&#x2F;bin 是给系统用户使用的指令（除root外的通用户），而&#x2F;sbin, &#x2F;usr&#x2F;sbin 则是给root使用的指令。</p>
 </blockquote>
 </li>
+<li><strong>&#x2F;var</strong>： 这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在&#x2F;var&#x2F;log 目录下，另外mail的预设放置也是在这里。</li>
 </ul>
-</li>
-</ul>
-<h1 id="跨域的几种情况"><a href="#跨域的几种情况" class="headerlink" title="跨域的几种情况"></a>跨域的几种情况</h1><p>由上面的概念不难看出，跨域的几种情况：</p>
-<ul>
-<li>协议不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="http://demo.com/">http://demo.com</a></li>
-<li>域名不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="http://www.demo.com/">http://www.demo.com</a></li>
-<li>端口不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="https://demo.com:81/">https://demo.com:81</a></li>
-<li>ip与域名不同 <a target="_blank" rel="noopener" href="https://11.22.11.22/">https://11.22.11.22</a> 与 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a></li>
-</ul>
-<h1 id="解决跨域方法"><a href="#解决跨域方法" class="headerlink" title="解决跨域方法"></a>解决跨域方法</h1><ol>
-<li><p>script方式jsonp</p>
-<blockquote>
-<p>因为script不受同源影响,可利用其封装一个jsonp方法</p>
-</blockquote>
-</li>
-<li><p>iframe</p>
-</li>
-<li><p>cors</p>
-</li>
-<li><p>反向代理</p>
-</li>
-<li><p>websocket</p>
-</li>
-<li><p>Node中间件</p>
-<blockquote>
-<p>实现原理：同源策略是浏览器需要遵循的标准，而如果是服务器向服务器请求就无需遵循同源策略。</p>
-</blockquote>
-</li>
-<li><p>postMessage</p>
-</li>
-<li><p>使用场景<br>- 与iframe里的页面传递数据<br>- 多窗口之间数据传递<br>- 与打开的新窗口传递数据</p>
-</li>
-<li><p>用法<br>  otherWindow.postMessage(message, targetOrigin, [transfer]);</p>
-</li>
-<li><p>canvas操作图片的跨域问题</p>
-<blockquote>
-<p>浏览器开启跨域方式，此方法可以从源头关闭浏览器的同源策略（此方法不建议）</p>
-</blockquote>
-</li>
-</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>

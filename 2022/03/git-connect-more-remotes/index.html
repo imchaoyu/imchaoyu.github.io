@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -716,12 +748,14 @@
 <li><p>本地创建好文件夹及文件</p>
 </li>
 <li><p>初始化git</p>
+</li>
+</ul>
 <pre><code class="bash">git init
 </code></pre>
-</li>
-<li><p>分别在GitHub和Gitee上创建好远程仓库</p>
-</li>
-<li><p>回到本地关联远程仓库</p>
+<ul>
+<li>分别在GitHub和Gitee上创建好远程仓库</li>
+<li>回到本地关联远程仓库</li>
+</ul>
 <pre><code class="bash">git remote add github git@github.com:imchaoyu/note.git
 git remote add gitee git@gitee.com:chaoyu91/note.git
 </code></pre>
@@ -735,8 +769,6 @@ github  git@github.com:imchaoyu/notes.git (fetch)
 github  git@github.com:imchaoyu/notes.git (push)
 </code></pre>
 <p>说明关联成功。</p>
-</li>
-</ul>
 <blockquote>
 <p>当有修改推送到远程的时候,分别推送即可</p>
 </blockquote>
@@ -744,11 +776,11 @@ github  git@github.com:imchaoyu/notes.git (push)
 git push gitee master
 </code></pre>
 <ul>
-<li>可关联master分支,使用<code>git push github</code>等直接提交,不用再写默认master分支名<pre><code class="bash"> git push --set-upstream github master
+<li>可关联master分支,使用<code>git push github</code>等直接提交,不用再写默认master分支名</li>
+</ul>
+<pre><code class="bash"> git push --set-upstream github master
  git push --set-upstream gitee master
 </code></pre>
-</li>
-</ul>
 <blockquote>
 <p>如果已关联一个远程,可使用以下命令,先删除远程关联,再重新关联即可</p>
 </blockquote>

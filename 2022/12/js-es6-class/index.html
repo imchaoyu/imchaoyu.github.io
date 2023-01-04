@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -970,52 +1002,56 @@ var notAPerson = Person.call(person, &#39;张三&#39;);  // 报错
 <h1 id="ES6与ES5的对比"><a href="#ES6与ES5的对比" class="headerlink" title="ES6与ES5的对比"></a>ES6与ES5的对比</h1><ul>
 <li><p>静态方法对比</p>
 <ul>
-<li>ES6实现方式<pre><code class="javascript">class Employee&#123;
-constructor(name, dept)&#123;
+<li>ES6实现方式</li>
+</ul>
+<pre><code class="javascript">class Employee&#123;
+  constructor(name, dept)&#123;
+    this.name = name;
+    this.dept = dept;
+  &#125;
+  static func()&#123;
+    console.log(&#39;static&#39;)
+  &#125;
+  getName()&#123;
+    console.log(this.name)
+  &#125;
+&#125;
+</code></pre>
+<ul>
+<li>ES5实现方式</li>
+</ul>
+<pre><code class="javascript">function Employee(name, dept)&#123;
   this.name = name;
   this.dept = dept;
 &#125;
-static func()&#123;
-  console.log(&#39;static&#39;)
-&#125;
-getName()&#123;
-  console.log(this.name)
-&#125;
-&#125;
-</code></pre>
-</li>
-<li>ES5实现方式<pre><code class="javascript">function Employee(name, dept)&#123;
-this.name = name;
-this.dept = dept;
-&#125;
 Employee.fun = function()&#123;
-console.log(&quot;static&quot;)
+  console.log(&quot;static&quot;)
 &#125;
 Employee.prototype.getName=function()&#123;
-console.log(this.name)
+  console.log(this.name)
 &#125;
 </code></pre>
-</li>
-</ul>
 </li>
 <li><p>继承方式对比</p>
 <ul>
-<li>ES6实现方式<pre><code class="javascript">class Manager extends Employee&#123;
-constructor(name, dept, reports)&#123;
-  super(name, dept);
-  this.reports = reports;
-&#125;
+<li>ES6实现方式</li>
+</ul>
+<pre><code class="javascript">class Manager extends Employee&#123;
+  constructor(name, dept, reports)&#123;
+    super(name, dept);
+    this.reports = reports;
+  &#125;
 &#125;
 </code></pre>
-</li>
-<li>ES5实现方式<pre><code class="javascript">function Manager(reports, name ,dept)&#123;
-Employee.call(this, name, dept);
-this.reports = reports;
+<ul>
+<li>ES5实现方式</li>
+</ul>
+<pre><code class="javascript">function Manager(reports, name ,dept)&#123;
+  Employee.call(this, name, dept);
+  this.reports = reports;
 &#125;
 Manager.fun = Employee.fun;
 </code></pre>
-</li>
-</ul>
 </li>
 </ul>
 <h1 id="class关键字的一些限制"><a href="#class关键字的一些限制" class="headerlink" title="class关键字的一些限制"></a>class关键字的一些限制</h1><ol>

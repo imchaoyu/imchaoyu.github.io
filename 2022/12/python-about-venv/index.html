@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -718,11 +750,11 @@
 <p>Python3.3之后<code>vene</code>已经作为标准库嵌入到了Python中，之前的版本可以借助<code>virtualenv</code>这个第三方库来实现，本文不再介绍。</p>
 </blockquote>
 <ul>
-<li><p>查看帮助<br>在终端中使用<code>python -m venv -h</code>可查看<code>venv</code>的用法<br><img src="/2022/12/python-about-venv/-h.png" alt="帮助命令"><br><code>--system-site-packages</code>代表使用全局环境中的第三方库（否则虚拟环境直接是纯洁的第三方库）<br><code>--without-pip</code>代表不安装<code>pip</code>（一般都是要装的，所以默认就行）</p>
+<li><p>查看帮助<br>在终端中使用<code>python -m venv -h</code>可查看<code>venv</code>的用法<br><img src="/python-about-venv/-h.png" alt="帮助命令"><br><code>--system-site-packages</code>代表使用全局环境中的第三方库（否则虚拟环境直接是纯洁的第三方库）<br><code>--without-pip</code>代表不安装<code>pip</code>（一般都是要装的，所以默认就行）</p>
 </li>
-<li><p>创建虚拟环境<br><code>python -m venv [path/name]</code><br><img src="/2022/12/python-about-venv/create.png" alt="创建命令"><br>如上图在根目录下创建了<code>testEnv</code>的虚拟环境。</p>
+<li><p>创建虚拟环境<br><code>python -m venv [path/name]</code><br><img src="/python-about-venv/create.png" alt="创建命令"><br>如上图在根目录下创建了<code>testEnv</code>的虚拟环境。</p>
 </li>
-<li><p>激活虚拟环境<br><code>source [path/name]/bin/activate</code><br><img src="/2022/12/python-about-venv/jihuo.png" alt="激活命令"><br>创建完虚拟环境后后需要激活才能使用使用，如上图所示，激活后可看到虚拟环境的名称的后缀，表示当前虚拟环境已经激活并正在使用。此时使用<code>pip list</code>命令可以查看到，当前环境中没用其他第三方库。</p>
+<li><p>激活虚拟环境<br><code>source [path/name]/bin/activate</code><br><img src="/python-about-venv/jihuo.png" alt="激活命令"><br>创建完虚拟环境后后需要激活才能使用使用，如上图所示，激活后可看到虚拟环境的名称的后缀，表示当前虚拟环境已经激活并正在使用。此时使用<code>pip list</code>命令可以查看到，当前环境中没用其他第三方库。</p>
 </li>
 <li><p>关闭虚拟环境<br><code>deactivate</code></p>
 </li>

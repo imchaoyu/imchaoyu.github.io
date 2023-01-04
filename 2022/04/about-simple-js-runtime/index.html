@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -720,7 +752,7 @@ d() // 输出啥？ undefined 2
 </code></pre>
 <p>如果你是js老手, 一看d()执行结果就知道是a变量提升了打印undefined，dd方法执行打印2，那a为什么会提升呢, 怎么不是打印外面的变量a &#x3D; 1呢？b怎么不打印22呢？想要弄清楚这些问题，就要了解js的执行机制了。</p>
 <p>js运行时有两个阶段：编译阶段、执行阶段。<br><strong>编译阶段</strong>：js通过编译生成执行上下文和可执行代码两部分。<br><strong>执行阶段</strong>：执行可执行代码，输出结果。<br>可以理解如下图</p>
-<p><img src="/2022/04/about-simple-js-runtime/1.webp" alt="js运行时"></p>
+<p><img src="/about-simple-js-runtime/1.webp" alt="js运行时"></p>
 <p>执行上下文是啥？可执行代码又是啥？</p>
 <blockquote>
 <p>执行上下文是 JavaScript 执行一段代码时的运行环境，比如调用一个函数，就会进入这个函数的执行上下文，确定该函数在执行期间用到的诸如 this、变量、对象以及函数等。</p>
@@ -730,9 +762,9 @@ d() // 输出啥？ undefined 2
 </blockquote>
 <p>其实不管是什么高级语言代码都要编译才能执行，后面再说。</p>
 <p>了解了这两个概念还不够，执行上下文里面有哪些内容？可以如下图表示</p>
-<p><img src="/2022/04/about-simple-js-runtime/2.webp" alt="执行上下文"></p>
+<p><img src="/./about-simple-js-runtime/2.webp" alt="执行上下文"></p>
 <p>看上图，这是编译阶段的输出，可以了解到一些重要信息：<br><strong>变量环境</strong>：执行上下文中var 声明的变量，且赋值默认值undefined。<br><strong>词法环境</strong>：执行上下文中let const声明的变量，这是解决变量提升问题，重点这是在es6加入的，es5并没有词法环境。<br><strong>outer</strong>: 外部引用，其实在每个执行上下文中，都包含了一个外部引用，用来指向外部的执行上下文，我们把这个外部引用称为 outer。在js中有全局执行上下文、函数上下文之说，每个上下文的外部引用都是在编译时决定的，这个和代码的编译时的位置有关，也称为词法作用域。词法作用域就是指作用域是由代码中函数声明的位置来决定的，所以词法作用域是静态的作用域，通过它就能够预测代码在执行过程中如何查找标识符。理解可以参考下图</p>
-<p><img src="/2022/04/about-simple-js-runtime/3.webp" alt="词法作用域，编译时根据位置确定"></p>
+<p><img src="/./about-simple-js-runtime/3.webp" alt="词法作用域，编译时根据位置确定"></p>
 <p><strong>this</strong>: this是一套和作用域无关的独立机制，这个你可以另外找到相关文章深入理解。</p>
 <p>变量提升其实就是函数运行的编译阶段，把所有var声明的变量统一提升到该作用域“顶部”， 并赋默认值undefined。</p>
 <p>所以执行d()函数的时候，相当于以下流程,先编译再执行</p>
@@ -741,7 +773,7 @@ console.log(a)
 a = 11
 </code></pre>
 <p>而dd()执行的时候其实就是按照上面说的，由于dd上下文没有声明b变量，根据作用域链查找外部引用，直到首次找到b，而作用域在编译阶段就确定了外部引用。具体可以参考下图：</p>
-<p><img src="/2022/04/about-simple-js-runtime/4.webp" alt="d方法运行时"></p>
+<p><img src="/./about-simple-js-runtime/4.webp" alt="d方法运行时"></p>
 <p>所以，就例子而言无论d方法还是dd方法，它们的外部引用都是指向全局上下文，在执行阶段，如果发现函数作用域没有变量声明就会沿着作用域往外部引用查找。</p>
 <h1 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h1><ol>
 <li>js运行时有两个阶段：编译阶段 和 执行阶段</li>
@@ -753,9 +785,9 @@ a = 11
 <p>首先先了解一些概念：</p>
 <h2 id="编译器和解释器"><a href="#编译器和解释器" class="headerlink" title="编译器和解释器"></a>编译器和解释器</h2><p>之所以存在编译器和解释器，是因为机器不能直接理解我们所写的代码，所以在执行程序之前，需要将我们所写的代码“翻译”成机器能读懂的机器语言。</p>
 <p>按语言的执行流程，可以把语言划分为编译型语言和解释型语言。编译型语言在程序执行之前，需要经过编译器的编译过程，并且编译之后会直接保留机器能读懂的二进制文件，这样每次运行程序时，都可以直接运行该二进制文件，而不需要再次重新编译了。比如 C&#x2F;C++、GO 等都是编译型语言。而由解释型语言编写的程序，在每次运行时都需要通过解释器对程序进行动态解释和执行。比如 Python、JavaScript 等都属于解释型语言。</p>
-<p><img src="/2022/04/about-simple-js-runtime/5.webp" alt="解释器、编译器 语言流程"></p>
+<p><img src="/./about-simple-js-runtime/5.webp" alt="解释器、编译器 语言流程"></p>
 <p>了解上面的概念之后，v8引擎就是走的基于解释器的路线，但是又与它不同，是一个改进版。具体如下图</p>
-<p><img src="/2022/04/about-simple-js-runtime/6.webp" alt="v8引擎处理代码流程"></p>
+<p><img src="/./about-simple-js-runtime/6.webp" alt="v8引擎处理代码流程"></p>
 <p>从图中可以看出v8是解释器、编译器一起用了的。</p>
 <p>通常，如果有一段第一次执行的字节码，解释器 Ignition 会逐条解释执行。解释器 Ignition 除了负责生成字节码之外，它还有另外一个作用，就是解释执行字节码。在 Ignition 执行字节码的过程中，如果发现有热点代码（HotSpot），比如一段代码被重复执行多次，这种就称为热点代码，那么后台的编译器 TurboFan 就会把该段热点的字节码编译为高效的机器码，然后当再次执行这段被优化的代码时，只需要执行编译后的机器码就可以了，这样就大大提升了代码的执行效率。</p>
 <p>回到上面的js运行时两个阶段，编译阶段和执行阶段，编译阶段就是源码 -&gt;AST -&gt; 字节码。执行阶段就是基于字节码、机器码执行。</p>

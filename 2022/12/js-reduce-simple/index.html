@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -741,7 +773,8 @@
 </li>
 <li><p>例子</p>
 <ol>
-<li><p>没有设置函数的初始迭代值</p>
+<li>没有设置函数的初始迭代值</li>
+</ol>
 <pre><code class="javascript">const arr = [1,2,3,4,5];
 const sum = arr.reduce(function(prev,cur,index,arr)&#123;
  console.log(prev,cur,index);
@@ -749,12 +782,13 @@ const sum = arr.reduce(function(prev,cur,index,arr)&#123;
 &#125;);
 console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
 </code></pre>
-<p> <img src="/2022/12/js-reduce-simple/1.png" alt="例1"></p>
+<p> <img src="/./js-reduce-simple/1.png" alt="例1"></p>
 <blockquote>
 <p>分析：在这里reduce的作用就是对这个数组进行求和，迭代了4次，函数迭代的初始值是1，也就是默认值（数组的第一项），prev的值是每次计算后的值。</p>
 </blockquote>
-</li>
-<li><p>设置函数的初始迭代值</p>
+<ol start="2">
+<li>设置函数的初始迭代值</li>
+</ol>
 <pre><code class="javascript">const arr = [1,2,3,4,5];
 const sum = arr.reduce((prev,cur,index,arr) =&gt; &#123;
   console.log(prev,cur,index);
@@ -762,12 +796,10 @@ const sum = arr.reduce((prev,cur,index,arr) =&gt; &#123;
 &#125;,5); 
 console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
 </code></pre>
-<p><img src="/2022/12/js-reduce-simple/1.png" alt="例2"></p>
+<p><img src="/./js-reduce-simple/1.png" alt="例2"></p>
 <blockquote>
 <p>分析：这里我们添加了一个初始的迭代值，也就是让prev从5开始计算(以5为初始值求和)，可以看到，这里迭代了5次，结果也加上了初始值。同时，这里使用箭头函数来代替完整的函数。 运行结果相同。</p>
 </blockquote>
-</li>
-</ol>
 </li>
 </ul>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul>
@@ -789,7 +821,7 @@ const countedNames = names.reduce(function (allNames, name) &#123;
 &#125;, &#123;&#125;);
 console.log(countedNames);
 </code></pre>
-<img src="/2022/12/js-reduce-simple/3.png" alt="例3"></li>
+<img src="/./js-reduce-simple/3.png" alt="例3"></li>
 <li>去除数组中重复的元素<pre><code class="javascript">    let myArray = [&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;e&#39;, &#39;e&#39;, &#39;c&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;];
     let myOrderedArray = myArray.reduce(function (accumulator, currentValue) &#123;
     if (accumulator.indexOf(currentValue) === -1) &#123;
@@ -834,7 +866,7 @@ function groupBy(objectArray, property) &#123;
 const groupedPerson = groupBy(person, &#39;age&#39;);
 console.log(groupedPerson);
 </code></pre>
-<img src="/2022/12/js-reduce-simple/4.png" alt="例4"></li>
+<img src="/./js-reduce-simple/4.png" alt="例4"></li>
 <li>对对象的属性求和<pre><code class="javascript">let people = [
   &#123; name: &#39;Alice&#39;, age: 21 &#125;,
   &#123; name: &#39;Max&#39;, age: 20 &#125;,

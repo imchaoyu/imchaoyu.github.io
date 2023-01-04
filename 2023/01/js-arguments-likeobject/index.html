@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -800,14 +832,23 @@ foo(&#39;name&#39;, &#39;age&#39;)
 <p>在严格模式下，实参和 arguments 是不会共享的。</p>
 </blockquote>
 <ul>
-<li><p>应用</p>
-<ol>
-<li>将参数从一个函数传递到另一个函数<br> &#96;&#96;&#96;javascript<br> &#x2F;&#x2F; 使用 apply 将 foo 的参数传递给 bar<br>  function foo() {<br>   bar.apply(this, arguments);<br>  }<br>  function bar(a, b, c) {<br> console.log(a, b, c);<br>  }</li>
+<li>应用<ol>
+<li>将参数从一个函数传递到另一个函数</li>
 </ol>
-<p>  foo(1, 2, 3)</p>
-<pre><code>2. 使用ES6的 `...` 运算符，我们可以轻松转成数组
-```javascript
-function func(...arguments) &#123;
+<pre><code class="javascript">// 使用 apply 将 foo 的参数传递给 bar
+ function foo() &#123;
+     bar.apply(this, arguments);
+ &#125;
+ function bar(a, b, c) &#123;
+   console.log(a, b, c);
+ &#125;
+
+ foo(1, 2, 3)
+</code></pre>
+<ol start="2">
+<li>使用ES6的 <code>...</code> 运算符，我们可以轻松转成数组</li>
+</ol>
+<pre><code class="javascript">function func(...arguments) &#123;
    console.log(arguments); // [1, 2, 3]
 &#125;
 

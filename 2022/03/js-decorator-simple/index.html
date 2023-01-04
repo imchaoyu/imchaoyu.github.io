@@ -44,7 +44,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -111,7 +111,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -175,6 +175,20 @@
         
             
                 <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="nodejs">
                         
                         nodejs
@@ -220,7 +234,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_posts_number" value="30">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +384,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
         
         
         <a  class="全部文章 HTML+CSS "
@@ -742,16 +774,27 @@ class A &#123;&#125;
 A = decorator(A) || A;
 </code></pre>
 <ul>
-<li>可以在装饰器后面再添加提个参数<br>&#96;&#96;&#96;javascript<br>@log(‘hi’)<br>class MyClass { }</li>
+<li>可以在装饰器后面再添加提个参数</li>
 </ul>
-<p>function log(text) {<br>  return function(target) {<br>    target.prototype.logger &#x3D; () &#x3D;&gt; <code>$&#123;text&#125;，$&#123;target.name&#125; 被调用</code><br>  }<br>}</p>
-<p>const test &#x3D; new MyClass()<br>test.logger() &#x2F;&#x2F; hello，MyClass 被调用</p>
-<pre><code>
-2. 方法的装饰
+<pre><code class="javascript">@log(&#39;hi&#39;)
+class MyClass &#123; &#125;
 
-&gt; 与装饰类不同，对类方法的装饰本质是*操作其描述符*。可以把此时的装饰器理解成是 Object.defineProperty(obj, prop, descriptor) 的语法糖
-```javascript
-class Person &#123;
+function log(text) &#123;
+  return function(target) &#123;
+    target.prototype.logger = () =&gt; `$&#123;text&#125;，$&#123;target.name&#125; 被调用`
+  &#125;
+&#125;
+
+const test = new MyClass()
+test.logger() // hello，MyClass 被调用
+</code></pre>
+<ol start="2">
+<li>方法的装饰</li>
+</ol>
+<blockquote>
+<p>与装饰类不同，对类方法的装饰本质是<em>操作其描述符</em>。可以把此时的装饰器理解成是 Object.defineProperty(obj, prop, descriptor) 的语法糖</p>
+</blockquote>
+<pre><code class="javascript">class Person &#123;
   @readonly
   name() &#123; return `$&#123;this.first&#125; $&#123;this.last&#125;` &#125;
 &#125;
@@ -888,26 +931,38 @@ const hero = new Hero();
 <p>如果一个描述符不具有value,writable,get 和 set 任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常</p>
 </blockquote>
 <ul>
-<li>Babel编辑<br> &#96;&#96;&#96;javascript<br> class C {<br>  @readonly(false)<br>  method() { console.log(‘cat’) }<br>}</li>
+<li>Babel编辑</li>
 </ul>
-<p>function readonly(value) {<br>  return function (target, key, descriptor) { &#x2F;&#x2F; 此处 target 为 C.prototype; key 为 method;<br>    &#x2F;&#x2F; 原 descriptor 为：{ value: f, enumarable: false, writable: true, configurable: true }<br>    descriptor.writable &#x3D; value<br>    return descriptor<br>  }<br>}</p>
-<p>const c &#x3D; new C()<br>c.method &#x3D; () &#x3D;&gt; console.log(‘dog’)</p>
-<p>c.method() &#x2F;&#x2F; cat</p>
-<pre><code>
-可以看到装饰器函数接收的三个参数与 Object.defineProperty 是完全一样的，具体实现可以看 babel 转化后的代码，主要实现如下所示：
+<pre><code class="javascript">class C &#123;
+ @readonly(false)
+ method() &#123; console.log(&#39;cat&#39;) &#125;
+&#125;
 
-```javascript
-var C = (function() &#123;
- class C &#123;
-   method() &#123; console.log(&#39;cat&#39;) &#125;
+function readonly(value) &#123;
+ return function (target, key, descriptor) &#123; // 此处 target 为 C.prototype; key 为 method;
+   // 原 descriptor 为：&#123; value: f, enumarable: false, writable: true, configurable: true &#125;
+   descriptor.writable = value
+   return descriptor
  &#125;
+&#125;
 
- var temp
- temp = readonly(false)(C.prototype, &#39;method&#39;,
-   temp = Object.getOwnPropertyDescriptor(C.prototype, &#39;method&#39;)) || temp // 通过 Object.getOwnPropertyDescriptor 获取到描述符传入到装饰器函数中
+const c = new C()
+c.method = () =&gt; console.log(&#39;dog&#39;)
 
- if (temp) Object.defineProperty(C.prototype, &#39;method&#39;, temp)
- return C
+c.method() // cat
+</code></pre>
+<p>可以看到装饰器函数接收的三个参数与 Object.defineProperty 是完全一样的，具体实现可以看 babel 转化后的代码，主要实现如下所示：</p>
+<pre><code class="javascript">var C = (function() &#123;
+  class C &#123;
+    method() &#123; console.log(&#39;cat&#39;) &#125;
+  &#125;
+
+  var temp
+  temp = readonly(false)(C.prototype, &#39;method&#39;,
+    temp = Object.getOwnPropertyDescriptor(C.prototype, &#39;method&#39;)) || temp // 通过 Object.getOwnPropertyDescriptor 获取到描述符传入到装饰器函数中
+
+  if (temp) Object.defineProperty(C.prototype, &#39;method&#39;, temp)
+  return C
 &#125;)()
 </code></pre>
 <p>有多个装饰器作用于同一个方法:</p>

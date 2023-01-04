@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>浏览器跨域的理解 | 一点</title>
+  <title>Linux文件基本属性 | 一点</title>
   <meta name="keywords" content="">
-  <meta name="description" content="浏览器跨域的理解 | 一点">
+  <meta name="description" content="Linux文件基本属性 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -673,9 +673,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-fe-cors" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-linux-file-chmod" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">浏览器跨域的理解</h1>
+        <h1 class="article-title">Linux文件基本属性</h1>
     
     <div class="article-meta">
         
@@ -685,7 +685,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="HTML+CSS">HTML+CSS</a>
+            <a  data-rel="Linux">Linux</a>
             
         </span>
         
@@ -693,7 +693,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-01 22:25:53'>2023-01-01 22:13</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-04 13:22:19'>2023-01-04 12:15</time>
         
     </div>
     <div class="article-meta">
@@ -715,7 +715,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E6%A6%82%E5%BF%B5"><span class="toc-text">跨域概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5"><span class="toc-text">跨域的几种情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E6%96%B9%E6%B3%95"><span class="toc-text">解决跨域方法</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E6%96%87%E4%BB%B6%E5%B1%9E%E4%B8%BB%E5%92%8C%E5%B1%9E%E7%BB%84"><span class="toc-text">Linux文件属主和属组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="toc-text">更改文件属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">符号类型改变文件权限</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -731,57 +731,130 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="跨域概念"><a href="#跨域概念" class="headerlink" title="跨域概念"></a>跨域概念</h1><p>跨域是受到浏览器同源策略的影响，如果没有同源策略，浏览器很容易遭受一些攻击像<code>xss</code>, <code>csrf</code>等等。</p>
-<p><strong>同源策略</strong>是指<strong>协议+域名+端口</strong>都一致的情况叫同源，其他任意一种情况不同都是非同源或不同域。**不同域之间访问资源就叫”跨域”**。</p>
+        <blockquote>
+<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：<br><img src="/./linux-file-chmod/1.png" alt="ll"><br>如上图所示，bin文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。<br>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+</blockquote>
 <ul>
-<li>同源策略限制了哪些内容？<ul>
-<li>cookie，localStorage, indexDB</li>
-<li>dom</li>
-<li>ajax<blockquote>
-<p>有些标签元素不受同源影响可以访问资源：img,script,link<br>很多初级开发看到了报跨域错误时，会认为请求没有发出去，这是错误的理解。<br>其实请求是发出去，后端服务器中可以看到日志正常返回了数据，只不过是被浏览器认为这是不安全的访问给拦截了而已!</p>
-</blockquote>
-</li>
+<li>[ d ] 是目录；</li>
+<li>[ - ] 是文件；</li>
+<li>[ l ] 表示为链接文档(link file)；</li>
+<li>[ b ] 表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>[ c ] 表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
 </ul>
-</li>
-</ul>
-<h1 id="跨域的几种情况"><a href="#跨域的几种情况" class="headerlink" title="跨域的几种情况"></a>跨域的几种情况</h1><p>由上面的概念不难看出，跨域的几种情况：</p>
+<p>接下来的字符中，以三个为一组，且均为<code>『rwx』</code> 的三个参数的组合。其中，<code>[ r ]</code>代表可读(read)、<code>[ w ]</code>代表可写(write)、<code>[ x ]</code>代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号<code>[ - ]</code>而已。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）。<br><img src="/./linux-file-chmod/2.png" alt="文件属性"></p>
+<blockquote>
+<p>从左至右用0-9这些数字来表示。</p>
 <ul>
-<li>协议不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="http://demo.com/">http://demo.com</a></li>
-<li>域名不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="http://www.demo.com/">http://www.demo.com</a></li>
-<li>端口不同 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a> 与 <a target="_blank" rel="noopener" href="https://demo.com:81/">https://demo.com:81</a></li>
-<li>ip与域名不同 <a target="_blank" rel="noopener" href="https://11.22.11.22/">https://11.22.11.22</a> 与 <a target="_blank" rel="noopener" href="https://demo.com/">https://demo.com</a></li>
+<li>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。</li>
+<li>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</li>
+<li>其中，第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</li>
+<li>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</li>
 </ul>
-<h1 id="解决跨域方法"><a href="#解决跨域方法" class="headerlink" title="解决跨域方法"></a>解决跨域方法</h1><ol>
-<li><p>script方式jsonp</p>
-<blockquote>
-<p>因为script不受同源影响,可利用其封装一个jsonp方法</p>
 </blockquote>
-</li>
-<li><p>iframe</p>
-</li>
-<li><p>cors</p>
-</li>
-<li><p>反向代理</p>
-</li>
-<li><p>websocket</p>
-</li>
-<li><p>Node中间件</p>
+<h1 id="Linux文件属主和属组"><a href="#Linux文件属主和属组" class="headerlink" title="Linux文件属主和属组"></a>Linux文件属主和属组</h1><pre><code class="shell">[root@www /]# ls -l
+total 64drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron
+drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql……
+</code></pre>
 <blockquote>
-<p>实现原理：同源策略是浏览器需要遵循的标准，而如果是服务器向服务器请求就无需遵循同源策略。</p>
+<p>在文件中，它都有一个特定的所有者，也就是对该文件具有所有权的用户。<br>在Linux系统中，用户按组分类，一个用户属于一个或多个组。<br>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
 </blockquote>
+<p>Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p><strong>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</strong></p>
+<h1 id="更改文件属性"><a href="#更改文件属性" class="headerlink" title="更改文件属性"></a>更改文件属性</h1><ol>
+<li>chgrp：更改文件属组</li>
+</ol>
+<ul>
+<li>语法：<br><code>chgrp [-R] 属组名文件名</code></li>
+<li>参数选项<br><code>-R</code>：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
+</ul>
+<ol start="2">
+<li>chown：更改文件属主，也可以同时更改文件属组</li>
+</ol>
+<ul>
+<li>语法：<br><code>chown [–R] 属主名 文件名chown [-R] 属主名：属组名 文件名</code><br>进入 &#x2F;root 目录（~）将install.log的拥有者改为bin这个账号：<pre><code class="shell">[root@www ~] cd ~
+[root@www ~]# chown bin install.log
+[root@www ~]# ls -l-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log
+</code></pre>
+将install.log的拥有者与群组改回为root：<pre><code class="shell">[root@www ~]# chown root:root install.log
+[root@www ~]# ls -l-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log
+</code></pre>
 </li>
-<li><p>postMessage</p>
-</li>
-<li><p>使用场景<br>- 与iframe里的页面传递数据<br>- 多窗口之间数据传递<br>- 与打开的新窗口传递数据</p>
-</li>
-<li><p>用法<br>  otherWindow.postMessage(message, targetOrigin, [transfer]);</p>
-</li>
-<li><p>canvas操作图片的跨域问题</p>
-<blockquote>
-<p>浏览器开启跨域方式，此方法可以从源头关闭浏览器的同源策略（此方法不建议）</p>
+</ul>
+<ol start="3">
+<li>chmod：更改文件9个属性<blockquote>
+<p>Linux文件属性有两种设置方法，一种是数字，一种是符号。<br>Linux文件的基本权限就有九个，分别是owner&#x2F;group&#x2F;others三种身份各有自己的read&#x2F;write&#x2F;execute权限。</p>
 </blockquote>
 </li>
 </ol>
+<p>如上所述：文件的权限字符为：『-rwxrwxrwx』， <strong>这九个权限是三个三个一组的</strong>！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>分数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>4</td>
+</tr>
+<tr>
+<td>w</td>
+<td>2</td>
+</tr>
+<tr>
+<td>x</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>每种身份(owner&#x2F;group&#x2F;others)各自的三个权限(r&#x2F;w&#x2F;x)分数是需要累加的，例如当权限为： [-rwxrwx—] 分数则是：</p>
+<p>owner &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</p>
+<p>group &#x3D; rwx &#x3D; 4+2+1 &#x3D; 7</p>
+<p>others&#x3D; — &#x3D; 0+0+0 &#x3D; 0</p>
+<p>所以等一下我们设定权限的变更时，该文件的权限数字就是770啦！变更权限的指令chmod的语法是这样的：</p>
+<p><code>chmod [-R] xyz 文件或目录</code></p>
+<ul>
+<li>选项与参数：<br><strong>xyz</strong>: 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。<br><strong>-R</strong> : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
+</ul>
+<p>举例来说，如果要将.bashrc这个文件所有的权限都设定启用，那么命令如下：</p>
+<pre><code class="shell">[root@www ~]# ls -al .bashrc
+-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc
+[root@www ~]# chmod 777 .bashrc
+[root@www ~]# ls -al .bashrc
+-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc
+</code></pre>
+<blockquote>
+<p>那如果要将权限变成 -rwxr-xr– 呢？那么权限的分数就成为 [4+2+1][4+0+1][4+0+0]&#x3D;754。</p>
+</blockquote>
+<h2 id="符号类型改变文件权限"><a href="#符号类型改变文件权限" class="headerlink" title="符号类型改变文件权限"></a>符号类型改变文件权限</h2><blockquote>
+<p>如上所述基本上就九个权限分别是(1)user (2)group (3)others三种身份，那么我们就可以藉由u, g, o来代表三种身份的权限！</p>
+</blockquote>
+<blockquote>
+<p>此外， a 则代表 all 亦即全部的身份！那么读写的权限就可以写成r, w, x！也就是可以使用底下的方式来看：</p>
+</blockquote>
+<pre><code>chmod u +(加入) r 文件或目录
+      g -(除去) w
+      o =(设定) x	
+      a
+</code></pre>
+<blockquote>
+<p>如果我们需要将文件权限设置为 -rwxr-xr– ，可以使用 chmod u&#x3D;rwx,g&#x3D;rx,o&#x3D;r 文件名 来设定:</p>
+</blockquote>
+<pre><code class="shell">[root@www ~]# ls -al .bashrc
+-rwxr-xr-x  1 root root 395 Jul  4 11:45 .bashrc
+[root@www ~]# chmod  a+w  .bashrc
+[root@www ~]# ls -al .bashrc
+-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc
+</code></pre>
+<blockquote>
+<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
+</blockquote>
+<pre><code class="shell">[root@www ~]# chmod  a-x  .bashrc
+[root@www ~]# ls -al .bashrc
+-rw-rw-rw-  1 root root 395 Jul  4 11:45 .bashrc
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
