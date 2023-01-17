@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Python虚拟环境简介和基础使用 | 一点</title>
-  <meta name="keywords" content=" Python基础 ">
-  <meta name="description" content="Python虚拟环境简介和基础使用 | 一点">
+  <title>React的setState到底是异步还是同步 | 一点</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="React的setState到底是异步还是同步 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -696,9 +696,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-python-about-venv" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-react-setstate-async-or-sync" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Python虚拟环境简介和基础使用</h1>
+        <h1 class="article-title">React的setState到底是异步还是同步</h1>
     
     <div class="article-meta">
         
@@ -708,22 +708,15 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="python">python</a>
+            <a  data-rel="React">React</a>
             
         </span>
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color4">Python基础</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-30 20:43:24'>2022-12-30 19:51</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-17 17:37:05'>2023-01-17 11:32</time>
         
     </div>
     <div class="article-meta">
@@ -745,7 +738,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-text">什么是虚拟环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#venv%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">venv的使用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0"><span class="toc-text">批量更新</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E8%83%8C%E5%90%8E%E7%9A%84%E7%8E%B0%E8%B1%A1%E6%B5%85%E6%9E%90"><span class="toc-text">同步背后的现象浅析</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -761,31 +754,119 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="什么是虚拟环境"><a href="#什么是虚拟环境" class="headerlink" title="什么是虚拟环境"></a>什么是虚拟环境</h1><blockquote>
-<p>Python应用经常需要使用一些第三方包或者模块，有时需要依赖特定的包或者库的版本，很多时候不同的Python应用所依赖的包是冲突的，所以很难实现一个环境适应所有Python应用，解决这一问题的方法就是使用<code>虚拟环境</code>，即每个不同的Python应用拥有一套属于自己的环境。</p>
-</blockquote>
-<p>虚拟环境是用于依赖项目管理和项目隔离的Python工具，允许Python站点包（第三方库）安装在本地特定项目的隔离目录中，而不是全局安装（即作为系统范围内的Python的一部分）。</p>
+        <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><code>React</code> 的 <code>setState</code> 到底是异步还是同步？先给出结论：</p>
+<blockquote>
 <ul>
-<li><strong>概念：</strong>一个独立的Python环境，完全模拟系统全局Python环境的使用，如安装、卸载包逻辑操作等</li>
-<li><strong>作用：</strong>避免不同项目环境的干扰，同时方便项目的部署。</li>
+<li>setState 在 React 事件处理函数中或 React 生命周期方法中是异步</li>
+<li>在 setTimeout ,  Promise 等异步方法中或原生事件中是同步<br><strong>注意</strong>以上是在<code>React 18</code>以前的版本处理方式，18 开始使用 <code>createRoot</code> 的 api 的话，就不会有这种问题了，就算是 <code>setTimeout</code> 里的代码也能异步批量执行（同样，使用<code>Hooks</code>的<code>useState</code>也不会有这种问题）。下文也是基于 React 18 前的版本<code>class</code>组件进行分析。</li>
 </ul>
-<h1 id="venv的使用"><a href="#venv的使用" class="headerlink" title="venv的使用"></a>venv的使用</h1><blockquote>
-<p>Python3.3之后<code>vene</code>已经作为标准库嵌入到了Python中，之前的版本可以借助<code>virtualenv</code>这个第三方库来实现，本文不再介绍。</p>
 </blockquote>
-<ul>
-<li><p>查看帮助<br>在终端中使用<code>python -m venv -h</code>可查看<code>venv</code>的用法<br><img src="/python-about-venv/-h.png" alt="帮助命令"><br><code>--system-site-packages</code>代表使用全局环境中的第三方库（否则虚拟环境直接是纯洁的第三方库）<br><code>--without-pip</code>代表不安装<code>pip</code>（一般都是要装的，所以默认就行）</p>
-</li>
-<li><p>创建虚拟环境<br><code>python -m venv [path/name]</code><br><img src="/python-about-venv/create.png" alt="创建命令"><br>如上图在根目录下创建了<code>testEnv</code>的虚拟环境。</p>
-</li>
-<li><p>激活虚拟环境<br><code>source [path/name]/bin/activate</code><br><img src="/python-about-venv/jihuo.png" alt="激活命令"><br>创建完虚拟环境后后需要激活才能使用使用，如上图所示，激活后可看到虚拟环境的名称的后缀，表示当前虚拟环境已经激活并正在使用。此时使用<code>pip list</code>命令可以查看到，当前环境中没用其他第三方库。</p>
-</li>
-<li><p>关闭虚拟环境<br><code>deactivate</code></p>
-</li>
-<li><p>保存虚拟环境<br><code>pip freeze &gt; requirements.txt</code><br>次命令可将虚拟环境的第三方库冻结后存到<code>requirement.txt</code>文件内。</p>
-</li>
-<li><p>复制虚拟环境<br><code>pip install -r requirements.txt</code><br>使用该命令即可安装此项目运行需要的包。</p>
-</li>
-</ul>
+<h1 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h1><p>如下代码片段：</p>
+<pre><code class="javascript">class App extends React.Component &#123;
+    constructor()&#123;
+        super()
+        this.state = &#123;
+            count: 0
+        &#125;
+    &#125;
+  increment = () =&gt; &#123;
+    console.log(&#39;increment setState前&#39;, this.state.count)
+    this.setState(&#123;
+      count: this.state.count + 1
+    &#125;)
+    console.log(&#39;increment setState后&#39;, this.state.count)
+  &#125;
+
+  triple = () =&gt; &#123;
+    console.log(&#39;triple setState前&#39;, this.state.count)
+    this.setState(&#123;
+      count: this.state.count + 1
+    &#125;)
+    this.setState(&#123;
+      count: this.state.count + 1
+    &#125;)
+    this.setState(&#123;
+      count: this.state.count + 1
+    &#125;)
+    console.log(&#39;triple setState后&#39;, this.state.count)
+  &#125;
+
+  reduce = () =&gt; &#123;
+    setTimeout(()=&gt;&#123;
+      console.log(&#39;reduce setState前&#39;, this.state.count)
+      this.setState(&#123;
+        count: this.state.count - 1
+      &#125;)
+      console.log(&#39;reduce setState后&#39;, this.state.count)
+    &#125;, 0)
+  &#125;
+
+  render()&#123;
+    return(
+      &lt;div&gt;
+        &lt;button onClick=&#123;this.increment&#125;&gt;点击增加&lt;/button&gt;
+        &lt;button onClick=&#123;this.triple&#125;&gt;点击三倍增加&lt;/button&gt;
+        &lt;button onClick=&#123;this.reduce&#125;&gt;点击减少&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  &#125;
+&#125;
+</code></pre>
+<p>依次点击后，控制台打印结果：</p>
+<pre><code>increment setState前 0
+increment setState后 0
+triple setState前 1
+triple setState后 1
+reduce setState前 2
+reduce setState后 1 // React 18使用 createRoot 此处会打印： reduce setState后 2
+</code></pre>
+<p>从打印信息及其顺序可能会有疑惑，<code>increment</code>、<code>triple</code>两个函数 <code>setState</code> 是个异步操作，点击后<code>state</code>并不会立即发生改变，但<code>reduce</code>是怎么回事，<code>setState</code>又成了同步更新了？</p>
+<h1 id="批量更新"><a href="#批量更新" class="headerlink" title="批量更新"></a>批量更新</h1><p>带着这个疑问，我们来看一下<code>setState</code>的执行流程：<br><img src="/2023/01/react-setstate-async-or-sync/react-setstate-async-or-sync/setState.png'" alt="setState执行流程"><br>从上图可以看出，每次<code>setState</code>都会执行一次这个流程，消耗就会很大，类似如下流程：</p>
+<pre><code class="javascript">this.setState(&#123;
+  count:thisstate.count+1 // ===&gt; shouldComponentUpdate ===&gt; componentWillUpdate ===&gt; render ===&gt; componentDidUpdate
+&#125;)
+
+this.setState(&#123;
+  count:this.state.count+1 // ===&gt; shouldComponentUpdate ===&gt; componentWillUpdate ===&gt; render ===&gt; componentDidUpdate
+&#125;)
+
+this.setState(&#123;
+  count:this.state.count+1 // ===&gt; shouldComponentUpdate ===&gt; componentWillUpdate ===&gt; render ===&gt; componentDidUpdate
+&#125;)
+</code></pre>
+<p>其实不然，<code>React</code> 的 <code>setState</code> 采用的是批量更新的机制，每进行一次<code>setState</code>就会把它塞进一个队列，等“时机成熟”，再把队列内积攒的<code>state</code>结果做合并，最后只针对最新的<code>state</code>值走一次更新流程，类似<code>Vue</code>的<code>nextTick</code>和浏览器的<code>EventLoop</code>。如下：</p>
+<pre><code class="javascript">this.setState(&#123;
+  count:thisStatecount+1 // ===&gt; 入队，[count+l的任务]
+&#125;)
+
+this.setState(&#123;
+  count:this.state.count+1 // ===&gt; 入队，[cont+1的任务，count+l的任务]
+&#125;)
+this.setState(&#123;
+  count:thisstate.count+1 // ===&gt; [count+1的任务，count+1的任务，count+l的任务，合并state，[count+1的任务]
+&#125;)
+                         // ⇊
+                         // 合并state，[count+1的任务]
+                         // ⇊
+                         // 执行count+1的任务
+</code></pre>
+<p>所以，只要同步队列没结束，就会一直这么“攒”下去。所以即使像下面这样<code>setState</code>100次，也只是入队列的次数在增加，并不会执行100次<code>render</code>，当100次入队列任务结束后，只是队列的内容发生变化，<code>state</code>本身并不会立刻改变。</p>
+<pre><code class="javascript">test=()=&gt;&#123;
+  console.log(&#39;循环100次setState前的count&#39;, this.state.count)
+  for(leti=0; i&lt;100; i++)&#123;
+    this.setState(&#123;
+      count: this.state.count+1
+    &#125;)
+  &#125;
+  console.log(&#39;循环100次setState后的count&#39;, this.state.count)
+&#125;
+// 循环100次setState前的count 0
+// 循环100次setState前的count 0
+</code></pre>
+<h1 id="同步背后的现象浅析"><a href="#同步背后的现象浅析" class="headerlink" title="同步背后的现象浅析"></a>同步背后的现象浅析</h1><blockquote>
+<p>并不是 <code>setTimeout</code> 改变了 <code>setState</code>，而是<code>setTimeout</code>帮助<code>setState</code>“逃脱”了<code>React</code>对它的管控只要是在<code>React</code>管控下的<code>setState</code>，一定是异步的。</p>
+</blockquote>
+<p>在 <code>React</code> 的 <code>setState</code> 函数实现中，会根据一个变量 <code>isBatchingUpdates</code> 判断是直接更新<code>this.state </code>还是放到一个 <code>updateQueue</code> 中延时更新。<br>而 <code>isBatchingUpdates</code> 默认是 <code>false</code>，表示 <code>setState</code> 会同步更新 <code>this.state</code>。<br>但是，有一个函数 <code>batchedUpdates</code>，该函数会把 <code>isBatchingUpdates</code> 修改为 <code>true</code>。而当 <code>React</code> 在调用事件处理函数之前就会先调用这个 <code>batchedUpdates</code>将<code>isBatchingUpdates</code>修改为<code>true</code>。这样由 <code>React</code> 控制的事件处理过程 <code>setState</code> 不会同步更新 <code>this.state</code>，而是异步的。<br>所以说<code>setState</code>本身是同步的，一旦走了<code>react</code>内部的合并逻辑，放入了<code>updateQueue</code>队列中就变成异步了。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
