@@ -805,7 +805,7 @@ const sum = arr.reduce(function(prev,cur,index,arr)&#123;
 &#125;);
 console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
 </code></pre>
-<p> <img src="/./js-reduce-simple/1.png" alt="例1"></p>
+<p> <img src="/2022/12/js-reduce-simple/1.png" alt="例1"></p>
 <blockquote>
 <p>分析：在这里reduce的作用就是对这个数组进行求和，迭代了4次，函数迭代的初始值是1，也就是默认值（数组的第一项），prev的值是每次计算后的值。</p>
 </blockquote>
@@ -819,7 +819,7 @@ const sum = arr.reduce((prev,cur,index,arr) =&gt; &#123;
 &#125;,5); 
 console.log(&#39;arr:&#39;,arr,&#39;sum:&#39;,sum);
 </code></pre>
-<p><img src="/./js-reduce-simple/1.png" alt="例2"></p>
+<p><img src="/2022/12/js-reduce-simple/1.png" alt="例2"></p>
 <blockquote>
 <p>分析：这里我们添加了一个初始的迭代值，也就是让prev从5开始计算(以5为初始值求和)，可以看到，这里迭代了5次，结果也加上了初始值。同时，这里使用箭头函数来代替完整的函数。 运行结果相同。</p>
 </blockquote>
@@ -844,7 +844,7 @@ const countedNames = names.reduce(function (allNames, name) &#123;
 &#125;, &#123;&#125;);
 console.log(countedNames);
 </code></pre>
-<img src="/./js-reduce-simple/3.png" alt="例3"></li>
+<img src="/2022/12/js-reduce-simple/3.png" alt="例3"></li>
 <li>去除数组中重复的元素<pre><code class="javascript">    let myArray = [&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;e&#39;, &#39;e&#39;, &#39;c&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;];
     let myOrderedArray = myArray.reduce(function (accumulator, currentValue) &#123;
     if (accumulator.indexOf(currentValue) === -1) &#123;
@@ -889,7 +889,7 @@ function groupBy(objectArray, property) &#123;
 const groupedPerson = groupBy(person, &#39;age&#39;);
 console.log(groupedPerson);
 </code></pre>
-<img src="/./js-reduce-simple/4.png" alt="例4"></li>
+<img src="/2022/12/js-reduce-simple/4.png" alt="例4"></li>
 <li>对对象的属性求和<pre><code class="javascript">let people = [
   &#123; name: &#39;Alice&#39;, age: 21 &#125;,
   &#123; name: &#39;Max&#39;, age: 20 &#125;,

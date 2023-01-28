@@ -716,7 +716,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-31 15:24:33'>2022-12-31 14:45</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-28 09:42:48'>2022-12-31 14:45</time>
         
     </div>
     <div class="article-meta">
@@ -793,14 +793,14 @@ console.log(bar(7))
 <blockquote>
 <p> 主线程从任务队列中读取事件，这个过程是不断循环的，所以整个的这种运行机制又被称为<strong>Evnt Loop（事件循环）</strong></p>
 </blockquote>
-<p><img src="/./js-eventloop/evntloop.png" alt="事件循环流程图"></p>
+<p><img src="/2022/12/js-eventloop/js-eventloop/evntloop.png" alt="事件循环流程图"></p>
 <h1 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h1><p>所有任务分为<strong>宏任务（macrotask）</strong>和<strong>微任务（microtask）</strong>两种。</p>
 <ul>
 <li><strong>宏任务</strong>包括<code>script</code>全部代码、<code>setTimeout</code>、<code>setInterval</code>、<code>setImmediate</code>、<code>I/O</code>、<code>UI Rendering</code>。</li>
 <li><strong>微任务</strong>包括<code>Process.nextTick</code>、<code>Promise</code>、<code>Object.observe</code>(废弃)、<code>MutationObserver</code></li>
 </ul>
 <p>在挂起任务时，JS引擎会将所有任务按照类别分到两个队列中，首先在宏任务的队列中取出第一个任务，执行完毕后取出微任务队列中的所有任务顺序执行，之后再取宏任务，周而复始，直至两个队列的任务都取完。</p>
-<p><img src="/./js-eventloop/macromicrotask.png" alt="宏任务和微任务执行"></p>
+<p><img src="/2022/12/js-eventloop/js-eventloop/macromicrotask.png" alt="宏任务和微任务执行"></p>
 <blockquote>
 <p>异步编程的几种方法：</p>
 <ul>
