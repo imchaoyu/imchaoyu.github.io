@@ -716,7 +716,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-28 09:44:43'>2023-01-17 11:32</time>
+            发布时间 : <time class="date" title='最后更新: 2023-01-28 09:51:34'>2023-01-17 11:32</time>
         
     </div>
     <div class="article-meta">
@@ -821,7 +821,7 @@ reduce setState前 2
 reduce setState后 1 // React 18使用 createRoot 此处会打印： reduce setState后 2
 </code></pre>
 <p>从打印信息及其顺序可能会有疑惑，<code>increment</code>、<code>triple</code>两个函数 <code>setState</code> 是个异步操作，点击后<code>state</code>并不会立即发生改变，但<code>reduce</code>是怎么回事，<code>setState</code>又成了同步更新了？</p>
-<h1 id="批量更新"><a href="#批量更新" class="headerlink" title="批量更新"></a>批量更新</h1><p>带着这个疑问，我们来看一下<code>setState</code>的执行流程：<br><img src="/2023/01/react-setstate-async-or-sync/react-setstate-async-or-sync/setState.png'" alt="setState执行流程"><br>从上图可以看出，每次<code>setState</code>都会执行一次这个流程，消耗就会很大，类似如下流程：</p>
+<h1 id="批量更新"><a href="#批量更新" class="headerlink" title="批量更新"></a>批量更新</h1><p>带着这个疑问，我们来看一下<code>setState</code>的执行流程：<br><img src="/2023/01/react-setstate-async-or-sync/setState.png" alt="setState执行流程"><br>从上图可以看出，每次<code>setState</code>都会执行一次这个流程，消耗就会很大，类似如下流程：</p>
 <pre><code class="javascript">this.setState(&#123;
   count:thisstate.count+1 // ===&gt; shouldComponentUpdate ===&gt; componentWillUpdate ===&gt; render ===&gt; componentDidUpdate
 &#125;)
