@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Linux系统目录结构介绍 | 一点</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Linux系统目录结构介绍 | 一点">
+  <title>Luoshen Npm包快捷格式化统一代码 | 一点</title>
+  <meta name="keywords" content=" npm , prettier , eslint , husky , stylelint ">
+  <meta name="description" content="Luoshen Npm包快捷格式化统一代码 | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -713,9 +713,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-linux-list-menu" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-eslint-prettier-for-react-vue" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Linux系统目录结构介绍</h1>
+        <h1 class="article-title">Luoshen Npm包快捷格式化统一代码</h1>
     
     <div class="article-meta">
         
@@ -725,15 +725,30 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="Linux">Linux</a>
+            <a  data-rel="代码规范">代码规范</a>
             
         </span>
         
         
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">npm</a>
+            
+            <a class="color4">prettier</a>
+            
+            <a class="color2">eslint</a>
+            
+            <a class="color1">husky</a>
+            
+            <a class="color5">stylelint</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-01-04 12:28:59'>2023-01-04 12:15</time>
+            发布时间 : <time class="date" title='最后更新: 2023-02-20 15:03:38'>2023-02-20 13:49</time>
         
     </div>
     <div class="article-meta">
@@ -755,7 +770,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%84%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">各目录介绍</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E8%AE%BE%E7%BD%AE"><span class="toc-text">编辑器设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VS-Code"><span class="toc-text">VS Code</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -771,117 +786,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code> ls</code></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>日常开发中，在新起项目时会涉及到代码格式化的问题，现在通用的方式是<a href="'./../eslit-prettier.md'"><code>ESLint+Prettier</code></a>的方式，这种方式方便快捷，再搭配<code>git hook</code>等使用也能很好地统一团队中不同的风格需求和习惯。<br>但每次有新项目都需要把配置重新设置一遍，最差的情况也要复制、粘贴一下，浪费时间。为了节省在这方面的心智，便想着开发一个npm包，每次安装一次，通过简单的配置就能使项目风格统一，于是便有了这个小工具的诞生。</p>
+</blockquote>
+<p><code>luoshen</code>是一个npm包，使用<code>ESlint+Prettier+StyleLint+Husky</code>实现的对前端项目格式化进行配置精简化，并通过<code>husky</code>在提交代码时进行<code>commit</code>信息校验和代码格式化检查。目前支持<code>React</code>、<code>Vue</code>、<code>TypeScript</code>、<code>nodejs</code>、<code>css/less/scss</code>等前端语言的项目。另外可再完全配置符合自己的各种格式化规范。</p>
 <blockquote>
-<p>查看当前目录<br><code>ls /</code><br>查看Linux所有目录</p>
+<p><code>luoshen</code>即<strong>洛神</strong>，中国古代神话中的人物，其形象十分美丽，“翩若惊鸿、婉若游龙、云髻峨峨、皓齿内鲜”。以“<strong>洛神</strong>”命名本项目，希望在繁琐复杂的前端样式规范配置中，减轻工作量，让前端格式化更简单更优美。</p>
 </blockquote>
-<h1 id="各目录介绍"><a href="#各目录介绍" class="headerlink" title="各目录介绍"></a>各目录介绍</h1><table>
-<thead>
-<tr>
-<th>目录</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;bin</td>
-<td>Binary，该目录存放着经常使用的命令</td>
-</tr>
-<tr>
-<td>&#x2F;boot</td>
-<td>存放的是启动Linux时使用的一些核心文件，包括连接文件和镜像文件</td>
-</tr>
-<tr>
-<td>&#x2F;dev</td>
-<td>Device，存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的</td>
-</tr>
-<tr>
-<td>&#x2F;etc</td>
-<td>存放所有的系统管理所需要的配置文件和子目录</td>
-</tr>
-<tr>
-<td>&#x2F;home</td>
-<td>用户主目录，每个用户都有一个自己的目录，目录名一般以用户的账号命名</td>
-</tr>
-<tr>
-<td>&#x2F;lib</td>
-<td>存放系统最基本的动态连接共享库，类似Windows的DLL文件</td>
-</tr>
-<tr>
-<td>&#x2F;lost+found</td>
-<td>该目录一般是空的，当系统非法关机后，这里存放一些文件</td>
-</tr>
-<tr>
-<td>&#x2F;media</td>
-<td>Linux会自动识别一些设备，如U盘、光驱，当识别后，会把识别的设备挂载到这个目录下</td>
-</tr>
-<tr>
-<td>&#x2F;mnt</td>
-<td>让用户临时挂载别的文件系统，可将光驱挂载在&#x2F;mnt上</td>
-</tr>
-<tr>
-<td>&#x2F;opt</td>
-<td>给主机额外安装软件所摆放的目录，如安装一个oracle数据库可以放到这个目录。默认是空的</td>
-</tr>
-<tr>
-<td>&#x2F;proc</td>
-<td>虚拟目录，是系统内存的映射，这个目录不在硬盘上而是在内存里</td>
-</tr>
-<tr>
-<td>&#x2F;root</td>
-<td>系统管理员目录，也称作超级权限者的用户主目录</td>
-</tr>
-<tr>
-<td>&#x2F;sbin</td>
-<td>存放系统管理员使用的系统管理程序<em>s即Super User</em></td>
-</tr>
-<tr>
-<td>&#x2F;selinux</td>
-<td>Redhat&#x2F;CentOS所特有的目录，selinux是一个安全机制，类似Windows的防火墙，，这个目录就是存放selinux相关的文件</td>
-</tr>
-<tr>
-<td>&#x2F;srv</td>
-<td>存放一些服务启动后需要提取的数据</td>
-</tr>
-<tr>
-<td>&#x2F;sys</td>
-<td>linux2.6内核的一个大变化，该目录安装了2.6内核中新出现的一个系统文件系统sysfs</td>
-</tr>
-<tr>
-<td>&#x2F;tmp</td>
-<td>存放一些临时文件</td>
-</tr>
-<tr>
-<td>&#x2F;usr</td>
-<td>用户的很多应用程序和文件都放在这个目录下，类型windows的program files目录</td>
-</tr>
-<tr>
-<td>&#x2F;usr&#x2F;bin</td>
-<td>系统用户使用的应用程序</td>
-</tr>
-<tr>
-<td>&#x2F;usr&#x2F;sbin</td>
-<td>超级用户使用的比较高级的管理程序和系统守护程序</td>
-</tr>
-<tr>
-<td>&#x2F;usr&#x2F;src</td>
-<td>内核源码默认存放的目录</td>
-</tr>
-<tr>
-<td>&#x2F;var</td>
-<td>存放着不断扩充着的东西，我们习惯将那些经常被修改的目录放在这里，包括日志文件</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>在linux系统中，有几个目录是比较重要的，平时需要注意不要误删除或者随意更改内部文件。</p>
-</blockquote>
-<ul>
-<li><strong>&#x2F;etc</strong>： 系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。</li>
-<li><strong>&#x2F;bin, &#x2F;sbin, &#x2F;usr&#x2F;bin, &#x2F;usr&#x2F;sbin</strong>: 这是系统预设的执行文件的放置目录，比如 ls 就是在&#x2F;bin&#x2F;ls 目录下的。<blockquote>
-<p>&#x2F;bin, &#x2F;usr&#x2F;bin 是给系统用户使用的指令（除root外的通用户），而&#x2F;sbin, &#x2F;usr&#x2F;sbin 则是给root使用的指令。</p>
-</blockquote>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><pre><code class="bash">npm i luoshen eslint prettier stylelint husky -D
+</code></pre>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>.eslintrc.js<pre><code class="javascript">module.exports = &#123;
+  extends: [require.resolve(&#39;luoshen/dist/eslint&#39;)],
+  // vue 项目使用以下配置项
+  // extends: [require.resolve(&#39;luoshen/dist/eslint-vue&#39;)],
+  rules: &#123;
+    // 此处配置luoshen规范外您喜欢的规则
+  &#125;,
+&#125;;
+</code></pre>
 </li>
-<li><strong>&#x2F;var</strong>： 这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在&#x2F;var&#x2F;log 目录下，另外mail的预设放置也是在这里。</li>
+<li>.prettierrc.js<pre><code class="javascript">const luoshen = require(&#39;luoshen&#39;);
+
+module.exports = &#123;
+  ...luoshen.prettier,
+&#125;;
+</code></pre>
+</li>
+<li>.stylelintrc.js  <pre><code class="javascript">module.exports = &#123;
+  extends: [require.resolve(&#39;luoshen/dist/stylelint&#39;)],
+  rules: &#123;
+    // 此处配置luoshen规范外您喜欢的规则
+  &#125;,
+&#125;;
+</code></pre>
+</li>
+<li>husky配置<ol>
+<li>在package.json文件中新增一下命令：</li>
+</ol>
+<pre><code class="json">&quot;script&quot;:&#123;
+  &quot;prepare&quot;: &quot;husky install&quot;
+&#125;
+</code></pre>
+<ol start="2">
+<li>然后运行<code>npm run prepare</code> 或者直接运行以下命令：</li>
+</ol>
+<pre><code class="bash"> npm pkg set scripts.prepare=&quot;husky install&quot;
+ npm run prepare
+</code></pre>
+<ol start="3">
+<li>增加<code>commit-msg</code>验证</li>
+</ol>
+<pre><code class="bash">npx husky add .husky/commit-msg &#39;npx luoshen verify-commit &quot;$1&quot;&#39;
+</code></pre>
+</li>
 </ul>
+<h1 id="编辑器设置"><a href="#编辑器设置" class="headerlink" title="编辑器设置"></a>编辑器设置</h1><blockquote>
+<p>项目文件配置好后,设置编辑器,便可以在每次保存时自动格式化。</p>
+</blockquote>
+<h2 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h2><ul>
+<li>安装ESLint、Prettier和StyleLint插件</li>
+<li>formatOnSave 关闭</li>
+<li>editor.codeActionsOnSave 修改<pre><code class="json">&quot;editor.codeActionsOnSave&quot;: &#123;
+  &quot;source.fixAll.eslint&quot;: true,
+  &quot;source.fixAll.stylelint&quot;: true
+&#125;,
+</code></pre>
+</li>
+<li>stylelint.validate内增加 vue支持</li>
+</ul>
+<pre><code class="json"> &quot;stylelint.validate&quot;: [
+   &quot;css&quot;,
+   &quot;less&quot;,
+   &quot;postcss&quot;,
+   &quot;vue&quot;
+ ],
+</code></pre>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这是一个根据个人兴趣开发的个人项目，其中受能力限制，难免有诸多错误和考虑不全的地方，如果您有时间希望提出问题并指正，也可一块开发。开源地址<a target="_blank" rel="noopener" href="https://github.com/imchaoyu/luoshen">https://github.com/imchaoyu/luoshen</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
