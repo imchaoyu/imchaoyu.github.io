@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ES6的class探索 | 一点</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="ES6的class探索 | 一点">
+  <title>Yargs的使用介绍（附案例） | 一点</title>
+  <meta name="keywords" content=" 脚手架 ">
+  <meta name="description" content="Yargs的使用介绍（附案例） | 一点">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
 <meta property="og:type" content="website">
@@ -749,9 +749,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-js-es6-class" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-about-yargs-info" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ES6的class探索</h1>
+        <h1 class="article-title">Yargs的使用介绍（附案例）</h1>
     
     <div class="article-meta">
         
@@ -761,15 +761,22 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="JavaScript">JavaScript</a>
+            <a  data-rel="前端架构">前端架构</a>
             
         </span>
         
         
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">脚手架</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-12-31 18:25:13'>2022-12-31 15:29</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-12 14:41:23'>2023-06-12 14:30</time>
         
     </div>
     <div class="article-meta">
@@ -791,7 +798,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#constructor-NaN"><span class="toc-text">constructor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#super"><span class="toc-text">super</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">静态方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95%E5%92%8C%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="toc-text">私有方法和私有属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%9D%97"><span class="toc-text">静态块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#new-target%E5%B1%9E%E6%80%A7"><span class="toc-text">new.target属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6%E4%B8%8EES5%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">ES6与ES5的对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#class%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%B8%80%E4%BA%9B%E9%99%90%E5%88%B6"><span class="toc-text">class关键字的一些限制</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BD%BF%E7%94%A8"><span class="toc-text">初始化使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B"><span class="toc-text">完整示例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -807,334 +814,346 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ES6 中的关键字<code>class</code>本质上还是通过原型链和函数实现的，提供了一种更加方便、逻辑更加清晰的方法去实现类。</p>
-<p>所以ES6的<code>class</code>属于一种语法糖，使写法更优雅，更加面向对象的编程，其思想和ES5没有本质区别。</p>
-<blockquote>
-<p>ES6的 <code>class</code> 内部是基于寄生组合式继承，它是目前最理想的继承方式。</p>
-</blockquote>
-<pre><code class="javascript">//ES6
-class Point&#123;
-  constructor(x,y)&#123;
-    this.x = x;
-    this.y = y;
-  &#125;
-  toString()&#123;
-    return `$&#123;this.x&#125;,$&#123;this.y&#125;`
-  &#125;
-&#125;
+        <h1 id="初始化使用"><a href="#初始化使用" class="headerlink" title="初始化使用"></a>初始化使用</h1><pre><code class="javascript">const yargs = require(&#39;yargs/yargs&#39;);
+const &#123; hideBin &#125; = require(&#39;yargs/helpers&#39;); // hideBin用于做输入命令的参数解析
+const arg = hideBin(process.argv); // 得到命令参数
+const cli = yargs(arg);
+cli
+  .argv; //调用.argv，完成yargs初始化，这时候，输入hahayh --help 或 hahayh --version就能显示帮助信息或版本了
 </code></pre>
-<p>等同于</p>
-<pre><code class="javascript">// ES5
-function Point(x,y)&#123;
-  this.x = x;
-  this.y = y;
-&#125;
-Point.prototype.toString = function()&#123;
-  return &#39;(&#39; + this.x + &#39;,&#39; + this.y + &#39;)&#39;;
-&#125;;
-</code></pre>
-<h1 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h1><p><code>constructor</code>方法是类的构造函数，是一个默认方法，通过<code>new</code>命令创建对象实例时，自动调用该方法。</p>
-<p>一个类必须有<code>constructor</code>方法，如果没有显示定义，一个默认的<code>constructor</code>方法会被默认添加。一般<code>constructor</code>方法返回实例对象<code>this</code>，但是也可以指定<code>constructor</code>方法返回一个全新的对象，让返回的实例对象不是该类的实例。</p>
-<p>ES6中的<code>constructor</code>构造方法对应ES5中的构造函数。</p>
-<h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p><code>super</code>关键字既可以当函数使用，也可以当对象使用。这两种情况下，它的使用方法完全不同。<br>对象函数中的<code>this</code>指向的是当前函数所在的对象，而<code>super</code>指向的是当前函数所在对象的原型，比<code>this</code>更深了一层。在子类构造函数中调用<code>super()</code>，相当于调用父类的<code>constructor</code>。</p>
-<ol>
-<li><p>super当函数使用</p>
-<pre><code class="javascript">class A&#123;&#125;
-class B extends A&#123;
- constructor()&#123;
-   super(); // ES6要求，子类的构造函数必须执行一次super函数，否则会报错
-&#125;
-</code></pre>
-<blockquote>
-<p>注：在 <code>constructor</code> 中必须调用 <code>super</code> 方法，因为子类没有自己的 <code>this</code> 对象，而是继承父类的 <code>this</code> 对象，然后对其进行加工,而 <code>super</code> 就代表了父类的构造函数。<code>super</code> 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 <code>super</code> 内部的 <code>this</code> 指的是 B，因此 <code>super()</code> 在这里相当于 <code>A.prototype.constructor.call(this, props)</code></p>
-</blockquote>
-</li>
-</ol>
-<pre><code class="javascript">class A &#123;
-  constructor() &#123;
-    console.log(new.target.name); // new.target 指向当前正在执行的函数
-  &#125;
-&#125;
-
-class B extends A &#123;
-  constructor() &#123;
-    super();
-  &#125;
-&#125;
-
-new A(); // A
-new B(); // B
-</code></pre>
-<blockquote>
-<p>可以看到，在 <code>super()</code> 执行时，它指向的是 子类 B 的构造函数，而不是父类 A 的构造函数。也就是说，<code>super()</code> 内部的 <code>this</code> 指向的是 B。</p>
-</blockquote>
-<ol start="2">
-<li><p>super当对象使用</p>
-<blockquote>
 <ul>
-<li>在普通方法中，指向父类的原型对象；</li>
-<li>在静态方法中，指向父类。</li>
+<li>hideBin(process.argv)<br>会得到命令的参数，相当于:<br><code>require(&quot;process&quot;).argv.slice(2)</code></li>
+<li>usage() 展示用法：</li>
 </ul>
-</blockquote>
-<pre><code class="javascript">class A&#123;
- c()&#123;
-   return 2
- &#125;
-&#125;
-
-class B extends A&#123;
- constructor()&#123;
-   super();
-   console.log(super.c()); // 2
- &#125;
-&#125;
-let b = new B();
+<pre><code class="javascript">cli
+  .usage(&#39;Usage: hahayh [command] &lt;options&gt;&#39;) 
+   // 展示用法,当我们使用--help的时候展示，或者使用了strict()时，命令输入错误，展示错误提示的时候展示。
+   // 这里可以使用$0来标识命令名称，也就是package.json中的bin的属性
+  .argv;
 </code></pre>
-<blockquote>
-<p>上面代码中，子类B当中的<code>super.c()</code>就是将<code>super</code>当作一个对象使用。这时，<code>super</code>在普通方法之中，指向<code>A.prototype</code>，所以<code>super.c()</code>就相当于<code>A.prototype.c()</code></p>
-</blockquote>
-<p><strong>通过<code>super</code>调用父类的方法时，<code>super</code>会绑定子类的<code>this</code></strong></p>
-<pre><code class="javascript">class A&#123;
- constructor()&#123;
-   this.x = 1;
- &#125;
- s()&#123;
-   console.log(this.x)
- &#125;
-&#125;
-
-class B extends A&#123;
- constructor()&#123;
-   super();
-   this.x = 2;
- &#125;
- m()&#123;
-   super.s()
- &#125;
-&#125;
-let b = new B();
-b.m(); // 2
-</code></pre>
-<blockquote>
-<p>上面代码中，<code>super.s()</code> 虽然调用的是 <code>A.prototytpe.s()</code>，但是 <code>A.prototytpe.s()</code>会绑定子类 B 的 <code>this</code>，导致输出的是 2，而不是 1。也就是说，实际上执行的是 <code>super.s.call(this)</code>。</p>
-</blockquote>
-</li>
-</ol>
-<p>  <strong>由于绑定子类的 <code>this</code>，所以如果通过 <code>super</code> 对某个属性赋值，这时 <code>super</code> 就是 <code>this</code>，赋值的属性会变成子类实例的属性。</strong></p>
-<pre><code class="javascript">class A &#123;
-  constructor() &#123;
-    this.x = 1;
-  &#125;
-&#125;
-
-class B extends A &#123;
-  constructor() &#123;
-    super();
-    this.x = 2;
-    super.x = 3;
-    console.log(super.x); // undefined
-    console.log(this.x); // 3
-  &#125;
-&#125;
-
-let b = new B();
-</code></pre>
-<blockquote>
-<p>上面代码中，<code>super.x</code> 赋值为 3，这时等同于对 <code>this.x</code> 赋值为 3。而当读取 <code>super.x </code>的时候，调用的是 <code>A.prototype.x</code>，但并没有 x 方法，所以返回 <code>undefined</code>。</p>
-</blockquote>
-<p>  <strong>注意，使用 <code>super</code> 的时候，必须显式指定是作为函数，还是作为对象使用，否则会报错。</strong></p>
-<pre><code class="javascript">class A &#123;&#125;
-class B extends A &#123;
-  constructor() &#123;
-    super();
-    console.log(super); // 报错
-  &#125;
-&#125;
-</code></pre>
-<blockquote>
-<p>上面代码中，<code>console.log(super);</code> 中的 <code>super</code>，无法看出是作为函数使用，还是作为对象使用，所以 JavaScript 引擎解析代码的时候就会报错。如果能清晰的表明 <code>super</code> 的数据类型，就不会报错。<br><strong>由于对象总是继承其他对象的，所以可以在任意一个对象中，使用 super 关键字。</strong></p>
-</blockquote>
-<h1 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h1><blockquote>
-<p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
-</blockquote>
-<pre><code class="javascript">class Foo &#123;
-  static classMethod() &#123;
-    return &#39;hello&#39;;
-  &#125;
-&#125;
- 
-Foo.classMethod() // &#39;hello&#39;
- 
-var foo = new Foo();
-foo.classMethod()
-// TypeError: foo.classMethod is not a function
-</code></pre>
-<p><strong>注意，如果静态方法包含this关键字，这个this指的是类，而不是实例</strong></p>
-<pre><code class="javascript">class Foo &#123;
-  static bar() &#123;
-    this.baz();
-  &#125;
-  static baz() &#123;
-    console.log(&#39;hello&#39;);
-  &#125;
-  baz() &#123;
-    console.log(&#39;world&#39;);
-  &#125;
-&#125;
- 
-Foo.bar() // hello
-</code></pre>
-<blockquote>
-<p>上面代码中，静态方法<code>bar</code>调用了<code>this.baz</code>，这里的<code>this</code>指的是<code>Foo</code>类，而不是<code>Foo</code>的实例，等同于调用<code>Foo.baz</code>。另外，从这个例子还可以看出，静态方法可以与非静态方法重名。</p>
-</blockquote>
-<blockquote>
 <ul>
-<li>父类的静态方法，可以被子类继承。</li>
-<li>静态方法也是可以从<code>super</code>对象上调用的。</li>
+<li>strict() 启用严格模式</li>
 </ul>
-</blockquote>
-<h1 id="私有方法和私有属性"><a href="#私有方法和私有属性" class="headerlink" title="私有方法和私有属性"></a>私有方法和私有属性</h1><blockquote>
-<p>私有方法和私有属性，是只能在类的内部访问的方法和属性，外部不能访问。这是常见需求，有利于代码的封装，但 ES6 不提供，只能通过变通方法模拟实现。</p>
-</blockquote>
+<pre><code class="javascript">cli
+  .strict()  
+// 启用严格模式，
+// 这个代表输入的参数不对的时候，会给我们一个错误提示。
+// 如果没有这条，那么输入错误是没有任何反馈的。
+</code></pre>
 <ul>
-<li><p>一种做法是在命名上加以区别</p>
-<pre><code class="javascript">class Widget &#123;
-  // 公有方法
-  foo (baz) &#123;
-    this._bar(baz);
-  &#125;
-  // 私有方法
-  _bar(baz) &#123;
-    return this.snaf = baz;
-  &#125;
-  // ...
-&#125;
+<li>demandCommand(个数，描述) 设置最少命令个数</li>
+</ul>
+<pre><code class="javascript">cli
+  .demandCommand(1, &quot;A command is required. Pass --help to see all available commands and options.&quot;) 
+// 需要输入的参数个数设定
+// 当我们使用--help的时候展示，或者使用了strict()时，命令输入错误，展示错误提示的时候展示。
 </code></pre>
-</li>
-<li><p>另一种方法就是索性将私有方法移出类，因为类内部的所有方法都是对外可见的。</p>
-<pre><code class="javascript">class Widget &#123;
-  foo (baz) &#123;
-    bar.call(this, baz); // 内部调用了bar.call(this, baz)。这使得bar()实际上成为了当前类的私有方法
-  &#125;
-  // ...
-&#125;
- 
-function bar(baz) &#123;
-  return this.snaf = baz;
-&#125;
+<ul>
+<li>recommendCommands() 提示近似命令</li>
+</ul>
+<pre><code class="javascript">cli
+  .recommendCommands() // 当用户输错命令的时候，会提示近似命令
 </code></pre>
-</li>
-<li><p>还有一种方法是利用<code>Symbol</code>值的唯一性，将私有方法的名字命名为一个<code>Symbol</code>值。</p>
+<ul>
+<li>fail((err, msg) &#x3D;&gt; {}) 输入错误命令的处理</li>
+</ul>
+<pre><code class="javascript">cli
+  .fail((err, msg) =&gt; &#123; // 输入错误命令的时候进行处理，有了这个后，demandCommand无效,recommendCommands无效，其实就是--help的帮助信息看板无效
+    // err是错误信息
+    console.log(err)
+    // 一般只需要打印err信息
+  &#125;)
+</code></pre>
+<ul>
+<li>wrap(列数) 设置命令提示的宽度</li>
+</ul>
+<pre><code class="javascript">cli
+  .wrap(cli.terminalWidth()) 
+  // 设置命令提示的宽度，可以尝试输入-h看下，展示出来界面的一行文字的宽度是不一样的。
+  // 参数是数字，比如100，表示列数
+  // 如果宽度为终端的宽度，那么可以使用方法cli.terminalWidth(),这里的cli就是yargs(hideBin(process.argv))
+</code></pre>
+<ul>
+<li>epilogue() 自定义结尾</li>
+</ul>
+<pre><code class="javascript">const dedent = require(&#39;dedent&#39;);
+cli // 来自初始化的cli
+  .epilogue(dedent`  111
+
+ 1 11  ` + &#39;222&#39;)
+// 最终会显示如下
+/*
+111
+
+1 11222
+*/
+
+// 自定义结尾，结尾加上我们想说的话,string类型
+// 这里可以使用一个很有意思的库dedent，能够去掉每行首位的所有空格，但是不去空行，也就是去掉缩进(任何数目空格的缩进都去掉)，注意去掉的是每行的收尾
+</code></pre>
+<ul>
+<li>选项options<ul>
+<li>options() 批量注册选项</li>
+</ul>
 </li>
 </ul>
-<h1 id="静态块"><a href="#静态块" class="headerlink" title="静态块"></a>静态块</h1><blockquote>
-<p>ES2022引入的新概念。允许在类的内部设置一个代码块，在类生成时运行一次，主要作用是对静态属性进行初始化。</p>
-</blockquote>
-<pre><code class="javascript">class C &#123;
-  static x = ...;
-  static y;
-  static z;
- 
-  static &#123;
-    try &#123;
-      const obj = doSomethingWith(this.x);
-      this.y = obj.y;
-      this.z = obj.z;
+<pre><code class="javascript">cli
+  .options(&#123;
+    debug: &#123;
+      type: &#39;boolean&#39;,
+      describe: &#39;Bootstrap debug mode&#39;,
+      alias: &#39;d&#39;, // --debug的缩写-d，也可以使用上面的alias
+      hidden: false, // 这个options存在，但是可以控制--help的时候是否显示，一般用作内部开发用
+      &#125;,
+    rename: &#123;
+      type: &#39;string&#39;,
+      describe: &#39;Bootstrap rename mode&#39;,
+      aliases: [&#39;rn&#39;, &#39;yhrn&#39;], // 别名可以写成数组形式,-rn 或 -yhrn
+      hidden: false,
     &#125;
-    catch &#123;
-      this.y = ...;
-      this.z = ...;
+  &#125;)
+</code></pre>
+<ul>
+<li>option() 单个注册选项</li>
+</ul>
+<pre><code class="javascript">cli
+  .option(&#39;register&#39;, &#123;
+    // 跟options的区别是options可以批量注册options，而option只能单个注册
+    type: &#39;string&#39;,
+    describe: &#39;define global registry&#39;,
+    alias: &#39;r&#39;,
+    hidden: false, // 这个options存在，但是可以控制--help的时候是否显示，一般用作内部开发用
+    &#125;)
+</code></pre>
+<ul>
+<li>group([option1，option2，…]， 当前类别名称) 给options分类</li>
+</ul>
+<pre><code class="javascript">cli
+  .group([&#39;debug&#39;], &#39;Dev Options&#39;)
+  .group([&#39;version&#39;, &#39;help&#39;], &#39;Cli Options&#39;)
+</code></pre>
+<ul>
+<li>命令command<ul>
+<li>第一种：.command(‘init [name]’, ‘Do init a project’, (yargs) &#x3D;&gt; {}, (argv) &#x3D;&gt; {})<ul>
+<li>第一个参数：命令格式 (命令格式中的[option]，在builder函数中注册)</li>
+<li>第二个参数：描述</li>
+<li>第三个参数：builder函数 (参数为yargs当前函数常用于注册option)</li>
+<li>第四个参数：handler函数 (参数为argv，命令输入时的参数)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">cli
+  .command(
+    &#39;init [name]&#39;,
+    &#39;Do init a project&#39;,
+    (yargs) =&gt; &#123;
+      yargs.option(&#39;name&#39;, &#123;
+        type: &#39;string&#39;,
+        describe: &#39;Name of a project&#39;,
+        alias: &#39;n&#39;
+      &#125;)
+    &#125;,
+    (argv) =&gt; &#123;
+      console.log(argv)
+      /*
+      如果你输入的命令是hahayh init -d -r npm -n yh-test
+      则得到的argv是：
+      &#123;
+      _: [ &#39;init&#39; ],
+      d: true,
+      debug: true,
+      r: &#39;npm&#39;,
+      register: &#39;npm&#39;,
+      n: &#39;yh-test&#39;,
+      name: &#39;yh-test&#39;,
+      &#39;$0&#39;:&#39;..\\..\\..\\AppData\\Roaming\\npm\\node_modules\\haha-cli\\bin\\index.js&#39;           &#125;
+      */
     &#125;
-  &#125;
-&#125;
-</code></pre>
-<blockquote>
-<p>上面代码中，类的内部有一个 <code>static</code> 代码块，这就是静态块。它的好处是将静态属性y和z的初始化逻辑，写入了类的内部，而且只运行一次。<br>每个类只能有一个静态块，在静态属性声明后运行。静态块的内部不能有return语句。<br>静态块内部可以使用类名或this，指代当前类。</p>
-</blockquote>
-<h1 id="new-target属性"><a href="#new-target属性" class="headerlink" title="new.target属性"></a>new.target属性</h1><blockquote>
-<p><code>new</code>是从构造函数生成实例对象的命令。ES6为<code>new</code>命令引入了一个<code>new.target</code>属性，该属性一般用在构造函数之中，返回<code>new</code>命令作用于的那个构造函数。如果构造函数不是通过<code>new</code>命令或<code>Reflect.construct()</code>调用的，<code>new.target</code>会返回<code>undefined</code>，因此这个属性可以用来确定构造函数是怎么调用的。</p>
-</blockquote>
-<pre><code class="javascript">function Person(name) &#123;
-  if (new.target !== undefined) &#123;
-    this.name = name;
-  &#125; else &#123;
-    throw new Error(&#39;必须使用 new 命令生成实例&#39;);
-  &#125;
-&#125;
- 
-// 另一种写法
-function Person(name) &#123;
-  if (new.target === Person) &#123;
-    this.name = name;
-  &#125; else &#123;
-    throw new Error(&#39;必须使用 new 命令生成实例&#39;);
-  &#125;
-&#125;
- 
-var person = new Person(&#39;张三&#39;); // 正确
-var notAPerson = Person.call(person, &#39;张三&#39;);  // 报错
-</code></pre>
-<p><strong><code>class</code> 内部调用<code>new.target</code>，返回当前 <code>class</code>。</strong><br>需要注意的是，子类继承父类时，<code>new.target</code>会返回子类。<br>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
-<h1 id="ES6与ES5的对比"><a href="#ES6与ES5的对比" class="headerlink" title="ES6与ES5的对比"></a>ES6与ES5的对比</h1><ul>
-<li><p>静态方法对比</p>
-<ul>
-<li>ES6实现方式</li>
-</ul>
-<pre><code class="javascript">class Employee&#123;
-  constructor(name, dept)&#123;
-    this.name = name;
-    this.dept = dept;
-  &#125;
-  static func()&#123;
-    console.log(&#39;static&#39;)
-  &#125;
-  getName()&#123;
-    console.log(this.name)
-  &#125;
-&#125;
+  )
 </code></pre>
 <ul>
-<li>ES5实现方式</li>
+<li>第二种：参数(1个)：对象类型</li>
 </ul>
-<pre><code class="javascript">function Employee(name, dept)&#123;
-  this.name = name;
-  this.dept = dept;
-&#125;
-Employee.fun = function()&#123;
-  console.log(&quot;static&quot;)
-&#125;
-Employee.prototype.getName=function()&#123;
-  console.log(this.name)
-&#125;
-</code></pre>
-</li>
-<li><p>继承方式对比</p>
-<ul>
-<li>ES6实现方式</li>
-</ul>
-<pre><code class="javascript">class Manager extends Employee&#123;
-  constructor(name, dept, reports)&#123;
-    super(name, dept);
-    this.reports = reports;
-  &#125;
-&#125;
+<pre><code class="javascript">cli
+  .command(&#123;
+    command: &#39;list&#39;,
+    aliases: [&#39;ls&#39;, &#39;la&#39;, &#39;ll&#39;],
+    describe: &#39;list local packages&#39;,
+    builder: (yargs) =&gt; &#123;&#125;,
+    handler: (argv) =&gt; &#123;
+      console.log(argv)
+    &#125;
+  &#125;)
 </code></pre>
 <ul>
-<li>ES5实现方式</li>
+<li>alias() 别名<ul>
+<li>用alias()注册别名</li>
 </ul>
-<pre><code class="javascript">function Manager(reports, name ,dept)&#123;
-  Employee.call(this, name, dept);
-  this.reports = reports;
-&#125;
-Manager.fun = Employee.fun;
-</code></pre>
 </li>
 </ul>
-<h1 id="class关键字的一些限制"><a href="#class关键字的一些限制" class="headerlink" title="class关键字的一些限制"></a>class关键字的一些限制</h1><ol>
-<li>灵活性</li>
-<li>类声明不可提升</li>
-<li>无法重写类</li>
-</ol>
+<pre><code class="javascript">cli
+  .alias(&#39;h&#39;, &#39;help&#39;)
+</code></pre>
+<ul>
+<li>用属性注册别名(options中、option中、command中、builder中，凡是用对象注册的，都可以用)<ul>
+<li>单个别名alias，值为字符串</li>
+<li>多个别名aliases，值为数组</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">cli
+  .command(&#123;
+    command: &#39;list&#39;,
+    aliases: [&#39;ls&#39;, &#39;la&#39;, &#39;ll&#39;], // 多别名
+    describe: &#39;list local packages&#39;,
+    builder: (yargs) =&gt; &#123;&#125;,
+    handler: (argv) =&gt; &#123;
+      console.log(argv)
+    &#125;&#125;)
+  .command(&#123;
+    command: &#39;mark&#39;,
+    alias: &#39;mk&#39;, // 单别名
+    describe: &#39;mark aomthng&#39;,
+    builder: (yargs) =&gt; &#123;&#125;,
+    handler: (argv) =&gt; &#123;
+      console.log(argv)
+    &#125;&#125;)
+</code></pre>
+<ul>
+<li>parse() 混入自定义属性</li>
+</ul>
+<pre><code class="javascript">const pkg = require(&quot;../package.json&quot;);
+const context = &#123;
+  hahaVersion: pkg.version
+&#125;
+const arg = hideBin(process.argv);
+// 得到命令参数cli
+// 初始化时的cli
+// .argv;
+// 调用.argv，完成yargs初始化，这时候，输入hahayh --help 或 hahayh --version就能显示帮助信息或版本了
+// 最后也可以不用.argv，改成parse方法  .parse(arg, context)
+// 这个parse作用是将参数arg和context合并，注入到yargs中,当你输入hahayh ls 的时候，argv中（handler函数中）就有hahaVersion了，这个hahaVersion就来自于context
+</code></pre>
+<h1 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h1><pre><code class="javascript">#!/usr/bin/env node
+const yargs = require(&#39;yargs/yargs&#39;);
+const &#123; hideBin &#125; = require(&#39;yargs/helpers&#39;); // hideBin用于做输入命令的参数解析
+// console.log(hideBin(process.argv)); // 会得到命令的参数，相当于require(&quot;process&quot;).argv.slice(2)，这里的require(&quot;process&quot;)可以直接写成process，不用require也可以，一模一样的
+// console.log(process.argv.slice(2)); 
+const dedent = require(&#39;dedent&#39;);
+const pkg = require(&quot;../package.json&quot;);
+
+const context = &#123;
+  hahaVersion: pkg.version
+&#125;
+
+
+const arg = hideBin(process.argv); // 得到命令参数
+const cli = yargs(arg);
+// yargs初始化
+cli// yargs函数传入参数
+  .usage(&#39;Usage: hahayh [command] &lt;options&gt;&#39;) // 展示用法,当我们使用--help的时候展示，或者使用了strict()时，命令输入错误，展示错误提示的时候展示。
+  .demandCommand(1, &quot;A command is required. Pass --help to see all available commands and options.&quot;) // 需要输入的参数个数设定,当我们使用--help的时候展示，或者使用了strict()时，命令输入错误，展示错误提示的时候展示。
+                                                                                                     // 有了fail()后，此项无效
+  .recommendCommands() // 当用户输错命令的时候，会提示近似命令
+  .strict()  // 启用严格模式，这个代表输入的参数不对的时候，会给我们一个错误提示。如果没有这条，那么输入错误是没有任何反馈的。
+  .fail((err, msg) =&gt; &#123; // 输入错误命令的时候进行处理，有了这个后，demandCommand无效,recommendCommands无效，其实就是--help的帮助信息看板无效
+    // 这个函数会执行2遍，第一遍err会是近似词提示，第二遍是错误信息
+    // console.log(&#39;msg&#39;, msg)
+    console.log(&#39;err&#39;, err)
+    // 一般只需要打印err信息
+  &#125;)
+  .alias(&quot;h&quot;, &quot;help&quot;)    // 别名，alias书写的顺序怎么样，那么展示就是怎么样的顺序
+  .alias(&quot;v&quot;, &quot;version&quot;)
+  .wrap(cli.terminalWidth()) // 设置命令提示的宽度，可以尝试输入-h看下，展示出来界面的一行文字的宽度是不一样的。
+             // 参数是数字，比如100，表示列数
+             // 如果宽度为终端的宽度，那么可以使用方法cli.terminalWidth(),这里的cli就是yargs(hideBin(process.argv))
+  .epilogue(dedent`
+  When a command fails, all logs are written to lerna-debug.log in the current working directory.
+
+  For more information, find our manual at https://github.com/lerna/lerna
+`)        // 自定义结尾，结尾加上我们想说的话,string类型
+             // 这里可以使用一个很有意思的库dedent，能够去掉每行首位的所有空格，但是不去空行，也就是去掉缩进(任何数目空格的缩进都去掉)，注意去掉的是每行的收尾哦
+  .options(&#123; // 增加选项
+    debug: &#123; // 相当于增加了一个--debug选项，类型是布尔，描述是&#39;Bootstrap debug mode&#39;
+      type: &#39;boolean&#39;,
+      describe: &#39;Bootstrap debug mode&#39;,
+      alias: &#39;d&#39;, // --debug的缩写-d，也可以使用上面的alias
+      hidden: false, // 这个options存在，但是可以控制--help的时候是否显示，一般用作内部开发用
+    &#125;
+  &#125;)
+  .option(&#39;register&#39;, &#123; // 跟options的区别是options可以批量注册options，而option只能单个注册
+    type: &#39;string&#39;,
+    describe: &#39;define global registry&#39;,
+    alias: &#39;r&#39;,
+    hidden: false, // 这个options存在，但是可以控制--help的时候是否显示，一般用作内部开发用
+  &#125;)
+  .group([&#39;debug&#39;], &#39;Dev Options:&#39;)        // 对已经注册的options进行分类
+  .group([&#39;register&#39;], &#39;Publish Options:&#39;)
+  // 以上主要是注册option
+  // 以下主要是注册command
+  /*
+    注册命令使用command方法有2两种
+      第一种：.command(&#39;init [name]&#39;, &#39;Do init a project&#39;, (yargs) =&gt; &#123;&#125;, (argv) =&gt; &#123;&#125;)
+        参数(4个):
+          第一个参数：命令格式
+            命令格式中的[option]，在builder函数中注册
+          第二个参数：描述
+          第三个参数：builder函数
+            参数为yargs
+          第四个参数：handler函数
+            参数为argv，命令输入时的参数
+      第二种：
+        参数(1个)：对象类型
+        .command(&#123;
+          command: &#39;list&#39;,
+          aliases: [&#39;ls&#39;, &#39;la&#39;, &#39;ll&#39;],
+          describe: &#39;list local packages&#39;,
+          builder: (yargs) =&gt; &#123;&#125;,
+          handler: (argv) =&gt; &#123;
+            console.log(argv)
+          &#125;
+        &#125;)
+  */
+  .command(&#39;init [name]&#39;, &#39;Do init a project&#39;, (yargs) =&gt; &#123;
+    yargs.option(&#39;name&#39;, &#123;
+      type: &#39;string&#39;,
+      describe: &#39;Name of a project&#39;,
+      alias: &#39;n&#39;
+    &#125;)
+  &#125;, (argv) =&gt; &#123;
+    console.log(argv)
+    /*
+      如果你输入的命令是hahayh init -d -r npm -n yh-test
+      则得到的argv是：
+      &#123; _: [ &#39;init&#39; ],
+        d: true,
+        debug: true,
+        r: &#39;npm&#39;,
+        register: &#39;npm&#39;,
+        n: &#39;yh-test&#39;,
+        name: &#39;yh-test&#39;,
+        &#39;$0&#39;:
+        &#39;..\\..\\..\\AppData\\Roaming\\npm\\node_modules\\haha-cli\\bin\\index.js&#39; &#125;
+    */
+  &#125;)
+  .command(&#123;
+    command: &#39;list&#39;,
+    aliases: [&#39;ls&#39;, &#39;la&#39;, &#39;ll&#39;],
+    describe: &#39;list local packages&#39;,
+    builder: (yargs) =&gt; &#123;&#125;,
+    handler: (argv) =&gt; &#123;
+      console.log(argv)
+    &#125;
+  &#125;)
+  // .argv;     // 调用.argv，完成yargs初始化，这时候，输入hahayh --help 或 hahayh --version就能显示帮助信息或版本了
+  // 最后也可以不用.argv，改成parse方法
+  .parse(arg, context) // 这个parse作用是将参数arg和context合并，注入到yargs中,当你输入hahayh ls 的时候，argv中（handler函数中）就有hahaVersion了，这个hahaVersion就来自于context
+
+  // 定义脚手架的时候，别名不能重复，否则会覆盖
+  // 别名可以单数alias，单数时为字符串；也可以复数aliases，复数时为数组
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
