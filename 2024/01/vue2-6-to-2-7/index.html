@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue2.6老项目升级至2.7并使用组合式Api写法记录 | 一点</title>
+  <meta name="keywords" content=" Vue , setup , 升级 , Vue3 ">
+  <meta name="description" content="Vue2.6老项目升级至2.7并使用组合式Api写法记录 | 一点">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SQL">
+<meta property="og:url" content="http://chaoyu.site/SQL/index.html">
+<meta property="og:site_name" content="一点">
+<meta property="og:description" content="这是一个前端技术博客，记录前端学习、实际工作中的知识沉淀。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-08T01:41:53.000Z">
+<meta property="article:modified_time" content="2022-12-22T07:42:20.000Z">
+<meta property="article:author" content="chaoyu">
+<meta property="article:tag" content="技术博客,前端开发,笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>chaoyu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/imchaoyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:chaoyumail@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(35)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="代码规范">
+                        
+                        代码规范
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="前端架构">
+                        
+                        前端架构
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="git">
+                        
+                        git
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="HTML+CSS">
+                        
+                        HTML+CSS
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="JavaScript">
+                        
+                        JavaScript
+                        <small>(10)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="Linux">
+                        
+                        Linux
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="nodejs">
+                        
+                        nodejs
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="python">
+                        
+                        python
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="React">
+                        
+                        React
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="35">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>仓库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分支</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>脚手架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>爬虫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>升级</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法 时间复杂度 空间复杂度</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>行政区划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>装饰器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>commonjs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>eslint</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>esm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>husky</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>js</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>module</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodejs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nrm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nvm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>prettier</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>python基础 函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>setup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>stylelint</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>url 网络基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vue3</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端架构 "
+           href="/2024/01/vue2-6-to-2-7/"
+           data-tag="Vue,setup,升级,Vue3"
+           data-author="" >
+            <span class="post-title" title="Vue2.6老项目升级至2.7并使用组合式Api写法记录">Vue2.6老项目升级至2.7并使用组合式Api写法记录</span>
+            <span class="post-date" title="2024-01-12 16:00:26">2024/01/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端架构 "
+           href="/2023/06/about-yargs-info/"
+           data-tag="脚手架"
+           data-author="" >
+            <span class="post-title" title="Yargs的使用介绍（附案例）">Yargs的使用介绍（附案例）</span>
+            <span class="post-date" title="2023-06-12 14:30:52">2023/06/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端架构 "
+           href="/2023/05/fe-arch-cli/"
+           data-tag="脚手架"
+           data-author="" >
+            <span class="post-title" title="前端脚手架简介及基础知识摘录">前端脚手架简介及基础知识摘录</span>
+            <span class="post-date" title="2023-05-19 10:02:39">2023/05/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 代码规范 "
+           href="/2023/02/eslint-prettier-for-react-vue/"
+           data-tag="npm,prettier,eslint,husky,stylelint"
+           data-author="" >
+            <span class="post-title" title="Luoshen Npm包快捷格式化统一代码">Luoshen Npm包快捷格式化统一代码</span>
+            <span class="post-date" title="2023-02-20 13:49:55">2023/02/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 React "
+           href="/2023/01/react-setstate-async-or-sync/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="React的setState到底是异步还是同步">React的setState到底是异步还是同步</span>
+            <span class="post-date" title="2023-01-17 11:32:45">2023/01/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-file-chmod/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux文件基本属性">Linux文件基本属性</span>
+            <span class="post-date" title="2023-01-04 12:15:58">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 Linux "
+           href="/2023/01/linux-list-menu/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux系统目录结构介绍">Linux系统目录结构介绍</span>
+            <span class="post-date" title="2023-01-04 12:15:23">2023/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 HTML+CSS "
+           href="/2023/01/fe-cors/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器跨域的理解">浏览器跨域的理解</span>
+            <span class="post-date" title="2023-01-01 22:13:41">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 HTML+CSS "
+           href="/2023/01/html-reflow-repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="重排与重绘的极简描述">重排与重绘的极简描述</span>
+            <span class="post-date" title="2023-01-01 22:12:16">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 HTML+CSS "
+           href="/2023/01/css-block-formatter-context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS的块级格式化上下文">CSS的块级格式化上下文</span>
+            <span class="post-date" title="2023-01-01 22:03:54">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2023/01/js-arguments-likeobject/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="js的类数组对象与Arguments">js的类数组对象与Arguments</span>
+            <span class="post-date" title="2023-01-01 21:26:02">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/12/js-es6-class/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ES6的class探索">ES6的class探索</span>
+            <span class="post-date" title="2022-12-31 15:29:31">2022/12/31</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/12/js-eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浅析js中的EvntLoop事件循环">浅析js中的EvntLoop事件循环</span>
+            <span class="post-date" title="2022-12-31 14:45:39">2022/12/31</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/12/js-forin-forof-foreach/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Js的for In、for of及froEach的区别">Js的for In、for of及froEach的区别</span>
+            <span class="post-date" title="2022-12-31 12:06:11">2022/12/31</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/12/js-iterator-simple/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Js迭代器简介">Js迭代器简介</span>
+            <span class="post-date" title="2022-12-31 11:36:54">2022/12/31</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/12/js-reduce-simple/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Reduce简介和基础应用">Reduce简介和基础应用</span>
+            <span class="post-date" title="2022-12-31 10:55:23">2022/12/31</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/12/python-about-venv/"
+           data-tag="Python基础"
+           data-author="" >
+            <span class="post-title" title="Python虚拟环境简介和基础使用">Python虚拟环境简介和基础使用</span>
+            <span class="post-date" title="2022-12-30 19:51:20">2022/12/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 代码规范 "
+           href="/2022/05/eslit-prettier/"
+           data-tag="prettier,eslint"
+           data-author="" >
+            <span class="post-title" title="Prettier和Eslint在前端项目中的配置">Prettier和Eslint在前端项目中的配置</span>
+            <span class="post-date" title="2022-05-10 14:37:03">2022/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/04/web-system-theme-by-js-css/"
+           data-tag="主题"
+           data-author="" >
+            <span class="post-title" title="前端判断当前系统主题">前端判断当前系统主题</span>
+            <span class="post-date" title="2022-04-25 13:48:13">2022/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/04/a-world-about-js-base/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一句话理解JavaScript基础知识点">一句话理解JavaScript基础知识点</span>
+            <span class="post-date" title="2022-04-21 13:15:22">2022/04/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/04/about-simple-js-runtime/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="探究JavaScript的运行时">探究JavaScript的运行时</span>
+            <span class="post-date" title="2022-04-19 11:54:29">2022/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/04/js-macro-task-micro-task/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浅析Js的宏任务和微任务">浅析Js的宏任务和微任务</span>
+            <span class="post-date" title="2022-04-18 19:44:58">2022/04/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-high-function/"
+           data-tag="python基础 函数"
+           data-author="" >
+            <span class="post-title" title="Python进阶，从函数到高级魔法方法">Python进阶，从函数到高级魔法方法</span>
+            <span class="post-date" title="2022-03-21 10:55:26">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-struct/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，数据结构大汇总">Python基础，数据结构大汇总</span>
+            <span class="post-date" title="2022-03-21 10:53:38">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 python "
+           href="/2022/03/python-basic-var-throw/"
+           data-tag="python基础"
+           data-author="" >
+            <span class="post-title" title="Python基础，从变量到异常处理">Python基础，从变量到异常处理</span>
+            <span class="post-date" title="2022-03-21 10:51:48">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/what-happend-when-url-input/"
+           data-tag="url 网络基础"
+           data-author="" >
+            <span class="post-title" title="从Url输入到页面展现发生了什么">从Url输入到页面展现发生了什么</span>
+            <span class="post-date" title="2022-03-21 10:26:36">2022/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/github-fork/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="GitHub如何提PR且fork后与原仓库同步">GitHub如何提PR且fork后与原仓库同步</span>
+            <span class="post-date" title="2022-03-11 08:40:59">2022/03/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2022/03/algorithm-complexity-O&S/"
+           data-tag="算法 时间复杂度 空间复杂度"
+           data-author="" >
+            <span class="post-title" title="时间复杂度和空间复杂度">时间复杂度和空间复杂度</span>
+            <span class="post-date" title="2022-03-08 15:42:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-connect-more-remotes/"
+           data-tag="git,仓库"
+           data-author="" >
+            <span class="post-title" title="Git关联多个远程仓库">Git关联多个远程仓库</span>
+            <span class="post-date" title="2022-03-08 11:50:49">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-pull&push/"
+           data-tag="git,分支"
+           data-author="" >
+            <span class="post-title" title="Git拉取远程分支并创建本地分支">Git拉取远程分支并创建本地分支</span>
+            <span class="post-date" title="2022-03-08 11:49:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 git "
+           href="/2022/03/git-about-tags/"
+           data-tag="git,tag"
+           data-author="" >
+            <span class="post-title" title="Git创建tag并推送至远程">Git创建tag并推送至远程</span>
+            <span class="post-date" title="2022-03-08 11:48:50">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/about-npm-simple/"
+           data-tag="nodejs,npm,nvm,nrm,npx"
+           data-author="" >
+            <span class="post-title" title="Npm基础知识">Npm基础知识</span>
+            <span class="post-date" title="2022-03-08 10:32:01">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/commonjs&ESM-different/"
+           data-tag="commonjs,ES6,module,esm"
+           data-author="" >
+            <span class="post-title" title="commonjs和ES6 Module的区别">commonjs和ES6 Module的区别</span>
+            <span class="post-date" title="2022-03-08 10:29:11">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 JavaScript "
+           href="/2022/03/js-decorator-simple/"
+           data-tag="js,装饰器"
+           data-author="" >
+            <span class="post-title" title="Js装饰器浅析">Js装饰器浅析</span>
+            <span class="post-date" title="2022-03-08 09:35:52">2022/03/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 nodejs "
+           href="/2022/03/nodejs-worm-get-division/"
+           data-tag="nodejs,爬虫,行政区划"
+           data-author="" >
+            <span class="post-title" title="Nodejs爬虫获取行政区划">Nodejs爬虫获取行政区划</span>
+            <span class="post-date" title="2022-03-08 09:27:05">2022/03/08</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-vue2-6-to-2-7" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Vue2.6老项目升级至2.7并使用组合式Api写法记录</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="前端架构">前端架构</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">Vue</a>
+            
+            <a class="color1">setup</a>
+            
+            <a class="color3">升级</a>
+            
+            <a class="color5">Vue3</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-12 16:59:20'>2024-01-12 16:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text">前提</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E4%BE%9D%E8%B5%96"><span class="toc-text">升级依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setup-%E4%B8%AD%E4%BD%BF%E7%94%A8-vuex%E3%80%81-message%E3%80%81-route%E7%AD%89%E5%86%99%E6%B3%95"><span class="toc-text">setup 中使用 vuex、$message、$route等写法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setup-%E4%B8%AD%E4%BD%BF%E7%94%A8-vuex-%E7%9A%84-mapState%E7%AD%89%E6%96%B9%E6%B3%95"><span class="toc-text">setup 中使用 vuex 的 mapState等方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E9%80%89%E6%8B%A9%E5%99%A8%E6%94%B9%E5%86%99-v-deep%E3%80%81-x2F-deep-x2F-%E4%B8%BA-deep"><span class="toc-text">深度选择器改写 ::v-deep、&#x2F;deep&#x2F;为:deep()</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><blockquote>
+<p><code>Vue2</code>的官方支持到2023年12月31日已经到期，需要对公司<code>Vue</code>项目代码进行升级，但笔者公司前端项目使用<code>Vue2.6</code>版本，已经迭代开发5年有余，代码量多且杂，依赖的npm包很多，并且版本也大多都很停留在支持Vue2.6版本，所以想一次性升级至3.0，难度和风险可想而知。因此，我采用先保证稳定的前提，再慢慢更新升级。那先升级至2.7是最佳的选择。升级后可采用Vue3的新语法，对团队内成员来说也多了一次学习、更新技能的机会，对以后的迭代和引进新技术（如计划使用的微前端）提供便利。<br>这里记录一下升级过程，及其中踩过的坑。</p>
+</blockquote>
+<h1 id="升级依赖"><a href="#升级依赖" class="headerlink" title="升级依赖"></a>升级依赖</h1><ol>
+<li>对<code>@vue/cli</code>升级<blockquote>
+<p>如老项目是<code>v4</code>版本，则升级至<code>v4</code>对应的最新版本，如果是<code>v5</code>，则升级至<code>v5</code>对应最新版本<br>  <img src="/2024/01/vue2-6-to-2-7/packages.png" alt="升级@vue/cli"></p>
+</blockquote>
+</li>
+<li>将 <code>vue</code> 升级至 <code>^2.7.0</code></li>
+<li>对 <code>@vue/composition-api</code> 进行处理，<blockquote>
+<p>老项目如果之前引入过该包，一般情况下可直接删除，然后移除在入口文件中的相关代码</p>
+</blockquote>
+</li>
+<li>升级 <code>eslint-plugin-vue</code> 至 <code>^9.0</code>，升级该报的目的是为了防止使用<code>&lt;script setup&gt;</code>时lint报错变量未使用的问题。</li>
+<li>移除 <code>vue-template-compiler</code> </li>
+<li>2.7 的单文件组件编译器使用了 <code>PostCSS 8</code> (从 7 升级而来)。<code>PostCSS 8</code> 应该向下兼容了绝大多数插件，但是该升级可能在你使用了一些只支持 <code>PostCSS 7</code> 的自定义插件时遇到问题。这种情况下，你需要升级相应的插件至其兼容 <code>PostCSS 8</code> 的版本。</li>
+<li>使用 <code>volar</code> 禁用 <code>vetur</code></li>
+</ol>
+<blockquote>
+<p>升级依赖建议删除<code>node_modules</code> 和相应包的lock文件，如<code>package-lock.json</code>，然后进行重新安装。</p>
+</blockquote>
+<h1 id="setup-中使用-vuex、-message、-route等写法"><a href="#setup-中使用-vuex、-message、-route等写法" class="headerlink" title="setup 中使用 vuex、$message、$route等写法"></a>setup 中使用 vuex、$message、$route等写法</h1><blockquote>
+<p>vue-router 4.x版本存在一个较大的兼容性问题，即不支持在 <code>mixin</code> 中的路由钩子函数。考虑到实际项目中有这方面业务需求，所以并没有升级 <code>vuex</code> 和 <code>vue-router</code> 到 4.x 版本，在单文件组件中如果需要引用两者的话有一个替代方案在本地新建一个 <code>useVue.js</code> 文件</p>
+</blockquote>
+<pre><code class="javascript">/**
+ * 升级vue2.7辅助函数
+ */
+import &#123; getCurrentInstance &#125; from &#39;vue&#39;;
+/** this.$store替换方案 */
+export function useStore() &#123;
+  const &#123; proxy &#125; = getCurrentInstance();
+  const store = proxy.$store;
+  return store;
+&#125;
+/** this.$route替换方案 */
+export function useRoute() &#123;
+  const &#123; proxy &#125; = getCurrentInstance();
+  const route = proxy.$route;
+  return route;
+&#125;
+/** this.$router替换方案 */
+export function useRouter() &#123;
+  const &#123; proxy &#125; = getCurrentInstance();
+  const router = proxy.$router;
+  return router;
+&#125;
+/** this.$message方法替换方案 */
+export function useMessage() &#123;
+  const &#123; proxy &#125; = getCurrentInstance();
+  const message = proxy.$message;
+  return message;
+&#125;
+</code></pre>
+<p>然后在组合式api文件中写法如下：</p>
+<pre><code class="javascript">import &#123;useRouter, useMessage, useStore&#125; from &#39;@/hooks/useVue&#39;;
+// this.$router.push 写法
+const router = useRouter();
+router.push(&#39;/home&#39;);
+
+// this.$message 写法
+const message = useMessage();
+message(&#123;
+  type: &#39;error&#39;,
+  message: &#39;提示弹窗&#39;,
+&#125;)
+
+// vuex写法
+const store = useStore();
+const stateA = computed(() =&gt; store.state.stateA);
+const stateB = computed(() =&gt; store.state.stateB);
+
+const methodA = store.dispatch(&#39;methodA&#39;, &#123;name: &#39;张三&#39;&#125;);
+</code></pre>
+<h1 id="setup-中使用-vuex-的-mapState等方法"><a href="#setup-中使用-vuex-的-mapState等方法" class="headerlink" title="setup 中使用 vuex 的 mapState等方法"></a>setup 中使用 vuex 的 mapState等方法</h1><blockquote>
+<p><code>setup</code> 语法糖中不支持使用 <code>vuex</code> 中的辅助函数如 <code>mapGetter</code>。项目中依然保持Vuex，且未升级至4.0的话，需要封装mapState，mapGetters，mapActions等方法。</p>
+</blockquote>
+<ul>
+<li>创建 useMapper.js 文件，封装方法各个mapper方法</li>
+</ul>
+<pre><code class="javascript">import &#123; computed &#125; from &#39;vue&#39;;
+
+import &#123; useStore &#125; from &#39;./useVue&#39;; // 上一步中的代码
+
+export function useStateMapper(mapper, mapFn) &#123;
+  const store = useStore();
+  const storeStateFns = mapFn(mapper);
+  const storeState = &#123;&#125;;
+  Object.keys(storeStateFns).forEach((fnKey) =&gt; &#123;
+    // vuex源码中mapState和mapGetters的方法中使用的是this.$store,所以更改this绑定
+    const fn = storeStateFns[fnKey].bind(&#123; $store: store &#125;);
+    storeState[fnKey] = computed(fn);
+  &#125;);
+  return storeState;
+&#125;
+
+export function useActionMapper(mapper, mapFn) &#123;
+  const store = useStore();
+  const storeActionsFns = mapFn(mapper);
+  const storeAction = &#123;&#125;;
+  Object.keys(storeActionsFns).forEach((fnKey) =&gt; &#123;
+    storeAction[fnKey] = storeActionsFns[fnKey].bind(&#123; $store: store &#125;);
+  &#125;);
+  return storeAction;
+&#125;
+
+export function useMutationsMapper(mapper, mapFn) &#123;
+  const store = useStore();
+  const storeMutationsFns = mapFn(mapper);
+  const storeMutations = &#123;&#125;;
+  Object.keys(storeMutationsFns).forEach((fnKey) =&gt; &#123;
+    storeMutations[fnKey] = storeMutationsFns[fnKey].bind(&#123; $store: store &#125;);
+  &#125;);
+  return storeMutations;
+&#125;
+</code></pre>
+<ul>
+<li>新建 useVuex.js 文件 使用<code>createNamespacedHelpers</code>对各个mapper封装hooks函数</li>
+</ul>
+<pre><code class="javascript">import &#123; createNamespacedHelpers, mapActions, mapGetters, mapMutations, mapState &#125; from &#39;vuex&#39;;
+
+import &#123; useActionMapper, useMutationsMapper, useStateMapper &#125; from &#39;./useMapper&#39;;
+
+// 类型检查
+const checkType = (data) =&gt; &#123;
+  return Object.prototype.toString.call(data);
+&#125;;
+/**
+ *
+ * @param &#123;*&#125; moduleName 模块名称
+ * @param &#123;*&#125; mapper state属性集合 [&#39;name&#39;, &#39;age&#39;]
+ * @returns
+ */
+export function useState(moduleName, mapper) &#123;
+  let mapperFn = mapState;
+  // 如果使用模块化，则使用vuex提供的createNamespacedHelpers方法找到对应模块的mapState方法
+  if (checkType(moduleName) === &#39;[object String]&#39; &amp;&amp; moduleName.length &gt; 0) &#123;
+    mapperFn = createNamespacedHelpers(moduleName).mapState;
+  &#125;
+  return useStateMapper(mapper, mapperFn);
+&#125;
+/**
+ *
+ * @param &#123;*&#125; moduleName 模块名称
+ * @param &#123;*&#125; mapper getters属性集合 [&#39;name&#39;, &#39;age&#39;]
+ * @returns
+ */
+export function useGetters(moduleName, mapper) &#123;
+  let mapperFn = mapGetters;
+  // 如果使用模块化，则使用vuex提供的createNamespacedHelpers方法找到对应模块的mapGetters方法
+  if (checkType(moduleName) === &#39;[object String]&#39; &amp;&amp; moduleName.length &gt; 0) &#123;
+    mapperFn = createNamespacedHelpers(moduleName).mapGetters;
+  &#125;
+  return useStateMapper(mapper, mapperFn);
+&#125;
+/**
+ *
+ * @param &#123;*&#125; moduleName 模块名称
+ * @param &#123;*&#125; mapper Mutations [&#39;fn1&#39;, &#39;fn2&#39;]
+ * @returns
+ */
+export function useMutations(moduleName, mapper) &#123;
+  let mapperFn = mapMutations;
+  // 如果使用模块化，则使用vuex提供的createNamespacedHelpers方法找到对应模块的mapGetters方法
+  if (checkType(moduleName) === &#39;[object String]&#39; &amp;&amp; moduleName.length &gt; 0) &#123;
+    console.log(&#39;createNamespacedHelpers(moduleName): &#39;, createNamespacedHelpers(moduleName));
+    mapperFn = createNamespacedHelpers(moduleName).mapMutations;
+  &#125;
+  return useMutationsMapper(mapper, mapperFn);
+&#125;
+/**
+ *
+ * @param &#123;*&#125; moduleName 模块名称
+ * @param &#123;*&#125; mapper 方法名集合 [&#39;fn1&#39;, &#39;fn2&#39;]
+ * @returns
+ */
+export function useActions(moduleName, mapper) &#123;
+  let mapperFn = mapActions;
+  // 如果使用模块化，则使用vuex提供的createNamespacedHelpers方法找到对应模块的mapActions方法
+  if (checkType(moduleName) === &#39;[object String]&#39; &amp;&amp; moduleName.length &gt; 0) &#123;
+    mapperFn = createNamespacedHelpers(moduleName).mapActions;
+  &#125;
+  return useActionMapper(mapper, mapperFn);
+&#125;
+</code></pre>
+<ul>
+<li>使用方式</li>
+</ul>
+<pre><code class="vue">&lt;template&gt;
+    &lt;div class=&quot;home&quot;&gt;
+        &lt;span&gt;姓名：&#123;&#123;name&#125;&#125; 年龄：&#123;&#123;age&#125;&#125; 性别：&#123;&#123;sex&#125;&#125;&lt;/span&gt;
+        &lt;button @click=&quot;changeName&quot;&gt;改名&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import &#123;useState, useActions&#125; from &#39;@/hooks/useVuex&#39;
+
+const storeState = useState(&#39;home&#39;, [&#39;name&#39;, &#39;age&#39;, &#39;sex&#39;])
+const storeActions = useActions(&#39;home&#39;, [&#39;setName&#39;])
+const changeName = () =&gt; &#123;
+    storeAction.setName(&#39;李四&#39;)
+&#125;
+
+&lt;/script&gt;
+</code></pre>
+<h1 id="深度选择器改写-v-deep、-x2F-deep-x2F-为-deep"><a href="#深度选择器改写-v-deep、-x2F-deep-x2F-为-deep" class="headerlink" title="深度选择器改写 ::v-deep、&#x2F;deep&#x2F;为:deep()"></a>深度选择器改写 ::v-deep、&#x2F;deep&#x2F;为:deep()</h1><p>更新后，如果有::v-deep、&#x2F;deep&#x2F;相关的报错或者警告，需要改用:deep()</p>
+<pre><code class="html">&lt;style scoped&gt;
+  .a :deep(.b) &#123; /* ... */ &#125;
+&lt;/style&gt;
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 chaoyumail@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2022 王一点
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixinpay.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
